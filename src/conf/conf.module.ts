@@ -7,10 +7,14 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule,
     TypeOrmModule.forRootAsync({
+      imports: [ConfModule],
       useExisting: DataBaseConf,
     }),
   ],
   providers: [
+    DataBaseConf,
+  ],
+  exports: [
     DataBaseConf,
   ],
 })

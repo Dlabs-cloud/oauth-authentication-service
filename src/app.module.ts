@@ -8,6 +8,7 @@ import { DomainModule } from './domain/domain.module';
 import { ServiceModule } from './service/service.module';
 import { ServiceImplModule } from './service-impl/service-impl.module';
 import { CoreModule } from './core/core.module';
+import { TssCommonModule } from './tss-common/tss-common.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { CoreModule } from './core/core.module';
     DomainModule,
     ServiceModule,
     ServiceImplModule,
-    CoreModule],
+    CoreModule,
+    TssCommonModule],
   controllers: [AppController],
   providers: [AppService],
 })

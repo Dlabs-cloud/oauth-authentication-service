@@ -23,6 +23,7 @@ export class DataBaseConf implements TypeOrmOptionsFactory {
   }
 
   createTypeOrmOptions(connectionName?: string): Promise<TypeOrmModuleOptions> | TypeOrmModuleOptions {
+    console.log(__dirname + '/../../domain/entity/*.entity{.js,.ts}');
     return {
       type: 'postgres',
       host: this.configService.get<string>('DB_HOST', 'localhost'),
@@ -30,8 +31,8 @@ export class DataBaseConf implements TypeOrmOptionsFactory {
       password: this.configService.get<string>('DB_PASSWORD', 'postgres'),
       username: this.configService.get('DB_USERNAME', 'postgres'),
       database: this.configService.get('DB_DATABASE', 'postgres'),
-      dropSchema: this.refreshSchema(),
-      logging: this.configService.get('SHOW_LOG', false) === 'true',
+      dropSchema: true,
+      logging: true,
       entities: [
         __dirname + '/../../domain/entity/*.entity{.js,.ts}',
       ],
