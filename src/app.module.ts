@@ -8,10 +8,10 @@ import { DomainModule } from './domain/domain.module';
 import { ServiceModule } from './service/service.module';
 import { ServiceImplModule } from './service-impl/service-impl.module';
 import { CoreModule } from './core/core.module';
-import { IntergrationModule } from './intergration/intergration.module';
 
 @Module({
-  imports: [ControllerModule,
+  imports: [
+    ControllerModule,
     ConfModule,
     DaoModule,
     DomainModule,
