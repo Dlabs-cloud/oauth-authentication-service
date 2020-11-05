@@ -23,18 +23,17 @@ export class DataBaseConf implements TypeOrmOptionsFactory {
   }
 
   createTypeOrmOptions(connectionName?: string): Promise<TypeOrmModuleOptions> | TypeOrmModuleOptions {
-    console.log(__dirname + '/../../domain/entity/*.entity{.js,.ts}');
     return {
       type: 'postgres',
       host: this.configService.get<string>('DB_HOST', 'localhost'),
       port: this.configService.get<number>('DB_PORT', 5432),
       password: this.configService.get<string>('DB_PASSWORD', 'postgres'),
-      username: this.configService.get('DB_USERNAME', 'postgres'),
-      database: this.configService.get('DB_DATABASE', 'postgres'),
+      username: this.configService.get<string>('DB_USERNAME', 'postgres'),
+      database: this.configService.get<string>('DB_DATABASE', 'postgres'),
       dropSchema: true,
       logging: true,
       entities: [
-        __dirname + '/../../domain/entity/*.entity{.js,.ts}',
+        process.cwd() + '/dist/src/domain/entity/*.entity{.js,.ts}',
       ],
       synchronize: true,
       ssl: this.isProduction(),

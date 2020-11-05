@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { GenericStatusConstant } from '../../domain/constants/generic-status.constant';
+import { GenericStatus } from '../../domain/constants/generic-status.constant';
 
 export abstract class BaseEntity extends TypeOrmBaseEntity {
   @PrimaryGeneratedColumn()
@@ -13,11 +13,11 @@ export abstract class BaseEntity extends TypeOrmBaseEntity {
 
   @Column({
     type: 'enum',
-    enum: GenericStatusConstant,
-    default: GenericStatusConstant.ACTIVE,
+    enum: GenericStatus,
+    default: GenericStatus.ACTIVE,
 
   })
-  status?: GenericStatusConstant;
+  status?: GenericStatus;
 
   @CreateDateColumn({
     type: 'timestamp',

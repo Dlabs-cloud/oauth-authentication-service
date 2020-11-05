@@ -10,11 +10,16 @@ import { ServiceImplModule } from './service-impl/service-impl.module';
 import { CoreModule } from './core/core.module';
 import { TssCommonModule } from './tss-common/tss-common.module';
 import { ExceptionsModule } from './exceptions/exceptions.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     ControllerModule,
     ConfModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [ConfModule.environment + '.env'],
+    }),
     DaoModule,
     DomainModule,
     ServiceModule,

@@ -19,4 +19,7 @@ import { ConfigModule } from '@nestjs/config';
   ],
 })
 export class ConfModule {
+  static get environment(): string {
+    return process.env.ENV ?? '';
+  }
 }
