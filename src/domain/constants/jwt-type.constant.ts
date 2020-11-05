@@ -1,0 +1,5 @@
+export enum JwtType {
+  ACCESS = 'ACCESS',
+  REFRESH = 'REFRESH',
+  PASSWORD_RESET = 'PASSWORD_RESET',
+}

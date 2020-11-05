@@ -1,4 +1,4 @@
-export enum GenericStatusConstant {
+export enum GenericStatus {
   ACTIVE = 'ACTIVE',
   IN_ACTIVE = 'IN_ACTIVE',
   DELETED = 'DELETED',

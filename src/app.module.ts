@@ -9,6 +9,7 @@ import { ServiceModule } from './service/service.module';
 import { ServiceImplModule } from './service-impl/service-impl.module';
 import { CoreModule } from './core/core.module';
 import { TssCommonModule } from './tss-common/tss-common.module';
+import { ExceptionsModule } from './exceptions/exceptions.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { TssCommonModule } from './tss-common/tss-common.module';
     ServiceModule,
     ServiceImplModule,
     CoreModule,
-    TssCommonModule],
+    TssCommonModule,
+    ExceptionsModule],
   controllers: [AppController],
   providers: [AppService],
 })

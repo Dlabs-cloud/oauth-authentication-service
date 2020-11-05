@@ -1,9 +1,9 @@
 import { Column, Entity } from 'typeorm';
-import { GenderConstant } from '../constants/gender.constant';
 import { BaseEntity } from '../../tss-common/data-utils/base.entity';
+import { Gender } from '../constants/gender.constant';
 
 @Entity()
-export class PortalUserEntity extends BaseEntity {
+export class PortalUser extends BaseEntity {
   @Column()
   password: string;
   @Column()
@@ -24,12 +24,12 @@ export class PortalUserEntity extends BaseEntity {
   otherName?: string;
   @Column({
     type: 'enum',
-    enum: GenderConstant,
+    enum: Gender,
   })
-  gender: GenderConstant;
+  gender: Gender;
   @Column({
     nullable: true,
     type: 'timestamp',
   })
-  publishedO?: Date;
+  publishedOn?: Date;
 }

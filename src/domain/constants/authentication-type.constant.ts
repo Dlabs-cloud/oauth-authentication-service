@@ -1,0 +1,5 @@
+export enum AuthenticationType {
+  LOGIN = 'LOGIN',
+  USER_REGISTRATION = 'USER_REGISTRATION',
+  PASSWORD_RESET = 'PASSWORD_RESET'
+}
