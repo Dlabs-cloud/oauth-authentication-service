@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../tss-common/data-utils/base.entity';
+import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
 import { Column, Entity } from 'typeorm';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
 
@@ -13,6 +13,10 @@ export class PortalUserIdentificationVerification extends BaseEntity {
   @Column()
   identifier: string;
 
+
+  @Column({
+    nullable: true,
+  })
   verificationCode: string;
 
   @Column({
@@ -25,6 +29,15 @@ export class PortalUserIdentificationVerification extends BaseEntity {
   })
   expiresOn: Date;
 
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+  })
   usedOn: Date;
+
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+  })
   deactivatedOn: Date;
 }

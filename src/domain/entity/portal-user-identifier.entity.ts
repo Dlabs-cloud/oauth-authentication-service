@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../tss-common/data-utils/base.entity';
+import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
 import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
 import { PortalUser } from './portal-user.entity';
@@ -23,7 +23,9 @@ export class PortalUserIdentifier extends BaseEntity {
   dateVerified: Date;
 
 
-  @ManyToOne(() => PortalUser)
+  @ManyToOne(() => PortalUser, {
+    eager: true,
+  })
   portalUser: PortalUser;
 
   @OneToOne(() => PortalUserIdentificationVerification)

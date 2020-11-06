@@ -1,8 +1,8 @@
-import { BaseEntity } from '../../tss-common/data-utils/base.entity';
+import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
 import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne } from 'typeorm';
 import { PortalUserIdentifier } from './portal-user-identifier.entity';
 import { PortalUser } from './portal-user.entity';
-import { IllegalArgumentException } from '../../exceptions/illegal-argument.exception';
+import { IllegalArgumentException } from '@tss/common/exceptions/illegal-argument.exception';
 
 @Entity()
 export class PasswordResetRequest extends BaseEntity {

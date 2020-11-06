@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseEntity } from '../../tss-common/data-utils/base.entity';
+import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
 import { Gender } from '../constants/gender.constant';
 
 @Entity()

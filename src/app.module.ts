@@ -8,7 +8,6 @@ import { DomainModule } from './domain/domain.module';
 import { ServiceModule } from './service/service.module';
 import { ServiceImplModule } from './service-impl/service-impl.module';
 import { CoreModule } from './core/core.module';
-import { TssCommonModule } from './tss-common/tss-common.module';
 import { ExceptionsModule } from './exceptions/exceptions.module';
 import { ConfigModule } from '@nestjs/config';
 
@@ -25,7 +24,6 @@ import { ConfigModule } from '@nestjs/config';
     ServiceModule,
     ServiceImplModule,
     CoreModule,
-    TssCommonModule,
     ExceptionsModule],
   controllers: [AppController],
   providers: [AppService],
