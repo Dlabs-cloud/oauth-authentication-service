@@ -6,7 +6,7 @@ import { EntityRepository } from 'typeorm';
 export class PortalUserIdentifierRepository extends BaseRepository<PortalUserIdentifier> {
 
 
-  findBuIdentifier(identifier: string, isVerified: boolean) {
+  findByIdentifier(identifier: string, isVerified: boolean) {
     return this.findOneItemByStatus({
       identifier: identifier,
       verified: isVerified,

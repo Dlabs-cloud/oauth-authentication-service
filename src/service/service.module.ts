@@ -4,7 +4,7 @@ import { PortalUserIdentifierVerificationServiceImpl } from '../service-impl/por
 import { ServiceImplModule } from '../service-impl/service-impl.module';
 
 let portalUserIdentifierService = {
-  provide: PortalUserVerificationService,
+  provide: PortalUserIdentifierVerificationService,
   useExisting: PortalUserIdentifierVerificationServiceImpl,
 };
 

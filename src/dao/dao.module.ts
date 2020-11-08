@@ -11,6 +11,7 @@ import { PortalUserIdentifierRepository } from './portal-user-identifier.reposit
     ]),
   ],
   providers: [],
+
 })
 export class DaoModule {
 }

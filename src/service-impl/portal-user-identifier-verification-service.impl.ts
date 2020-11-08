@@ -2,18 +2,18 @@ import { PortalUserIdentifierVerificationService } from '../service/portal-user-
 import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
 import { PhoneNumberService } from '@tss/common/utils/phone-number/phone-number.service';
 import { PortalUserIdentificationVerification } from '../domain/entity/portal-user-identification-verification.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { PortalUserIdentifierVerificationRepository } from '../dao/portal-user-identifier-verification.repository';
-import { Connection, EntityManager } from 'typeorm';
-import DateTime from 'luxon/src/datetime.js';
 import { HashService } from '@tss/security/service';
+import { DateTime } from 'luxon';
+import { Connection, EntityManager } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { IllegalArgumentException } from '@tss/common';
 
+@Injectable()
 export class PortalUserIdentifierVerificationServiceImpl implements PortalUserIdentifierVerificationService {
   constructor(private readonly phoneNumberService: PhoneNumberService,
               private readonly connection: Connection,
-              private readonly hashService: HashService,
-              @InjectRepository(PortalUserIdentifierVerificationRepository)
-              private readonly portalUserIdentifierVerificationRepository: PortalUserIdentifierVerificationRepository) {
+              private readonly hashService: HashService) {
   }
 
   async createVerification(identifier: string, identifierType: UserIdentifierType) {
@@ -32,15 +32,19 @@ export class PortalUserIdentifierVerificationServiceImpl implements PortalUserId
       let verificationCode = this.generateVerificationCode(5);
 
       verification.verificationCode = verificationCode;
-      this.hashService.hash(verificationCode, 20).then(code => {
+      return this.hashService.hash(verificationCode).then(code => {
         verification.verificationCodeHash = code;
-      });
-      return entityManager.save(verification).then(userVerification => {
-        return Promise.resolve({
-          userVerification,
-          verificationCode: verification.verificationCode,
+        return entityManager.save(verification).then(userVerification => {
+          return {
+            userVerification,
+            verificationCode: userVerification.verificationCode,
+          };
         });
+      }).catch(error => {
+        console.log(error);
+        throw new IllegalArgumentException('Server error');
       });
+
     });
 
 
@@ -50,7 +54,7 @@ export class PortalUserIdentifierVerificationServiceImpl implements PortalUserId
   private deactivateAllActiveVerification(entityManager: EntityManager, identifier) {
     let currentDate = new Date();
 
-    return this.portalUserIdentifierVerificationRepository
+    return this.connection.getCustomRepository(PortalUserIdentifierVerificationRepository)
       .findAllActive(identifier).then(verifications => {
         let portalUserVerifications = verifications.map(verification => {
           verification.deactivatedOn = currentDate;
@@ -67,7 +71,7 @@ export class PortalUserIdentifierVerificationServiceImpl implements PortalUserId
       let randomNumber = Math.floor(Math.random() * 9) + 1;
       verificationCode.push(randomNumber);
     }
-    return verificationCode.join();
+    return verificationCode.join('');
   }
 
 

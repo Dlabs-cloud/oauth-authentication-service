@@ -3,9 +3,8 @@ import { compare, genSalt, hash } from 'bcryptjs';
 
 @Injectable()
 export class HashService {
-  public hash(value: string, saltRounds?: number): Promise<string> {
-    let round = saltRounds || 10;
-    return genSalt(round).then((salt: string) => {
+  public hash(value: string): Promise<string> {
+    return genSalt().then((salt: string) => {
       return hash(value, salt);
     });
   }

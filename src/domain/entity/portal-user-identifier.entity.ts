@@ -18,8 +18,16 @@ export class PortalUserIdentifier extends BaseEntity {
   })
   identifier: string;
 
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
   verified: boolean;
 
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+  })
   dateVerified: Date;
 
 

@@ -10,6 +10,7 @@ import { ServiceImplModule } from './service-impl/service-impl.module';
 import { CoreModule } from './core/core.module';
 import { ExceptionsModule } from './exceptions/exceptions.module';
 import { ConfigModule } from '@nestjs/config';
+import { SecurityModule } from '@tss/security';
 
 @Module({
   imports: [
