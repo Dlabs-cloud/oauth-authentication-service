@@ -14,7 +14,7 @@ import { EmailConf } from './email.conf';
     }),
 
     MailerModule.forRootAsync({
-      imports: [ConfigModule],
+      imports: [ConfModule],
       useExisting: EmailConf,
     }),
   ],

@@ -14,6 +14,7 @@ import { VerificationEmailSenderService } from '../service/verification-email-se
 export class PortalUserIdentifierVerificationController {
   constructor(@Inject(PortalUserIdentifierVerificationService)
               private readonly  portalUserIdentifierVerificationService: PortalUserIdentifierVerificationService,
+              @Inject(VerificationEmailSenderService)
               private readonly verificationEmailSenderService: VerificationEmailSenderService,
               private readonly connection: Connection) {
   }

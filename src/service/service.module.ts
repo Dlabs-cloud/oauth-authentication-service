@@ -10,7 +10,7 @@ let portalUserIdentifierService = {
   useExisting: PortalUserIdentifierVerificationServiceImpl,
 };
 
-let verificationEmailSender = {
+let verificationEmailSenderService = {
   provide: VerificationEmailSenderService,
   useExisting: VerificationEmailSenderServiceImpl,
 };
@@ -21,11 +21,11 @@ let verificationEmailSender = {
   ],
   providers: [
     portalUserIdentifierService,
-    verificationEmailSender,
+    verificationEmailSenderService,
   ],
   exports: [
     portalUserIdentifierService,
-    verificationEmailSender,
+    verificationEmailSenderService,
   ],
 })
 export class ServiceModule {
