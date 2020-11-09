@@ -5,10 +5,16 @@ import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.re
 import { PortalUserIdentifierVerificationService } from '../service/portal-user-identifier-verification.service';
 import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
 import { Connection } from 'typeorm';
+import { EventBus } from '@nestjs/cqrs';
+import { UserIdentifierVerificationEvent } from '../events/user-identifier-verification.event';
+import { ApiResponseDto } from '../data/response/api.response.dto';
+import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
 
 @Controller()
 export class PortalUserIdentifierVerificationController {
-  constructor(@Inject(PortalUserIdentifierVerificationService) private readonly  portalUserIdentifierVerificationService: PortalUserIdentifierVerificationService,
+  constructor(@Inject(PortalUserIdentifierVerificationService)
+              private readonly  portalUserIdentifierVerificationService: PortalUserIdentifierVerificationService,
+              private readonly verificationEmailSenderService: VerificationEmailSenderService,
               private readonly connection: Connection) {
   }
 
@@ -20,8 +26,14 @@ export class PortalUserIdentifierVerificationController {
       throw new HttpException('Email has already been verified', HttpStatus.CONFLICT);
     }
 
-    let verification = await this.portalUserIdentifierVerificationService.createVerification(verificationCodeParam.email, UserIdentifierType.EMAIL);
-    console.log('We are done');
-    return verification;
+    return this.portalUserIdentifierVerificationService
+      .createVerification(verificationCodeParam.email, UserIdentifierType.EMAIL)
+      .then(verification => {
+        return this.verificationEmailSenderService.sendVerificationCode(verification.userVerification)
+          .then(res => {
+            return Promise.resolve(new ApiResponseDto(201));
+          });
+      });
+
   }
 }

@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataBaseConf } from './data-base.conf';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { EmailConf } from './email.conf';
 
 @Module({
   imports: [
@@ -10,12 +12,20 @@ import { ConfigModule } from '@nestjs/config';
       imports: [ConfModule],
       useExisting: DataBaseConf,
     }),
+
+    MailerModule.forRootAsync({
+      imports: [ConfigModule],
+      useExisting: EmailConf,
+    }),
   ],
+
   providers: [
     DataBaseConf,
+    EmailConf,
   ],
   exports: [
     DataBaseConf,
+    EmailConf,
   ],
 })
 export class ConfModule {

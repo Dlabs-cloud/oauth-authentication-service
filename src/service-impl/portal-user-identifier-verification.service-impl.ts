@@ -40,9 +40,6 @@ export class PortalUserIdentifierVerificationServiceImpl implements PortalUserId
             verificationCode: userVerification.verificationCode,
           };
         });
-      }).catch(error => {
-        console.log(error);
-        throw new IllegalArgumentException('Server error');
       });
 
     });
