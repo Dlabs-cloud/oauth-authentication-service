@@ -26,7 +26,7 @@ export class PortalUserIdentifierVerificationServiceImpl implements PortalUserId
       let verification = new PortalUserIdentificationVerification();
       verification.identifierType = identifierType;
       verification.identifier = identifier;
-      await this.deactivateAllActiveVerification(entityManager, identifier);
+      let portalUserIdentificationVerifications = await this.deactivateAllActiveVerification(entityManager, identifier);
       verification.createdAt = currentTime;
       verification.expiresOn = DateTime.local().plus({ minutes: 15 }).toJSDate();
       let verificationCode = this.generateVerificationCode(5);

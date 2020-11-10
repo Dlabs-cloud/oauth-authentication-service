@@ -14,6 +14,8 @@
     "@tss/common/(.*)": "<rootDir>/../libs/common/src/$1",
     "@tss/common": "<rootDir>/../libs/common/src",
     "@tss/security/(.*)": "<rootDir>/../libs/security/src/$1",
-    "@tss/security": "<rootDir>/../libs/security/src"
+    "@tss/security": "<rootDir>/../libs/security/src",
+    "@tss/nest-test-starter/(.*)": "<rootDir>/../libs/nest-test-starter/src/$1",
+    "@tss/nest-test-starter": "<rootDir>/../libs/nest-test-starter/src"
   }
 }

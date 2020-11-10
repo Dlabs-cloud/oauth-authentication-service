@@ -19,6 +19,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/security/tsconfig.lib.json"
       }
+    },
+    "nest-test-starter": {
+      "type": "library",
+      "root": "libs/nest-test-starter",
+      "entryFile": "index",
+      "sourceRoot": "libs/nest-test-starter/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/nest-test-starter/tsconfig.lib.json"
+      }
     }
   },
   "compilerOptions": {

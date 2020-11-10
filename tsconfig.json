@@ -22,6 +22,12 @@
       ],
       "@tss/security/*": [
         "libs/security/src/*"
+      ],
+      "@tss/nest-test-starter": [
+        "libs/nest-test-starter/src"
+      ],
+      "@tss/nest-test-starter/*": [
+        "libs/nest-test-starter/src/*"
       ]
     }
   },

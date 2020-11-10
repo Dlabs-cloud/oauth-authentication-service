@@ -33,7 +33,7 @@ export class DataBaseConf implements TypeOrmOptionsFactory {
       dropSchema: true,
       logging: true,
       entities: [
-        process.cwd() + '/dist/src/domain/entity/*.entity{.js,.ts}',
+        __dirname + '/../domain/entity/*.entity{.js,.ts}',
       ],
       synchronize: true,
       ssl: this.isProduction(),
