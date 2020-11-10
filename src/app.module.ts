@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ControllerModule } from './controller/controller.module';
 import { ConfModule } from './conf/conf.module';
 import { DaoModule } from './dao/dao.module';
@@ -29,8 +27,7 @@ import { EventHandlersModule } from './event-handlers/event-handlers.module';
     ExceptionsModule,
     EventsModule,
     EventHandlersModule],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {
 }

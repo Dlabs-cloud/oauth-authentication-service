@@ -7,7 +7,7 @@ import { UserIdentifierType } from '../domain/constants/user-identifier-type.con
 import { Connection } from 'typeorm';
 import { EventBus } from '@nestjs/cqrs';
 import { UserIdentifierVerificationEvent } from '../events/user-identifier-verification.event';
-import { ApiResponseDto } from '../data/response/api.response.dto';
+import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
 
 @Controller()
