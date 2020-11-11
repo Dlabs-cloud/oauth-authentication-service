@@ -1,13 +1,12 @@
 import {
   registerDecorator,
   ValidationArguments, ValidationOptions,
-  ValidatorConstraint,
-  ValidatorConstraintInterface,
 } from 'class-validator';
 import { getConnection } from 'typeorm';
-import { GenericStatusConstant } from '../../domain/enums/generic-status-constant';
+import { GenericStatus } from '@tss/common';
+import { EntityTarget } from 'typeorm/common/EntityTarget';
 
-export function IsEntityExist(param: EntityConstraintParam, options?: ValidationOptions) {
+export function EntityValidator(param: EntityConstraintParam, options?: ValidationOptions) {
   return function(object: Object, propertyName: string) {
     registerDecorator({
       constraints: [param],
@@ -23,12 +22,12 @@ export function IsEntityExist(param: EntityConstraintParam, options?: Validation
           }
           const isExists = param.isExist;
           return getConnection()
-            .getRepository(param.name)
+            .getRepository(param.entity)
             .createQueryBuilder('entity')
             .where(`entity.${param.column} = :column`)
             .andWhere(`entity.status = :status`)
             .setParameter('column', value)
-            .setParameter('status', GenericStatusConstant.ACTIVE)
+            .setParameter('status', GenericStatus.ACTIVE)
             .getCount().then(count => {
               return isExists && count ? true :
                 isExists && !count ? false :
@@ -46,8 +45,8 @@ export function IsEntityExist(param: EntityConstraintParam, options?: Validation
 
 
 export interface EntityConstraintParam {
-  name: string;
+  entity: EntityTarget<any>;
   column: string,
   isExist: boolean
-  status?: GenericStatusConstant;
+  status?: GenericStatus;
 }

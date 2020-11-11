@@ -5,6 +5,7 @@ import { SecurityModule } from '@tss/security';
 import { ServiceModule } from '../service/service.module';
 import { ConfModule } from '../conf/conf.module';
 import { VerificationEmailSenderServiceImpl } from './verification-email-sender.service-impl';
+import { PortalUserRegistrationServiceImpl } from './portal-user-registration.service-impl';
 
 
 @Module({
@@ -17,10 +18,12 @@ import { VerificationEmailSenderServiceImpl } from './verification-email-sender.
   providers: [
     PortalUserIdentifierVerificationServiceImpl,
     VerificationEmailSenderServiceImpl,
+    PortalUserRegistrationServiceImpl,
   ],
   exports: [
     PortalUserIdentifierVerificationServiceImpl,
     VerificationEmailSenderServiceImpl,
+    PortalUserRegistrationServiceImpl,
   ],
 })
 export class ServiceImplModule {

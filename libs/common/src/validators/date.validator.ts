@@ -1,5 +1,5 @@
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator';
-import * as moment from 'moment';
+import { DateTime, Duration } from 'luxon';
 
 export function IsDateFormat(param: DateValidator, options?: ValidationOptions) {
 
@@ -12,17 +12,15 @@ export function IsDateFormat(param: DateValidator, options?: ValidationOptions) 
       validator: {
         validate(value: any, args: ValidationArguments) {
           const param = args.constraints[0] as DateValidator;
-
-
           if (!value) {
             return Promise.resolve(true);
           }
-          let momentDate = moment(value, param.format);
+          let luxonDate = DateTime.fromFormat(value, param.format);
+
           if (param.isBefore) {
-            let todayDate = moment().format(param.format);
-            return momentDate.isValid() && momentDate.isBefore(todayDate);
+            return luxonDate.isValid && luxonDate < DateTime.local();
           }
-          return momentDate.isValid() && momentDate.isSameOrAfter();
+          return luxonDate.isValid && luxonDate >= DateTime.local();
         },
       },
     });

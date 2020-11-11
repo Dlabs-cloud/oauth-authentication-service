@@ -4,6 +4,8 @@ import { PortalUserIdentifierVerificationServiceImpl } from '../service-impl/por
 import { ServiceImplModule } from '../service-impl/service-impl.module';
 import { VerificationEmailSenderService } from './verification-email-sender.service';
 import { VerificationEmailSenderServiceImpl } from '../service-impl/verification-email-sender.service-impl';
+import { PortalUserRegistrationServiceImpl } from '../service-impl/portal-user-registration.service-impl';
+import { PortalUserRegistrationService } from './portal-user-registration.service';
 
 let portalUserIdentifierService = {
   provide: PortalUserIdentifierVerificationService,
@@ -15,6 +17,11 @@ let verificationEmailSenderService = {
   useExisting: VerificationEmailSenderServiceImpl,
 };
 
+let portalUserRegistrationService = {
+  provide: PortalUserRegistrationService,
+  useExisting: PortalUserRegistrationServiceImpl,
+};
+
 @Module({
   imports: [
     forwardRef(() => ServiceImplModule),
@@ -22,10 +29,12 @@ let verificationEmailSenderService = {
   providers: [
     portalUserIdentifierService,
     verificationEmailSenderService,
+    portalUserRegistrationService,
   ],
   exports: [
     portalUserIdentifierService,
     verificationEmailSenderService,
+    portalUserRegistrationService,
   ],
 })
 export class ServiceModule {
