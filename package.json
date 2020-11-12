@@ -27,6 +27,7 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/cqrs": "^7.0.1",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/swagger": "^4.7.2",
     "@nestjs/typeorm": "^7.1.4",
     "@types/bcryptjs": "^2.4.2",
     "@types/faker": "^5.1.4",
@@ -47,6 +48,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
     "sqlite3": "^5.0.0",
+    "swagger-ui-express": "^4.1.4",
     "typeorm": "^0.2.29",
     "uuid": "^8.3.1"
   },

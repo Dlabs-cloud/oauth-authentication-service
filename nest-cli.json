@@ -31,6 +31,9 @@
     }
   },
   "compilerOptions": {
-    "webpack": false
+    "webpack": false,
+    "plugins": [
+      "@nestjs/swagger/plugin"
+    ]
   }
 }
