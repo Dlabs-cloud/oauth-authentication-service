@@ -4,6 +4,12 @@ import { PortalUserIdentifierVerificationServiceImpl } from '../service-impl/por
 import { ServiceImplModule } from '../service-impl/service-impl.module';
 import { VerificationEmailSenderService } from './verification-email-sender.service';
 import { VerificationEmailSenderServiceImpl } from '../service-impl/verification-email-sender.service-impl';
+import { PortalUserRegistrationServiceImpl } from '../service-impl/portal-user-registration.service-impl';
+import { PortalUserRegistrationService } from './portal-user-registration.service';
+import { ImplicitAuthenticationService } from './implicit-authentication.service';
+import { ImplicitAuthenticationServiceImpl } from '../service-impl/implicit-authentication.service-impl';
+import { RefreshTokenService } from './refresh-token.service';
+import { RefreshTokenServiceImpl } from '../service-impl/refresh-token.service-impl';
 
 let portalUserIdentifierService = {
   provide: PortalUserIdentifierVerificationService,
@@ -15,6 +21,21 @@ let verificationEmailSenderService = {
   useExisting: VerificationEmailSenderServiceImpl,
 };
 
+let portalUserRegistrationService = {
+  provide: PortalUserRegistrationService,
+  useExisting: PortalUserRegistrationServiceImpl,
+};
+
+let implicitAuthenticationService = {
+  provide: ImplicitAuthenticationService,
+  useExisting: ImplicitAuthenticationServiceImpl,
+};
+
+let refreshTokenService = {
+  provide: RefreshTokenService,
+  useExisting: RefreshTokenServiceImpl,
+};
+
 @Module({
   imports: [
     forwardRef(() => ServiceImplModule),
@@ -22,10 +43,16 @@ let verificationEmailSenderService = {
   providers: [
     portalUserIdentifierService,
     verificationEmailSenderService,
+    portalUserRegistrationService,
+    implicitAuthenticationService,
+    refreshTokenService,
   ],
   exports: [
     portalUserIdentifierService,
     verificationEmailSenderService,
+    portalUserRegistrationService,
+    implicitAuthenticationService,
+    refreshTokenService,
   ],
 })
 export class ServiceModule {

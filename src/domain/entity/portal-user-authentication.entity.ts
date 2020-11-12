@@ -9,7 +9,9 @@ import { IllegalArgumentException } from '@tss/common/exceptions/illegal-argumen
 
 @Entity()
 export class PortalUserAuthentication extends BaseEntity {
-  @Column()
+  @Column({
+    nullable: true,
+  })
   identifier: string;
 
   @Column({
@@ -31,7 +33,10 @@ export class PortalUserAuthentication extends BaseEntity {
   @Column()
   userAgent: string;
 
-  @ManyToOne(() => PortalUserIdentifier)
+  @ManyToOne(() => PortalUserIdentifier, {
+    nullable: true,
+  })
+
   portalUserIdentifier: PortalUserIdentifier;
 
   @ManyToOne(() => PortalUser, {
@@ -43,24 +48,39 @@ export class PortalUserAuthentication extends BaseEntity {
   @JoinColumn()
   passwordResetRequest: PasswordResetRequest;
 
+  @Column({
+    nullable: true,
+  })
   lastActiveAt: Date;
 
+  @Column({
+    nullable: true,
+  })
   becomesInactiveAt: Date;
 
+  @Column({
+    nullable: true,
+  })
   autoLogoutAt: Date;
 
+
+  @Column({
+    nullable: true,
+  })
   loggedOutAt: Date;
 
-
+  @Column({
+    nullable: true,
+  })
   deactivatedAt: Date;
 
   @BeforeInsert()
-  beforeInsert() {
+  private beforeInsert() {
 
     if (!this.portalUser) {
       this.portalUser = this.portalUserIdentifier.portalUser;
     } else {
-      if (this.portalUser.id != this.portalUserIdentifier.portalUser.id) {
+      if (this.portalUserIdentifier && (this.portalUser.id != this.portalUserIdentifier.portalUser.id)) {
         throw new IllegalArgumentException();
       }
     }

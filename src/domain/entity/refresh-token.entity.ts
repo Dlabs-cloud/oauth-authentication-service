@@ -23,7 +23,10 @@ export class RefreshToken extends BaseEntity {
   })
   expiresAt: Date;
 
-
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+  })
   timeDeactivated: Date;
 
 
@@ -38,7 +41,7 @@ export class RefreshToken extends BaseEntity {
 
 
   @BeforeInsert()
-  beforeInsert() {
+  private beforeInsert() {
 
     if (this._actualAuthentication) {
       this.portalUser = this._actualAuthentication.portalUser;
