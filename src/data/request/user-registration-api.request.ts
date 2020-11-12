@@ -3,9 +3,9 @@ import {
   IsArray,
   IsBooleanString,
   IsEmail,
-  isEmail,
   IsEnum,
-  IsNotEmpty, IsOptional,
+  IsNotEmpty,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -31,7 +31,6 @@ export class UserRegistrationApiRequest {
   otherNames?: string;
 
   @IsOptional()
-  @IsEmail()
   @EntityValidator({
     isExist: false,
     entity: PortalUser,

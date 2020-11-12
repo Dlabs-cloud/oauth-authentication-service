@@ -10,6 +10,7 @@ import { ExceptionsModule } from './exceptions/exceptions.module';
 import { ConfigModule } from '@nestjs/config';
 import { EventsModule } from './events/events.module';
 import { EventHandlersModule } from './event-handlers/event-handlers.module';
+import { SecurityModule } from './security/security.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { EventHandlersModule } from './event-handlers/event-handlers.module';
     CoreModule,
     ExceptionsModule,
     EventsModule,
-    EventHandlersModule],
+    EventHandlersModule,
+    SecurityModule],
   providers: [],
 })
 export class AppModule {

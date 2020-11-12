@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { PortalUserRegistrationService } from '../service/portal-user-registration.service';
 import { UserRegistrationApiRequest } from '../data/request/user-registration-api.request';
 import { PortalUser } from '../domain/entity/portal-user.entity';
@@ -10,16 +10,22 @@ import { HashService } from '@tss/security/service';
 import { IllegalArgumentException } from '@tss/common';
 import { PhoneNumberService } from '@tss/common/utils/phone-number/phone-number.service';
 import { PortalUserData } from '../domain/entity/portal-user-data.entity';
+import { RequestMetaData } from '../security/data/request-meta-data.dto';
+import { PortalUserAuthentication } from '../domain/entity/portal-user-authentication.entity';
+import { ImplicitAuthenticationService } from '../service/implicit-authentication.service';
+import { isBlank } from '@tss/common/utils/string.utlls';
 
 @Injectable()
 export class PortalUserRegistrationServiceImpl implements PortalUserRegistrationService {
 
   constructor(private readonly connection: Connection,
               private readonly phoneNumberService: PhoneNumberService,
+              @Inject(ImplicitAuthenticationService)
+              private readonly implicitAuthenticationService: ImplicitAuthenticationService,
               private readonly hashService: HashService) {
   }
 
-  register(userData: UserRegistrationApiRequest) {
+  async register(userData: UserRegistrationApiRequest, requestMetaData: RequestMetaData): Promise<PortalUserAuthentication> {
     let portalUser = new PortalUser();
     portalUser.firstName = userData.firstName.normalize();
     portalUser.lastName = userData.lastName.normalize();
@@ -29,8 +35,12 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
 
 
     if (!isBlank(userData.password)) {
-      portalUser.password = userData.password;
-      portalUser.passwordUpdateRequired = userData.isPasswordUpdateRequired;
+
+      await this.hashService.hash(userData.password).then(hash => {
+        portalUser.password = hash;
+        portalUser.passwordUpdateRequired = userData.isPasswordUpdateRequired;
+      });
+
     }
 
     return this.connection.transaction(async entityManager => {
@@ -50,14 +60,19 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
         throw new IllegalArgumentException('Identifier must be provided');
       }
 
-      let userDataPromise = userData.data.map(data => {
-        let portalUserData = new PortalUserData();
-        portalUserData.name = data.name;
-        portalUserData.value = data.value;
-        portalUserData.portalUser = portalUser;
-        return entityManager.save(portalUserData);
-      });
-      await Promise.all(userDataPromise);
+      if (userData.data) {
+        let userDataPromise = userData.data.map(data => {
+          let portalUserData = new PortalUserData();
+          portalUserData.name = data.name;
+          portalUserData.value = data.value;
+          portalUserData.portalUser = portalUser;
+          return entityManager.save(portalUserData);
+        });
+        await Promise.all(userDataPromise);
+      }
+
+
+      return this.implicitAuthenticationService.createSignUpAuthentication(entityManager, portalUser, requestMetaData);
     });
 
 

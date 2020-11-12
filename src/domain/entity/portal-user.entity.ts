@@ -4,12 +4,17 @@ import { Gender } from '../constants/gender.constant';
 
 @Entity()
 export class PortalUser extends BaseEntity {
-  @Column()
+  @Column({
+    nullable: true,
+  })
   password: string;
-  @Column()
+  @Column({
+    default: false,
+  })
   passwordUpdateRequired: boolean;
   @Column({
     type: 'timestamp',
+    nullable: true,
   })
   passwordLastUpdatedOn: Date;
   @Column()
@@ -25,6 +30,7 @@ export class PortalUser extends BaseEntity {
   @Column({
     type: 'enum',
     enum: Gender,
+    nullable: true
   })
   gender: Gender;
   @Column({

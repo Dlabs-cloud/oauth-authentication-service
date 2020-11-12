@@ -14,9 +14,15 @@ export class SignatureKey extends BaseEntity {
   })
   encodedKey: string;
 
+  @Column()
   algorithm: string;
 
+  @Column()
   format: string;
 
+  @Column({
+    type: 'enum',
+    enum: JwtType,
+  })
   type: JwtType;
 }
