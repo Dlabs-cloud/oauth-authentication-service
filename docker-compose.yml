@@ -1,0 +1,46 @@
+version: '3'
+services:
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=tss_auth_service_user
+      - POSTGRES_PASSWORD=8T8YS2J4G7LW4G6L
+      - POSTGRES_DB=tss_auth_service
+    ports:
+      - "5674:5432"
+    volumes:
+      - ./data/db_data:/var/lib/postgresql/data
+  app:
+    image: auth-service-api
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      NODE_ENV: prod
+      DB_CONNECTION: postgres
+      DB_HOST: postgres
+      DB_USERNAME: tss_auth_service_user
+      DB_PASSWORD: 8T8YS2J4G7LW4G6L
+      DB_DATABASE: tss_auth_service
+      DB_PORT: 5432
+      MAILER_HOST: smtp.mailtrap.io
+      EMAIL_USER: b0ca5d7a29dac9
+      EMAIL_PASS: 280a69ee384e4
+      EMAIL_PORT: 587
+      EMAIL_SENDER: auth@tssdevs.com
+      EMAIL_REPLY: email_reply@tssdevs.com
+      PROJECT_NAME: Tss_Auth_service
+      VERSION: 1
+      DOMAIN: http://app
+    depends_on:
+      - postgres
+    command:
+      [
+        'node',
+        'dist/src/main.js'
+      ]
+
+
+
+
