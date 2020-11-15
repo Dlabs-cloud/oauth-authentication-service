@@ -9,7 +9,7 @@ async function bootstrap() {
     .setTitle('Tss Authentication Service')
     .setDescription('Api ofr Tss authentication service')
     .setVersion('1.0')
-    .addTag('Authentication, tss dev')
+    .addTag('Authentication Service , tss dev')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);

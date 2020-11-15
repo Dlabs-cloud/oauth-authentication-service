@@ -33,7 +33,16 @@
   "compilerOptions": {
     "webpack": false,
     "plugins": [
-      "@nestjs/swagger/plugin"
+      {
+        "name": "@nestjs/swagger/plugin",
+        "options": {
+          "dtoFileNameSuffix": [
+            ".request.ts",
+            ".response.ts",
+            ".param.ts"
+          ]
+        }
+      }
     ]
   }
 }

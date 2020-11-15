@@ -1,12 +1,9 @@
 import { Controller, HttpException, HttpStatus, Inject, Param, Post } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { EmailVerificationCodeParam } from '../data/filter/email-verification-code-param';
+import { EmailVerificationCodeParam } from '../data/params/email-verification-code.param';
 import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.repository';
 import { PortalUserIdentifierVerificationService } from '../service/portal-user-identifier-verification.service';
 import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
 import { Connection } from 'typeorm';
-import { EventBus } from '@nestjs/cqrs';
-import { UserIdentifierVerificationEvent } from '../events/user-identifier-verification.event';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
 
@@ -33,7 +30,7 @@ export class PortalUserIdentifierVerificationController {
       .createVerification(verificationCodeParam.email, UserIdentifierType.EMAIL)
       .then(verification => {
         return this.verificationEmailSenderService.sendVerificationCode(verification.userVerification)
-          .then(res => {
+          .then(() => {
             return Promise.resolve(new ApiResponseDto(201));
           });
       });
