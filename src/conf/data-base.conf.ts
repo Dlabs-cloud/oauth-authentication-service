@@ -30,8 +30,8 @@ export class DataBaseConf implements TypeOrmOptionsFactory {
       password: this.configService.get<string>('DB_PASSWORD', 'postgres'),
       username: this.configService.get<string>('DB_USERNAME', 'postgres'),
       database: this.configService.get<string>('DB_DATABASE', 'postgres'),
-      dropSchema: true,
-      logging: false,
+      dropSchema: false,
+      logging: true,
       entities: [
         __dirname + '/../domain/entity/*.entity{.js,.ts}',
       ],

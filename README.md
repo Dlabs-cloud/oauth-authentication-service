@@ -29,8 +29,8 @@ EMAIL_PORT=587
 EMAIL_SENDER=auth@tssdevs.com
 EMAIL_REPLY=email_reply@tssdevs.com
 VERSION=1
-EMAIL_USER=b0ca5d7a29dac9
-EMAIL_PASS=2804a69ee384e4
+EMAIL_USER=b0ca5a29dac9
+EMAIL_PASS=2804ae384e4
 PROJECT_DESCRIPTION=A service tfor tss authentication
 `
 ### Start Application
