@@ -38,7 +38,11 @@ export class UserRegistrationApiRequest {
   })
   phoneNumber?: string;
 
+  @IsOptional()
   phoneNumberVerificationCode?: string;
+
+  @IsOptional()
+  emailVerificationCode?: string;
 
   @IsBooleanString()
   isPasswordUpdateRequired: boolean;

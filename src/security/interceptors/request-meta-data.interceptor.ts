@@ -21,6 +21,11 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
     return next.handle();
   }
 
+
+  public accessClaims(){
+
+  }
+
   private getIpAddress(request) {
     const ipAddress = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
     return !isBlank(request.headers[this.proxyIpHeader]) ? request.headers[this.proxyIpHeader] : ipAddress;

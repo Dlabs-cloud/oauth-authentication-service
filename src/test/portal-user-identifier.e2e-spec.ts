@@ -53,6 +53,7 @@ describe('Portal-user-identifier-controller', () => {
     await request(applicationContext.getHttpServer())
       .post(url)
       .expect(201);
+
     await connection.getCustomRepository(PortalUserIdentifierVerificationRepository)
       .findAllActive(identifierEmail).then(verifications => {
         expect(1).toEqual(verifications.length);

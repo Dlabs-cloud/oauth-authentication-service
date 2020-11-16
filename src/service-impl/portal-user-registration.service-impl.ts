@@ -93,9 +93,10 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
     portalUserIdentifier.portalUser = portalUser;
     portalUserIdentifier.identifier = userData.email;
 
-    if (userData.phoneNumberVerificationCode) {
-      await this.resolveVerification(entityManager, portalUserIdentifier, userData.phoneNumberVerificationCode);
+    if (userData.emailVerificationCode) {
+      await this.resolveVerification(entityManager, portalUserIdentifier, userData.emailVerificationCode);
     }
+
     return entityManager.save(portalUserIdentifier);
 
   }
