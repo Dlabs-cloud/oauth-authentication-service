@@ -15,6 +15,7 @@ export class PhoneNumberService {
     if (!phoneNumber) {
       return null;
     }
+
     phoneNumber = phoneNumber.trim().replace(' +', '');
     try {
       let number = this._phoneNumberUtil.parse(phoneNumber);
@@ -46,6 +47,7 @@ export class PhoneNumberService {
     if (number && !number.trim().length) {
       return null;
     }
+    return number.trim();
   }
 
 }

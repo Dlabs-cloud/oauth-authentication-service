@@ -1,10 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { INestApplication } from '@nestjs/common';
+import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(`api/v${process.env.VERSION}`);
+  globalPipes(app);
+
   const options = new DocumentBuilder()
     .setTitle('Tss Authentication Service')
     .setDescription('Api ofr Tss authentication service')
@@ -20,6 +24,10 @@ async function bootstrap() {
     console.log(`Starting application on port ${port}`);
     console.log(`Url:: ${process.env.DOMAIN}:${port}/api/v${process.env.VERSION}`);
   });
+}
+
+export function globalPipes(app: INestApplication) {
+  app.useGlobalPipes(new ValidatorTransformerPipe());
 }
 
 bootstrap();

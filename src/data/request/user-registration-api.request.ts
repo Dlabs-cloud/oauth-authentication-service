@@ -1,6 +1,6 @@
 import { UserDataApiRequest } from './user-data-api.request';
 import {
-  IsArray,
+  IsArray, IsBoolean,
   IsBooleanString,
   IsEmail,
   IsEnum,
@@ -13,6 +13,8 @@ import { Gender } from '../../domain/constants/gender.constant';
 import { EntityValidator } from '@tss/common/validators/entity-constraint.validator';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { Type } from 'class-transformer';
+import { IsValidPhoneNumber } from '@tss/common/validators/phone-number-constraint.validator';
+import { PortalUserIdentifier } from '../../domain/entity/portal-user-identifier.entity';
 
 export class UserRegistrationApiRequest {
 
@@ -31,10 +33,15 @@ export class UserRegistrationApiRequest {
   otherNames?: string;
 
   @IsOptional()
+  @IsValidPhoneNumber({
+    message: 'Phone number is not valid',
+  })
   @EntityValidator({
     isExist: false,
-    entity: PortalUser,
-    column: 'email',
+    entity: PortalUserIdentifier,
+    column: 'identifier',
+  }, {
+    message: 'phone number has already been used',
   })
   phoneNumber?: string;
 
@@ -44,7 +51,8 @@ export class UserRegistrationApiRequest {
   @IsOptional()
   emailVerificationCode?: string;
 
-  @IsBooleanString()
+  @IsOptional()
+  @IsBoolean()
   isPasswordUpdateRequired: boolean;
 
   @IsString()
@@ -55,8 +63,10 @@ export class UserRegistrationApiRequest {
   @IsEmail()
   @EntityValidator({
     isExist: false,
-    entity: PortalUser,
-    column: 'email',
+    entity: PortalUserIdentifier,
+    column: 'identifier',
+  }, {
+    message: 'Email has already been used',
   })
   email?: string;
 
