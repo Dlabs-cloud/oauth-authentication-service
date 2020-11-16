@@ -28,7 +28,8 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
 
 
   private static isIpLocalHost(ipAddress: string) {
-    return ipAddress === ('127.0.0.1' || '0:0:0:0:0:0:0:1' || '::1' || '::ffff:127.0.0.1');
+    let possibleIpAddress = ['127.0.0.1', '0:0:0:0:0:0:0:1', '::1', '::ffff:127.0.0.1'];
+    return possibleIpAddress.includes(ipAddress);
   }
 
   private getAccessToken(request): string | null {

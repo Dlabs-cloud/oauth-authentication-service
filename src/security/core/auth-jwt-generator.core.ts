@@ -2,6 +2,7 @@ import { RefreshToken } from '../../domain/entity/refresh-token.entity';
 import { sign, SignOptions } from 'jsonwebtoken';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import { DateTime, Interval } from 'luxon';
+import { v4 as uuid } from 'uuid';
 
 export class AuthJwsGenerator {
   private keyId: string;
@@ -14,7 +15,7 @@ export class AuthJwsGenerator {
   }
 
 
-  public hasKey() {
+  public hasKey(): boolean {
 
     return !!this.keyId;
 
@@ -25,7 +26,7 @@ export class AuthJwsGenerator {
     let currentTime = DateTime.local();
     let interval = Interval.fromDateTimes(currentTime, expiration);
     const signOptions: SignOptions = {
-      algorithm: 'HS256',
+      algorithm: 'RS256',
       keyid: this.keyId,
       expiresIn: interval.count('seconds'),
       subject: refreshToken.portalUser.id.toString(),

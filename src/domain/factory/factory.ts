@@ -1,6 +1,6 @@
 import { getConnection } from 'typeorm';
-import { ModelFactoryImpl, OrmAdapter } from '@tss/nest-test-starter';
 import { ModelFactoryRoster } from './model-factory-roster';
+import { ModelFactoryImpl, OrmAdapter } from '@tss/test-starter';
 
 
 export function factory() {

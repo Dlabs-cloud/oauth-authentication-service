@@ -1,6 +1,6 @@
-import { FactoryHelper, ModelFactory } from '@tss/nest-test-starter';
 import { PortalUserIdentificationVerification } from '../entity/portal-user-identification-verification.entity';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
+import { FactoryHelper, ModelFactory } from '@tss/test-starter';
 
 export class PortalUserIdentifierVerificationFactory implements FactoryHelper<PortalUserIdentificationVerification> {
 

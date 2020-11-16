@@ -40,6 +40,7 @@
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "faker": "^5.1.0",
+    "fs": "0.0.1-security",
     "google-libphonenumber": "^3.2.14",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^1.25.0",
@@ -99,8 +100,8 @@
       "@tss/common": "<rootDir>/libs/common/src",
       "@tss/security/(.*)": "<rootDir>/libs/security/src/$1",
       "@tss/security": "<rootDir>/libs/security/src",
-      "@tss/nest-test-starter/(.*)": "<rootDir>/libs/nest-test-starter/src/$1",
-      "@tss/nest-test-starter": "<rootDir>/libs/nest-test-starter/src"
+      "@tss/test-starter/(.*)": "<rootDir>/libs/test-starter/src/$1",
+      "@tss/test-starter": "<rootDir>/libs/test-starter/src"
     }
   }
 }

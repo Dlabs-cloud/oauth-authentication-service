@@ -1,6 +1,7 @@
-import { FactoryHelper, ModelFactory } from '@tss/nest-test-starter';
+
 import { PortalUser } from '../entity/portal-user.entity';
 import { Gender } from '../constants/gender.constant';
+import { FactoryHelper, ModelFactory } from '@tss/test-starter';
 
 export class PortalUserFactory implements FactoryHelper<PortalUser> {
   apply(faker: Faker.FakerStatic, modelFactory: ModelFactory): Promise<PortalUser> {

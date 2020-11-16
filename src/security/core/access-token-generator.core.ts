@@ -6,6 +6,8 @@ import { AuthJwsGenerator } from './auth-jwt-generator.core';
 import { Connection } from 'typeorm';
 import { AuthKeyGenerator } from '../contracts/auth-key-generator.contracts';
 import { DateTime, Interval } from 'luxon';
+import { IllegalArgumentException } from '@tss/common';
+import { tsconfigPathsBeforeHookFactory } from '@nestjs/cli/lib/compiler/hooks/tsconfig-paths.hook';
 
 
 export class AccessTokenGeneratorCore implements AuthKeyGenerator {
@@ -18,6 +20,7 @@ export class AccessTokenGeneratorCore implements AuthKeyGenerator {
 
 
   async onApplicationBootstrap() {
+
     if (this.authKeyGenerator.hasKey()) {
       console.log('Prevented duplicate initialization');
       return;

@@ -8,10 +8,10 @@ import { ACCESSKEYGENERATOR, REFRESHKEYGENERATOR } from './constants';
 import { Connection } from 'typeorm';
 import { KeyGenerator } from './contracts/key-generator.contracts';
 import { KeyGeneratorCore } from './core/key-generator.core';
+import { SecurityModule as TssSecurityModule } from '@tss/security';
 
 const refreshTokenGenerator = {
   provide: REFRESHKEYGENERATOR,
-  useExisting: RefreshTokenGeneratorCore,
   useFactory: async (connection: Connection, keyGenerator: KeyGenerator) => {
     let refreshTokenGeneratorCore = new RefreshTokenGeneratorCore(new AuthJwsGenerator(), connection, keyGenerator);
     await refreshTokenGeneratorCore.onApplicationBootstrap();
@@ -22,7 +22,6 @@ const refreshTokenGenerator = {
 
 const accessKeyGeneratorCore = {
   provide: ACCESSKEYGENERATOR,
-  useExisting: RefreshTokenGeneratorCore,
   useFactory: async (connection: Connection, keyGenerator: KeyGenerator) => {
     let accessTokenGeneratorCore = new AccessTokenGeneratorCore(new AuthJwsGenerator(), connection, keyGenerator);
     await accessTokenGeneratorCore.onApplicationBootstrap();
@@ -39,6 +38,7 @@ const keyGenerator = {
 };
 
 @Module({
+  imports: [TssSecurityModule],
   providers: [
     RequestMetaDataInterceptor,
     {
