@@ -4,11 +4,13 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthJwsGenerator } from './core/auth-jwt-generator.core';
 import { RefreshTokenGeneratorCore } from './core/refresh-token-generator.core';
 import { AccessTokenGeneratorCore } from './core/access-token-generator.core';
-import { ACCESSKEYGENERATOR, REFRESHKEYGENERATOR } from './constants';
+import { ACCESSCLAIMEXTRACTOR, ACCESSKEYGENERATOR, REFRESHCLAIMEXTRACTOR, REFRESHKEYGENERATOR } from './constants';
 import { Connection } from 'typeorm';
 import { KeyGenerator } from './contracts/key-generator.contracts';
 import { KeyGeneratorCore } from './core/key-generator.core';
 import { SecurityModule as TssSecurityModule } from '@tss/security';
+import { AccessClaimsExtractorCore } from './core/access-claims-extractor.core';
+import { RefreshClaimsExtractorCore } from './core/refresh-claims-extractor.core';
 
 const refreshTokenGenerator = {
   provide: REFRESHKEYGENERATOR,
@@ -18,6 +20,16 @@ const refreshTokenGenerator = {
     return refreshTokenGeneratorCore;
   },
   inject: [Connection, KeyGenerator],
+};
+
+const accessClaimExtractor = {
+  provide: ACCESSCLAIMEXTRACTOR,
+  useExisting: AccessClaimsExtractorCore,
+};
+
+const refreshClaimsExtractor = {
+  provide: REFRESHCLAIMEXTRACTOR,
+  useExisting: RefreshClaimsExtractorCore,
 };
 
 const accessKeyGeneratorCore = {
@@ -47,12 +59,17 @@ const keyGenerator = {
     },
     KeyGeneratorCore,
     keyGenerator,
+    accessClaimExtractor,
+    refreshClaimsExtractor,
     refreshTokenGenerator,
     accessKeyGeneratorCore,
+    AccessClaimsExtractorCore,
+    RefreshClaimsExtractorCore,
   ],
   exports: [
     refreshTokenGenerator,
     accessKeyGeneratorCore,
+    refreshClaimsExtractor,
   ],
 
 })

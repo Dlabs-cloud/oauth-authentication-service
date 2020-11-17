@@ -62,7 +62,6 @@ describe('Access-token generator-core', () => {
     expect(generateKey).toBeCalledTimes(0);
     generateKey.mockRestore();
     updateKey.mockRestore();
-
   });
   it('test that a jwt dto can be created', async () => {
     let authJwsGenerator = new AuthJwsGenerator();

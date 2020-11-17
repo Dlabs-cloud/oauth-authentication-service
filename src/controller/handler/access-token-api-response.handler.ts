@@ -8,6 +8,8 @@ import { ACCESSKEYGENERATOR, REFRESHKEYGENERATOR } from '../../security/constant
 import { PortalUserIdentifierRepository } from '../../dao/portal-user-identifier.repository';
 import { PortalUserIdentifier } from '../../domain/entity/portal-user-identifier.entity';
 import { UserIdentifierType } from '../../domain/constants/user-identifier-type.constant';
+import { RefreshToken } from '../../domain/entity/refresh-token.entity';
+import { PortalUserRepository } from '../../dao/portal-user.repository';
 
 export class AccessTokenApiResponseHandler {
   constructor(@Inject(RefreshTokenService) private readonly refreshTokenService: RefreshTokenService,
@@ -20,22 +22,30 @@ export class AccessTokenApiResponseHandler {
     return this.connection.transaction(async entityManager => {
 
       let refreshToken = await this.refreshTokenService.createRefreshToken(entityManager, portalUserAuthentication);
-      let accessTokenApiResponse = new AccessTokenApiResponse(refreshToken.portalUser);
-      let refreshTokenJwt = await this.refreshKeyGenerator.generateJwt(refreshToken);
-      let accessTokenDtoJwt = await this.accessKeyGenerator.generateJwt(refreshToken);
-      let portalUserIdentifiers = await this.connection.getCustomRepository(PortalUserIdentifierRepository).findByPortalUser(refreshToken.portalUser);
-      accessTokenApiResponse.emailAddresses = this.getEmailIdentifiers(portalUserIdentifiers);
-      accessTokenApiResponse.phoneNumbers = this.getPhoneNumberIdentifier(portalUserIdentifiers);
-      accessTokenApiResponse.refresh_token = refreshTokenJwt.token;
-      accessTokenApiResponse.access_token = accessTokenDtoJwt.token;
-      accessTokenApiResponse.expires_at = refreshToken.accessExpiresAt;
-      accessTokenApiResponse.secondsTillExpiry = accessTokenDtoJwt.secondsTillExpiry;
-      return Promise.resolve(accessTokenApiResponse);
-
+      return await this.makeAccessToken(refreshToken);
     });
 
   }
 
+
+  private async makeAccessToken(refreshToken: RefreshToken) {
+    if (!refreshToken.portalUser) {
+      refreshToken.portalUser = await this.connection.getCustomRepository(PortalUserRepository).findOne({
+        id: refreshToken.portalUserId,
+      });
+    }
+    let accessTokenApiResponse = new AccessTokenApiResponse(refreshToken.portalUser);
+    let refreshTokenJwt = await this.refreshKeyGenerator.generateJwt(refreshToken);
+    let accessTokenDtoJwt = await this.accessKeyGenerator.generateJwt(refreshToken);
+    let portalUserIdentifiers = await this.connection.getCustomRepository(PortalUserIdentifierRepository).findByPortalUser(refreshToken.portalUser);
+    accessTokenApiResponse.emailAddresses = this.getEmailIdentifiers(portalUserIdentifiers);
+    accessTokenApiResponse.phoneNumbers = this.getPhoneNumberIdentifier(portalUserIdentifiers);
+    accessTokenApiResponse.refresh_token = refreshTokenJwt.token;
+    accessTokenApiResponse.access_token = accessTokenDtoJwt.token;
+    accessTokenApiResponse.expires_at = refreshToken.accessExpiresAt;
+    accessTokenApiResponse.secondsTillExpiry = accessTokenDtoJwt.secondsTillExpiry;
+    return Promise.resolve(accessTokenApiResponse);
+  }
 
   private getEmailIdentifiers(identifiers: PortalUserIdentifier[]) {
     return identifiers.filter(identifier => identifier.identifierType === UserIdentifierType.EMAIL)

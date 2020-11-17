@@ -12,6 +12,7 @@ import { PortalUserRegistrationController } from './portal-user-registration.con
 import { LoginAuthenticationController } from './login-authentication.controller';
 import { errorResponseFilter } from '@tss/common/exception-filters/error-response.exception.filter';
 import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/illegal-argument.exception.filter';
+import { AccessTokenController } from './access-token.controller';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/il
     PortalUserIdentifierVerificationController,
     PortalUserRegistrationController,
     LoginAuthenticationController,
+    AccessTokenController,
   ],
   providers: [
     ResponseTransformInterceptor,

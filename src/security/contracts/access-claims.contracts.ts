@@ -1,11 +1,11 @@
 export interface AccessClaims {
   getId(): string
 
+  getKid(): string;
+
   getIssuer(): string;
 
   getSubject(): string;
-
-  getAudience(): string[]
 
   getExpirationTime(): Date;
 

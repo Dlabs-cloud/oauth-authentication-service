@@ -6,6 +6,10 @@ import { JwtType } from '../constants/jwt-type.constant';
 @Entity()
 export class SignatureKey extends BaseEntity {
 
+
+  @Column({
+    type: 'text',
+  })
   keyId: string;
 
 

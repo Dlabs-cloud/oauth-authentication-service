@@ -9,10 +9,10 @@ export class ErrorResponseExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     response
-      .status(400)
+      .status(exception.status)
       .json({
         code: exception.status,
-        message: exception.response.message,
+        message: exception.message,
       });
   }
 

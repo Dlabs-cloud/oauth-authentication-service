@@ -19,14 +19,14 @@ export class LoginAuthenticationController {
     let portalUserAuthentication = await this.loginAuthenticationService.getAuthenticationResponse(loginRequest, requestMetaData);
     if (portalUserAuthentication.responseType !== AuthenticationResponseType.SUCCESSFUL) {
       if (portalUserAuthentication.responseType == AuthenticationResponseType.UNKNOWN_ACCOUNT) {
-        throw new ErrorResponseException(HttpStatus.UNAUTHORIZED, new ApiResponseDto(HttpStatus.UNAUTHORIZED, null, 'Unknown account'));
+        throw new ErrorResponseException(HttpStatus.UNAUTHORIZED, 'UnAuthorized ');
       }
-      throw new ErrorResponseException(HttpStatus.UNAUTHORIZED, new ApiResponseDto(HttpStatus.UNAUTHORIZED, null, 'invalid credentials'));
+      throw new ErrorResponseException(HttpStatus.UNAUTHORIZED, 'UnAuthorized');
     }
 
     return this.accessTokenApiResponseHandler.getAccessToken(portalUserAuthentication)
       .then(accessTokenApiResponse => {
-        return new ApiResponseDto(HttpStatus.CREATED, accessTokenApiResponse);
+        return new ApiResponseDto(HttpStatus.OK, accessTokenApiResponse);
       });
 
   }

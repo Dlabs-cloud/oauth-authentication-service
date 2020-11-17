@@ -23,12 +23,12 @@ export class AuthJwsGenerator {
 
   public createJwt(refreshToken: RefreshToken, expiration: Date): Promise<string> {
 
-    let currentTime = DateTime.local();
+    let currentTime = new Date();
     let interval = Interval.fromDateTimes(currentTime, expiration);
     const signOptions: SignOptions = {
       algorithm: 'RS256',
       keyid: this.keyId,
-      expiresIn: interval.count('seconds'),
+      expiresIn: interval.count('second'),
       subject: refreshToken.portalUser.id.toString(),
       issuer: 'Tss_authentication_service',
       jwtid: refreshToken.id.toString(),
@@ -39,6 +39,7 @@ export class AuthJwsGenerator {
     return new Promise((resolve, reject) => {
       sign({
         userId: refreshToken.portalUser.id.toString(),
+        nbf: Math.floor(currentTime.valueOf() / 1000),
       }, this.key, signOptions, (error, token) => {
         if (error) {
           return reject(error);

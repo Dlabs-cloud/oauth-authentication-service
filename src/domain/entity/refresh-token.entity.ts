@@ -1,5 +1,5 @@
 import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
-import { BeforeInsert, Column, Entity, ManyToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { PortalUserAuthentication } from './portal-user-authentication.entity';
 import { PortalUser } from './portal-user.entity';
 import { IllegalArgumentException } from '@tss/common/exceptions/illegal-argument.exception';
@@ -7,11 +7,29 @@ import { IllegalArgumentException } from '@tss/common/exceptions/illegal-argumen
 @Entity()
 export class RefreshToken extends BaseEntity {
 
-  @ManyToOne(() => PortalUserAuthentication)
+
+  @ManyToOne(() => PortalUserAuthentication, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'portalUserAuthenticationId' })
   private _actualAuthentication: PortalUserAuthentication;
 
-  @ManyToOne(() => PortalUser)
+
+  @Column({
+    nullable: true,
+  })
+  portalUserAuthenticationId: number;
+
+  @ManyToOne(() => PortalUser, {
+    eager: true,
+  })
   portalUser: PortalUser;
+
+  @Column({
+    nullable: true,
+  })
+  portalUserId: number;
+
 
   @Column({
     type: 'timestamp',
@@ -39,6 +57,10 @@ export class RefreshToken extends BaseEntity {
     }
   }
 
+
+  get actualAuthentication(): PortalUserAuthentication {
+    return this._actualAuthentication;
+  }
 
   @BeforeInsert()
   private beforeInsert() {

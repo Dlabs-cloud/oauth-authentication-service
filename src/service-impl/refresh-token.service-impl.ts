@@ -26,7 +26,10 @@ export class RefreshTokenServiceImpl implements RefreshTokenService {
       portalUserAuthentication.lastActiveAt = refreshToken.createdAt;
       portalUserAuthentication.becomesInactiveAt = refreshToken.accessExpiresAt;
       portalUserAuthentication.autoLogoutAt = refreshToken.expiresAt;
-      return Promise.resolve(refreshToken);
+      return entityManager.save(portalUserAuthentication).then(portalUserAuthentication => {
+        return Promise.resolve(refreshToken);
+      });
+
     });
 
   }

@@ -53,7 +53,10 @@ describe('Auth-jwt-generator-core', () => {
     });
 
     let token = await authJwsGenerator.createJwt(refreshToken, refreshToken.expiresAt);
-    let jwtPayload = verify(token, signatureKey.encodedKey, { algorithms: ['RS256'] });
+    let jwtPayload = verify(token, signatureKey.encodedKey, {
+      algorithms: ['RS256'],
+    });
+
     expect(jwtPayload).toBeDefined();
   });
 
