@@ -107,7 +107,7 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
       .getCustomRepository(PortalUserIdentifierVerificationRepository)
       .findAllActive(userIdentifier.identifier.toLowerCase());
 
-    if (existingVerifications.length) {
+    if (!existingVerifications.length) {
       throw new IllegalArgumentException('Verification with identifier does not exist');
     }
 

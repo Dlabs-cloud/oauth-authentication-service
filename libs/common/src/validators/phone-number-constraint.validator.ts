@@ -21,7 +21,6 @@ export class PhoneNumberConstraintValidator implements ValidatorConstraintInterf
       phoneNumberUtil.parse(phoneNumber);
       return true;
     } catch (e) {
-      console.log(e);
       return false;
     }
   }
