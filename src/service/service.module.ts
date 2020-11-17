@@ -10,12 +10,18 @@ import { ImplicitAuthenticationService } from './implicit-authentication.service
 import { ImplicitAuthenticationServiceImpl } from '../service-impl/implicit-authentication.service-impl';
 import { RefreshTokenService } from './refresh-token.service';
 import { RefreshTokenServiceImpl } from '../service-impl/refresh-token.service-impl';
+import { LoginAuthenticationService } from './login-authentication.service';
+import { LoginAuthenticationServiceImpl } from '../service-impl/login-authentication.service-impl';
 
 let portalUserIdentifierService = {
   provide: PortalUserIdentifierVerificationService,
   useExisting: PortalUserIdentifierVerificationServiceImpl,
 };
 
+let loginAuthenticationService = {
+  provide: LoginAuthenticationService,
+  useExisting: LoginAuthenticationServiceImpl,
+};
 let verificationEmailSenderService = {
   provide: VerificationEmailSenderService,
   useExisting: VerificationEmailSenderServiceImpl,
@@ -46,6 +52,7 @@ let refreshTokenService = {
     portalUserRegistrationService,
     implicitAuthenticationService,
     refreshTokenService,
+    loginAuthenticationService,
   ],
   exports: [
     portalUserIdentifierService,
@@ -53,6 +60,7 @@ let refreshTokenService = {
     portalUserRegistrationService,
     implicitAuthenticationService,
     refreshTokenService,
+    loginAuthenticationService,
   ],
 })
 export class ServiceModule {

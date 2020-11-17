@@ -9,6 +9,9 @@ import {
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
 import { SecurityModule } from '../security/security.module';
 import { PortalUserRegistrationController } from './portal-user-registration.controller';
+import { LoginAuthenticationController } from './login-authentication.controller';
+import { errorResponseFilter } from '@tss/common/exception-filters/error-response.exception.filter';
+import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/illegal-argument.exception.filter';
 
 @Module({
   imports: [
@@ -19,11 +22,14 @@ import { PortalUserRegistrationController } from './portal-user-registration.con
   controllers: [
     PortalUserIdentifierVerificationController,
     PortalUserRegistrationController,
+    LoginAuthenticationController,
   ],
   providers: [
     ResponseTransformInterceptor,
     AccessTokenApiResponseHandler,
     responseTransformInterceptor,
+    errorResponseFilter,
+    illegalArgumentExceptionFilter,
   ],
 })
 export class ControllerModule {

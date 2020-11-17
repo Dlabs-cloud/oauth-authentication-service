@@ -8,6 +8,7 @@ import { VerificationEmailSenderServiceImpl } from './verification-email-sender.
 import { PortalUserRegistrationServiceImpl } from './portal-user-registration.service-impl';
 import { ImplicitAuthenticationServiceImpl } from './implicit-authentication.service-impl';
 import { RefreshTokenServiceImpl } from './refresh-token.service-impl';
+import { LoginAuthenticationServiceImpl } from './login-authentication.service-impl';
 
 
 @Module({
@@ -23,12 +24,14 @@ import { RefreshTokenServiceImpl } from './refresh-token.service-impl';
     PortalUserRegistrationServiceImpl,
     ImplicitAuthenticationServiceImpl,
     RefreshTokenServiceImpl,
+    LoginAuthenticationServiceImpl,
   ],
   exports: [
     PortalUserIdentifierVerificationServiceImpl,
     VerificationEmailSenderServiceImpl,
     PortalUserRegistrationServiceImpl,
     ImplicitAuthenticationServiceImpl,
+    LoginAuthenticationServiceImpl,
     RefreshTokenServiceImpl,
   ],
 })

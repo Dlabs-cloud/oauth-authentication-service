@@ -36,11 +36,11 @@ export class PortalUserAuthentication extends BaseEntity {
   @ManyToOne(() => PortalUserIdentifier, {
     nullable: true,
   })
-
   portalUserIdentifier: PortalUserIdentifier;
 
   @ManyToOne(() => PortalUser, {
     eager: true,
+    nullable: true,
   })
   portalUser: PortalUser;
 
@@ -77,7 +77,7 @@ export class PortalUserAuthentication extends BaseEntity {
   @BeforeInsert()
   private beforeInsert() {
 
-    if (!this.portalUser) {
+    if (!this.portalUser && this.portalUserIdentifier) {
       this.portalUser = this.portalUserIdentifier.portalUser;
     } else {
       if (this.portalUserIdentifier && (this.portalUser.id != this.portalUserIdentifier.portalUser.id)) {

@@ -1,0 +1,33 @@
+import { Body, Controller, HttpStatus, Inject, Post } from '@nestjs/common';
+import { LoginRequest } from '../data/request/login.request';
+import { RequestMetaData } from '../security/data/request-meta-data.dto';
+import { RequestMetaDataContext } from '../security/decorators/request-meta-data.decorator';
+import { LoginAuthenticationService } from '../service/login-authentication.service';
+import { AuthenticationResponseType } from '../domain/constants/authentication-response-type,constant';
+import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
+import { ApiResponseDto } from '@tss/common/data/api.response.dto';
+import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
+
+@Controller()
+export class LoginAuthenticationController {
+  constructor(@Inject(LoginAuthenticationService) private readonly loginAuthenticationService: LoginAuthenticationService,
+              protected readonly accessTokenApiResponseHandler: AccessTokenApiResponseHandler) {
+  }
+
+  @Post('/login')
+  async login(@Body() loginRequest: LoginRequest, @RequestMetaDataContext() requestMetaData: RequestMetaData) {
+    let portalUserAuthentication = await this.loginAuthenticationService.getAuthenticationResponse(loginRequest, requestMetaData);
+    if (portalUserAuthentication.responseType !== AuthenticationResponseType.SUCCESSFUL) {
+      if (portalUserAuthentication.responseType == AuthenticationResponseType.UNKNOWN_ACCOUNT) {
+        throw new ErrorResponseException(HttpStatus.UNAUTHORIZED, new ApiResponseDto(HttpStatus.UNAUTHORIZED, null, 'Unknown account'));
+      }
+      throw new ErrorResponseException(HttpStatus.UNAUTHORIZED, new ApiResponseDto(HttpStatus.UNAUTHORIZED, null, 'invalid credentials'));
+    }
+
+    return this.accessTokenApiResponseHandler.getAccessToken(portalUserAuthentication)
+      .then(accessTokenApiResponse => {
+        return new ApiResponseDto(HttpStatus.CREATED, accessTokenApiResponse);
+      });
+
+  }
+}

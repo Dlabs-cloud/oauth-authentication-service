@@ -7,10 +7,9 @@ import { PortalUser } from '../domain/entity/portal-user.entity';
 export class PortalUserIdentifierRepository extends BaseRepository<PortalUserIdentifier> {
 
 
-  findByIdentifier(identifier: string, isVerified: boolean) {
+  findByIdentifier(identifier: string) {
     return this.findOneItemByStatus({
       identifier: identifier,
-      verified: isVerified,
     });
 
 

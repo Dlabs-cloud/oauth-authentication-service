@@ -91,7 +91,7 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
     let portalUserIdentifier = new PortalUserIdentifier();
     portalUserIdentifier.identifierType = UserIdentifierType.EMAIL;
     portalUserIdentifier.portalUser = portalUser;
-    portalUserIdentifier.identifier = userData.email;
+    portalUserIdentifier.identifier = userData.email.toLowerCase();
 
     if (!userData.emailVerificationCode) {
       await this.resolveVerification(entityManager, portalUserIdentifier, userData.emailVerificationCode);
@@ -105,7 +105,7 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
     let now = new Date();
     let existingVerifications = await this.connection
       .getCustomRepository(PortalUserIdentifierVerificationRepository)
-      .findAllActive(userIdentifier.identifier);
+      .findAllActive(userIdentifier.identifier.toLowerCase());
 
     if (existingVerifications.length) {
       throw new IllegalArgumentException('Verification with identifier does not exist');

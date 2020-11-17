@@ -20,7 +20,7 @@ export class PortalUserIdentifierVerificationController {
   async requestEmailVerificationCode(@Param() verificationCodeParam: EmailVerificationCodeParam) {
     let portalUserIdentifier = await this.connection
       .getCustomRepository(PortalUserIdentifierRepository)
-      .findByIdentifier(verificationCodeParam.email, true);
+      .findByIdentifier(verificationCodeParam.email);
 
     if (portalUserIdentifier) {
       throw new HttpException('Email has already been verified', HttpStatus.CONFLICT);
