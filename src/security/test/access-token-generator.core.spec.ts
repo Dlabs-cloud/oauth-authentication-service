@@ -13,7 +13,7 @@ import { transaction } from '@tss/test-starter/mocks/type-orm.mock';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import { ACCESSKEYGENERATOR } from '../constants';
 
-describe('Access-token generator-core', () => {
+describe('Security: Access-token generator-core', () => {
   let applicationContext: INestApplication;
   let connection: Connection;
   let keyGenerator: KeyGenerator;

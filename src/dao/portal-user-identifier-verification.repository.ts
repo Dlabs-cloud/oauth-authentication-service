@@ -17,4 +17,6 @@ export class PortalUserIdentifierVerificationRepository extends BaseRepository<P
       .setParameter('identifier', identifier)
       .getMany();
   }
+
+
 }

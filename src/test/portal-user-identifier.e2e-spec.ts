@@ -1,4 +1,4 @@
-import { Connection, getConnection } from 'typeorm';
+import { Connection, getConnection, IsNull } from 'typeorm';
 import { INestApplication } from '@nestjs/common';
 import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
@@ -41,12 +41,16 @@ describe('Portal-user-identifier-controller', () => {
   });
 
   it('Test that all existing verification are deactivated before creating a new one', async () => {
+    let existingCount = await connection.getCustomRepository(PortalUserIdentifierVerificationRepository)
+      .count({
+        deactivatedOn: IsNull(),
+      });
     let identifierEmail = faker.internet.email();
     await factory().upset(PortalUserIdentificationVerification).use(verification => {
       verification.usedOn = null;
       verification.deactivatedOn = null;
       verification.identifier = identifierEmail;
-      verification.expiresOn = DateTime.local().plus({ minutes: 15 }).toJSDate();
+      verification.expiresOn = DateTime.local().plus({ minutes: 150 }).toJSDate();
       return verification;
     }).createMany(3);
     const url = `/user-emails/${identifierEmail}/verification-code`;
@@ -55,8 +59,10 @@ describe('Portal-user-identifier-controller', () => {
       .expect(201);
 
     await connection.getCustomRepository(PortalUserIdentifierVerificationRepository)
-      .findAllActive(identifierEmail).then(verifications => {
-        expect(1).toEqual(verifications.length);
+      .count({
+        deactivatedOn: IsNull(),
+      }).then(count => {
+        expect(count).toEqual(existingCount + 1);
       });
 
   });

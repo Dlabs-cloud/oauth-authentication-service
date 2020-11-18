@@ -11,7 +11,7 @@ import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { v4 as uuid } from 'uuid';
 import { JwtType } from '../../domain/constants/jwt-type.constant';
 
-describe('Auth-jwt-generator-core', () => {
+describe('Security: Auth-jwt-generator-core', () => {
 
   let asymmetricCrypto: AsymmetricCrypto;
   let key: Key;

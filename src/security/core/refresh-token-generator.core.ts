@@ -18,7 +18,6 @@ export class RefreshTokenGeneratorCore implements AuthKeyGenerator {
 
   async onApplicationBootstrap() {
     if (this.authKeyGenerator.hasKey()) {
-      console.log('Prevented duplicate initialization');
       return;
     }
     await this.connection.transaction(entityManager => {

@@ -11,7 +11,7 @@ import { AsymmetricCrypto } from '@tss/security/service/key-generator';
 import { Key } from '@tss/security/data/key.dto';
 import * as faker from 'faker';
 
-describe('Key generator - core', () => {
+describe('Security: Key generator - core', () => {
   let applicationContext: INestApplication;
   let connection: Connection;
   let keyGenerator: KeyGenerator;

@@ -7,16 +7,15 @@ import { ConfModule } from '../../conf/conf.module';
 import { transaction } from '@tss/test-starter/mocks/type-orm.mock';
 import { AuthJwsGenerator } from '../core/auth-jwt-generator.core';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
-import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { RefreshToken } from '../../domain/entity/refresh-token.entity';
 import { RefreshTokenGeneratorCore } from '../core/refresh-token-generator.core';
 import * as faker from 'faker';
-import { factory } from '../../domain/factory/factory';
 
-describe('Refresh-token-generator-core', () => {
+describe('Security: Refresh-token-generator-core', () => {
   let applicationContext: INestApplication;
   let connection: Connection;
   let keyGenerator: KeyGenerator;
+  let refreshToken: RefreshToken;
   beforeAll(async () => {
     let moduleRef = await Test.createTestingModule({
       imports: [SecurityModule, ConfModule],
@@ -29,6 +28,9 @@ describe('Refresh-token-generator-core', () => {
       .compile();
     keyGenerator = moduleRef.get<KeyGenerator>(KeyGenerator);
     connection = moduleRef.get<Connection>(Connection);
+    refreshToken = {
+      expiresAt: faker.date.future(),
+    } as RefreshToken;
 
   });
 
@@ -68,7 +70,6 @@ describe('Refresh-token-generator-core', () => {
     let authJwsGenerator = new AuthJwsGenerator();
     let createJwt = jest.spyOn(authJwsGenerator, 'createJwt').mockResolvedValueOnce('jwttoken');
     let accessTokenGeneratorCore = new RefreshTokenGeneratorCore(authJwsGenerator, connection, keyGenerator);
-    let refreshToken = await factory().make(RefreshToken);
     let jwtDto = await accessTokenGeneratorCore.generateJwt(refreshToken);
     expect(jwtDto).toBeDefined();
     expect(jwtDto.token).toEqual('jwttoken');
@@ -80,7 +81,6 @@ describe('Refresh-token-generator-core', () => {
     let authJwsGenerator = new AuthJwsGenerator();
     let createJwt = jest.spyOn(authJwsGenerator, 'createJwt').mockResolvedValueOnce('jwttoken');
     let accessTokenGeneratorCore = new RefreshTokenGeneratorCore(authJwsGenerator, connection, keyGenerator);
-    let refreshToken = await factory().make(RefreshToken);
     accessTokenGeneratorCore.generateJwt(refreshToken);
     expect(createJwt).toBeCalled();
   });

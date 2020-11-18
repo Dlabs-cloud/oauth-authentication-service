@@ -26,7 +26,7 @@ describe('Portal -user registration controller', () => {
   });
 
 
-  it('Test that a portal  user can be created ', () => {
+  it('Test that a portal user can be created ', () => {
     const requestPayload: UserRegistrationApiRequest = {
       displayName: faker.name.lastName(),
       email: faker.internet.email(),
@@ -56,7 +56,7 @@ describe('Portal -user registration controller', () => {
       lastName: faker.name.lastName(),
       otherNames: faker.name.firstName(),
       password: faker.random.uuid(),
-      phoneNumber: `${faker.phone.phoneNumber('+234#########')}`,
+      phoneNumber: `${faker.phone.phoneNumber('+2347########')}`,
     };
     const url = `/users`;
     return request(applicationContext.getHttpServer())
@@ -83,9 +83,9 @@ describe('Portal -user registration controller', () => {
   it('Test that a user with valid email verification code can sign up', () => {
     let hashService = new HashService();
     let randomValue = faker.random.alphaNumeric(5);
-    hashService.hash(randomValue).then(hash => {
+    return hashService.hash(randomValue).then(hash => {
       return factory().upset(PortalUserIdentificationVerification).use(verification => {
-        verification.identifier = faker.internet.email();
+        verification.identifier = faker.internet.email().toLowerCase();
         verification.identifierType = UserIdentifierType.EMAIL;
         verification.deactivatedOn = null;
         verification.usedOn = null;
@@ -96,7 +96,7 @@ describe('Portal -user registration controller', () => {
     }).then(verification => {
       const requestPayload: UserRegistrationApiRequest = {
         displayName: faker.name.lastName(),
-        email: faker.internet.email(),
+        email: verification.identifier,
         firstName: faker.name.firstName(),
         gender: Gender.FEMALE,
         isPasswordUpdateRequired: true,
@@ -112,18 +112,18 @@ describe('Portal -user registration controller', () => {
       return request(applicationContext.getHttpServer())
         .post(url)
         .send(requestPayload)
-        .expect(200);
+        .expect(201);
     });
   });
 
-  it('Test that a user with invalid email verification code sign up', () => {
+  it('Test that a user with invalid email verification code cannot  sign up', () => {
     const requestPayload: UserRegistrationApiRequest = {
       displayName: faker.name.lastName(),
       email: faker.internet.email(),
       firstName: faker.name.firstName(),
       gender: Gender.FEMALE,
       isPasswordUpdateRequired: true,
-      emailVerificationCode: faker.random.alphaNumeric(5),
+      emailVerificationCode: faker.random.alphaNumeric(7),
       lastName: faker.name.lastName(),
       otherNames: faker.name.firstName(),
       password: faker.random.uuid(),
@@ -175,7 +175,13 @@ describe('Portal -user registration controller', () => {
     }).then(response => {
       expect(response.body.errors.phoneNumber).toEqual('phone number has already been used');
       expect(response.body.errors.email).toEqual('Email has already been used');
+      return Promise.resolve(response);
     });
+  });
+
+  afterAll(async () => {
+    await connection.close();
+    await applicationContext.close();
   });
 
 
