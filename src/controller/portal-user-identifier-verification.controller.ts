@@ -6,8 +6,10 @@ import { UserIdentifierType } from '../domain/constants/user-identifier-type.con
 import { Connection } from 'typeorm';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
+import { Public } from '../security/decorators/public.decorator';
 
 @Controller()
+@Public()
 export class PortalUserIdentifierVerificationController {
   constructor(@Inject(PortalUserIdentifierVerificationService)
               private readonly  portalUserIdentifierVerificationService: PortalUserIdentifierVerificationService,

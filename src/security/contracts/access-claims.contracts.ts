@@ -12,4 +12,6 @@ export interface AccessClaims {
   getStartTime(): Date;
 
   getTimeIssued(): Date;
+
+  getAudience(): string[];
 }

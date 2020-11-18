@@ -11,8 +11,10 @@ import { AccessTokenApiResponseHandler } from './handler/access-token-api-respon
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { PortalUserAuthenticationFactory } from '../domain/factory/portal-user-authentication.factory';
 import { PortalUserAuthenticationRepository } from '../dao/portal-user-authentication.repository';
+import { Public } from '../security/decorators/public.decorator';
 
 @Controller()
+@Public()
 export class AccessTokenController {
 
   constructor(@Inject(REFRESHCLAIMEXTRACTOR) private readonly accessClaimsExtractor: AccessClaimsExtractor,

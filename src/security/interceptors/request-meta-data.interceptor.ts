@@ -1,18 +1,25 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
+import { CallHandler, ExecutionContext, Inject, Injectable, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { RequestMetaData } from '../data/request-meta-data.dto';
 import { isBlank } from '@tss/common/utils/string.utlls';
+import { AccessClaimsExtractor } from '../contracts/access-claims-extractor.contracts';
+import { ACCESSCLAIMEXTRACTOR } from '../constants';
+import { TokenExpiredError } from 'jsonwebtoken';
 
 @Injectable()
 export class RequestMetaDataInterceptor implements NestInterceptor {
 
+
+  constructor(@Inject(ACCESSCLAIMEXTRACTOR) private readonly accessClaimsExtractor: AccessClaimsExtractor) {
+  }
+
   private proxyIpHeader: string = 'X-REAL-IP';
   private tokenPrefix: string = 'Bearer ';
 
-  intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
+  async intercept(context: ExecutionContext, next: CallHandler<any>) {
     const request = context.switchToHttp().getRequest();
     let requestMetaData = new RequestMetaData();
-    requestMetaData.accessClaims = null;
+    requestMetaData.accessClaims = await this.accessClaims(request, requestMetaData);
     requestMetaData.accessToken = this.getAccessToken(request);
     requestMetaData.ipAddress = this.getIpAddress(request);
     requestMetaData.localHost = RequestMetaDataInterceptor.isIpLocalHost(this.getIpAddress(request));
@@ -22,7 +29,22 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
   }
 
 
-  public accessClaims(){
+  private async accessClaims(request, requestMetaData: RequestMetaData) {
+    let accessToken = this.getAccessToken(request);
+    if (!accessToken) {
+      return null;
+    }
+    try {
+      let claims = await this.accessClaimsExtractor.getClaims(accessToken);
+      if (!claims) {
+        return null;
+      }
+      return claims;
+    } catch (e) {
+      if (e instanceof TokenExpiredError) {
+        requestMetaData.tokenExpired = true;
+      }
+    }
 
   }
 

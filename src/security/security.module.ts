@@ -9,8 +9,9 @@ import { Connection } from 'typeorm';
 import { KeyGenerator } from './contracts/key-generator.contracts';
 import { KeyGeneratorCore } from './core/key-generator.core';
 import { SecurityModule as TssSecurityModule } from '@tss/security';
-import { AccessClaimsExtractorCore } from './core/access-claims-extractor.core';
-import { RefreshClaimsExtractorCore } from './core/refresh-claims-extractor.core';
+import { ClaimsExtractorCore } from './core/claims-extractor.core';
+import { JwtType } from '../domain/constants/jwt-type.constant';
+import { AccessConstrainInterceptor } from './interceptors/access-constrain.interceptor';
 
 const refreshTokenGenerator = {
   provide: REFRESHKEYGENERATOR,
@@ -24,12 +25,19 @@ const refreshTokenGenerator = {
 
 const accessClaimExtractor = {
   provide: ACCESSCLAIMEXTRACTOR,
-  useExisting: AccessClaimsExtractorCore,
+  useFactory: (connection: Connection) => {
+    return new ClaimsExtractorCore(connection, JwtType.ACCESS);
+  },
+  inject: [Connection],
 };
+
 
 const refreshClaimsExtractor = {
   provide: REFRESHCLAIMEXTRACTOR,
-  useExisting: RefreshClaimsExtractorCore,
+  useFactory: (connection: Connection) => {
+    return new ClaimsExtractorCore(connection, JwtType.REFRESH);
+  },
+  inject: [Connection],
 };
 
 const accessKeyGeneratorCore = {
@@ -53,9 +61,15 @@ const keyGenerator = {
   imports: [TssSecurityModule],
   providers: [
     RequestMetaDataInterceptor,
+    AccessConstrainInterceptor,
+
     {
       provide: APP_INTERCEPTOR,
       useExisting: RequestMetaDataInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useExisting: AccessConstrainInterceptor,
     },
     KeyGeneratorCore,
     keyGenerator,
@@ -63,8 +77,6 @@ const keyGenerator = {
     refreshClaimsExtractor,
     refreshTokenGenerator,
     accessKeyGeneratorCore,
-    AccessClaimsExtractorCore,
-    RefreshClaimsExtractorCore,
   ],
   exports: [
     refreshTokenGenerator,

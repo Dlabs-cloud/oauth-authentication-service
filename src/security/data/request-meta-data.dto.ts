@@ -6,7 +6,18 @@ export class RequestMetaData {
   private _userAgent: string;
   private _accessToken: string;
   private _localHost: boolean;
-  private _accessClaims: AccessClaims;
+  private _accessClaims?: AccessClaims;
+  private _tokenExpired: boolean;
+  private portalUser?: number;
+
+
+  get tokenExpired(): boolean {
+    return this._tokenExpired;
+  }
+
+  set tokenExpired(value: boolean) {
+    this._tokenExpired = value;
+  }
 
 
   get ipAddress(): string {
@@ -47,5 +58,8 @@ export class RequestMetaData {
 
   set accessClaims(value: AccessClaims) {
     this._accessClaims = value;
+    if (value) {
+      this.portalUser = Number(value.getSubject());
+    }
   }
 }

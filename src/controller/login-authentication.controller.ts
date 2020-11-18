@@ -7,8 +7,10 @@ import { AuthenticationResponseType } from '../domain/constants/authentication-r
 import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
+import { Public } from '../security/decorators/public.decorator';
 
 @Controller()
+@Public()
 export class LoginAuthenticationController {
   constructor(@Inject(LoginAuthenticationService) private readonly loginAuthenticationService: LoginAuthenticationService,
               protected readonly accessTokenApiResponseHandler: AccessTokenApiResponseHandler) {

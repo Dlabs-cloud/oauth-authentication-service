@@ -39,4 +39,8 @@ export class SimpleAccessClaimsCore implements AccessClaims {
     return this.claims.kid;
   }
 
+  getAudience(): string[] {
+    return this.claims.aud;
+  }
+
 }

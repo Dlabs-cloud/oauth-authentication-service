@@ -5,8 +5,10 @@ import { RequestMetaDataContext } from '../security/decorators/request-meta-data
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
+import { Public } from '../security/decorators/public.decorator';
 
 @Controller()
+@Public()
 export class PortalUserRegistrationController {
 
   constructor(@Inject(PortalUserRegistrationService) private readonly portalUserRegistrationService: PortalUserRegistrationService,

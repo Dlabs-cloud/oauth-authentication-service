@@ -7,4 +7,5 @@ export interface JwtTokenPayloadDto {
   iss: string;
   jti: string;
   kid?: string;
+  aud?: string[];
 }
