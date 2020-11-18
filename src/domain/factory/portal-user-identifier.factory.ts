@@ -8,7 +8,7 @@ export class PortalUserIdentifierFactory implements FactoryHelper<PortalUserIden
   async apply(faker: Faker.FakerStatic, modelFactory: ModelFactory): Promise<PortalUserIdentifier> {
     let portalUserIdentifier = new PortalUserIdentifier();
     portalUserIdentifier.verified = faker.random.boolean();
-    portalUserIdentifier.identifier = faker.internet.email();
+    portalUserIdentifier.identifier = faker.internet.email().toLowerCase();
     portalUserIdentifier.dateVerified = new Date();
     portalUserIdentifier.portalUser = await modelFactory.create(PortalUser);
     portalUserIdentifier.identifierType = faker.random.arrayElement(Object.values(UserIdentifierType));
