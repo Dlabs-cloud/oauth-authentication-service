@@ -1,4 +1,4 @@
-import { AuthJwsGenerator } from '../core/auth-jwt-generator.core';
+import { AuthJwsGenerator } from '../core/auth-jws-generator.core';
 import { RefreshToken } from '../../domain/entity/refresh-token.entity';
 import { Test } from '@nestjs/testing';
 import { SecurityModule } from '@tss/security';

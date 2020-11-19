@@ -2,6 +2,7 @@ import { AccessClaims } from '../contracts/access-claims.contracts';
 
 export class RequestMetaData {
 
+
   private _ipAddress: string;
   private _userAgent: string;
   private _accessToken: string;
@@ -9,6 +10,7 @@ export class RequestMetaData {
   private _accessClaims?: AccessClaims;
   private _tokenExpired: boolean;
   private portalUser?: number;
+  private _host?: string;
 
 
   get tokenExpired(): boolean {
@@ -61,5 +63,13 @@ export class RequestMetaData {
     if (value) {
       this.portalUser = Number(value.getSubject());
     }
+  }
+
+  get host(): string {
+    return this._host;
+  }
+
+  set host(value: string) {
+    this._host = value;
   }
 }

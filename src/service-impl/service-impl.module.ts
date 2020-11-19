@@ -9,14 +9,13 @@ import { PortalUserRegistrationServiceImpl } from './portal-user-registration.se
 import { ImplicitAuthenticationServiceImpl } from './implicit-authentication.service-impl';
 import { RefreshTokenServiceImpl } from './refresh-token.service-impl';
 import { LoginAuthenticationServiceImpl } from './login-authentication.service-impl';
+import { PasswordResetEmailSenderServiceImpl } from './password-reset-email-sender.service-impl';
+import { PasswordResetRequestServiceImpl } from './password-reset-request.service-impl';
 
 
 @Module({
   imports: [
-    CommonModule,
     forwardRef(() => ServiceModule),
-    SecurityModule,
-    ConfModule,
   ],
   providers: [
     PortalUserIdentifierVerificationServiceImpl,
@@ -25,6 +24,8 @@ import { LoginAuthenticationServiceImpl } from './login-authentication.service-i
     ImplicitAuthenticationServiceImpl,
     RefreshTokenServiceImpl,
     LoginAuthenticationServiceImpl,
+    PasswordResetEmailSenderServiceImpl,
+    PasswordResetRequestServiceImpl,
   ],
   exports: [
     PortalUserIdentifierVerificationServiceImpl,
@@ -33,6 +34,8 @@ import { LoginAuthenticationServiceImpl } from './login-authentication.service-i
     ImplicitAuthenticationServiceImpl,
     LoginAuthenticationServiceImpl,
     RefreshTokenServiceImpl,
+    PasswordResetEmailSenderServiceImpl,
+    PasswordResetRequestServiceImpl,
   ],
 })
 export class ServiceImplModule {

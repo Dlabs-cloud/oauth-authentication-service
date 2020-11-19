@@ -3,7 +3,7 @@ import { Connection, getConnection } from 'typeorm';
 import { Test } from '@nestjs/testing';
 import { AccessTokenGeneratorCore } from '../core/access-token-generator.core';
 import { SecurityModule } from '../security.module';
-import { AuthJwsGenerator } from '../core/auth-jwt-generator.core';
+import { AuthJwsGenerator } from '../core/auth-jws-generator.core';
 import { RefreshToken } from '../../domain/entity/refresh-token.entity';
 import * as faker from 'faker';
 import { PortalUser } from '../../domain/entity/portal-user.entity';

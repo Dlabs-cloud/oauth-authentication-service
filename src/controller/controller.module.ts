@@ -13,6 +13,7 @@ import { LoginAuthenticationController } from './login-authentication.controller
 import { errorResponseFilter } from '@tss/common/exception-filters/error-response.exception.filter';
 import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/illegal-argument.exception.filter';
 import { AccessTokenController } from './access-token.controller';
+import { PasswordResetRequestController } from './password-reset-request.controller';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AccessTokenController } from './access-token.controller';
     PortalUserIdentifierVerificationController,
     PortalUserRegistrationController,
     LoginAuthenticationController,
+    PasswordResetRequestController,
     AccessTokenController,
   ],
   providers: [

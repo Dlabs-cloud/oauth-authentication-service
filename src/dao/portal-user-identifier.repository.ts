@@ -9,7 +9,7 @@ export class PortalUserIdentifierRepository extends BaseRepository<PortalUserIde
 
   findByIdentifier(identifier: string) {
     return this.findOneItemByStatus({
-      identifier: identifier,
+      identifier: identifier.toLowerCase(),
     });
 
 

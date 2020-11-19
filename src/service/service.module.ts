@@ -12,6 +12,14 @@ import { RefreshTokenService } from './refresh-token.service';
 import { RefreshTokenServiceImpl } from '../service-impl/refresh-token.service-impl';
 import { LoginAuthenticationService } from './login-authentication.service';
 import { LoginAuthenticationServiceImpl } from '../service-impl/login-authentication.service-impl';
+import { PasswordResetEmailSenderService } from './password-reset-email-sender.service';
+import { PasswordResetEmailSenderServiceImpl } from '../service-impl/password-reset-email-sender.service-impl';
+import { PasswordResetRequestService } from './password-reset-request.service';
+import { PasswordResetRequestServiceImpl } from '../service-impl/password-reset-request.service-impl';
+import { SecurityModule } from '../security/security.module';
+import { ConfModule } from '../conf/conf.module';
+import { SecurityModule as TssSecurityModule } from '@tss/security';
+import { CommonModule } from '@tss/common';
 
 let portalUserIdentifierService = {
   provide: PortalUserIdentifierVerificationService,
@@ -25,6 +33,11 @@ let loginAuthenticationService = {
 let verificationEmailSenderService = {
   provide: VerificationEmailSenderService,
   useExisting: VerificationEmailSenderServiceImpl,
+};
+
+let passwordResetEmailSenderService = {
+  provide: PasswordResetEmailSenderService,
+  useExisting: PasswordResetEmailSenderServiceImpl,
 };
 
 let portalUserRegistrationService = {
@@ -42,9 +55,18 @@ let refreshTokenService = {
   useExisting: RefreshTokenServiceImpl,
 };
 
+let passwordResetRequestService = {
+  provide: PasswordResetRequestService,
+  useExisting: PasswordResetRequestServiceImpl,
+};
+
 @Module({
   imports: [
+    SecurityModule,
     forwardRef(() => ServiceImplModule),
+    TssSecurityModule,
+    ConfModule,
+    CommonModule
   ],
   providers: [
     portalUserIdentifierService,
@@ -53,6 +75,8 @@ let refreshTokenService = {
     implicitAuthenticationService,
     refreshTokenService,
     loginAuthenticationService,
+    passwordResetEmailSenderService,
+    passwordResetRequestService,
   ],
   exports: [
     portalUserIdentifierService,
@@ -61,6 +85,12 @@ let refreshTokenService = {
     implicitAuthenticationService,
     refreshTokenService,
     loginAuthenticationService,
+    passwordResetEmailSenderService,
+    passwordResetRequestService,
+    SecurityModule,
+    TssSecurityModule,
+    ConfModule,
+    CommonModule
   ],
 })
 export class ServiceModule {

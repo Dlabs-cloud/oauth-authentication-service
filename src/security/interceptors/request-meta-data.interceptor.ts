@@ -24,6 +24,7 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
     requestMetaData.ipAddress = this.getIpAddress(request);
     requestMetaData.localHost = RequestMetaDataInterceptor.isIpLocalHost(this.getIpAddress(request));
     requestMetaData.userAgent = request.headers['user-agent'];
+    requestMetaData.host = request.headers['host'];
     request.metadata = requestMetaData;
     return next.handle();
   }

@@ -1,7 +1,7 @@
 import { AuthKeyGenerator } from '../contracts/auth-key-generator.contracts';
 import { RefreshToken } from '../../domain/entity/refresh-token.entity';
 import { JwtDto } from '../data/jwt.dto';
-import { AuthJwsGenerator } from './auth-jwt-generator.core';
+import { AuthJwsGenerator } from './auth-jws-generator.core';
 import { KeyGenerator } from '../contracts/key-generator.contracts';
 import { Connection } from 'typeorm';
 import { JwtType } from '../../domain/constants/jwt-type.constant';

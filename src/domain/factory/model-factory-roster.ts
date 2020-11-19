@@ -9,6 +9,8 @@ import { RefreshToken } from '../entity/refresh-token.entity';
 import { RefreshTokenFactory } from './refresh-token.factory';
 import { PortalUserAuthentication } from '../entity/portal-user-authentication.entity';
 import { PortalUserAuthenticationFactory } from './portal-user-authentication.factory';
+import { PasswordRequestFactory } from './password-request.factory';
+import { PasswordResetRequest } from '../entity/password-reset-request.entity';
 
 export class ModelFactoryRoster {
   static register(modelFactory: ModelFactory) {
@@ -17,5 +19,6 @@ export class ModelFactoryRoster {
     modelFactory.register(PortalUser, PortalUserFactory);
     modelFactory.register(RefreshToken, RefreshTokenFactory);
     modelFactory.register(PortalUserAuthentication, PortalUserAuthenticationFactory);
+    modelFactory.register(PasswordResetRequest, PasswordRequestFactory);
   }
 }

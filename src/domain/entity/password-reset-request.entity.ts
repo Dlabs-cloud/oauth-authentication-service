@@ -33,11 +33,13 @@ export class PasswordResetRequest extends BaseEntity {
 
   @Column({
     type: 'timestamp',
+    nullable: true,
   })
   usedOn: Date;
 
   @Column({
     type: 'timestamp',
+    nullable: true,
   })
   deactivatedOn: Date;
 
