@@ -20,6 +20,8 @@ import { SecurityModule } from '../security/security.module';
 import { ConfModule } from '../conf/conf.module';
 import { SecurityModule as TssSecurityModule } from '@tss/security';
 import { CommonModule } from '@tss/common';
+import { PasswordUpdateService } from './password-update.service';
+import { PasswordUpdateServiceImpl } from '../service-impl/password-update.service-impl';
 
 let portalUserIdentifierService = {
   provide: PortalUserIdentifierVerificationService,
@@ -60,13 +62,18 @@ let passwordResetRequestService = {
   useExisting: PasswordResetRequestServiceImpl,
 };
 
+let passwordUpdateService = {
+  provide: PasswordUpdateService,
+  useExisting: PasswordUpdateServiceImpl,
+};
+
 @Module({
   imports: [
     SecurityModule,
     forwardRef(() => ServiceImplModule),
     TssSecurityModule,
     ConfModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [
     portalUserIdentifierService,
@@ -77,6 +84,7 @@ let passwordResetRequestService = {
     loginAuthenticationService,
     passwordResetEmailSenderService,
     passwordResetRequestService,
+    passwordUpdateService,
   ],
   exports: [
     portalUserIdentifierService,
@@ -87,10 +95,11 @@ let passwordResetRequestService = {
     loginAuthenticationService,
     passwordResetEmailSenderService,
     passwordResetRequestService,
+    passwordUpdateService,
     SecurityModule,
     TssSecurityModule,
     ConfModule,
-    CommonModule
+    CommonModule,
   ],
 })
 export class ServiceModule {

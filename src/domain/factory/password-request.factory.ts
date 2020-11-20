@@ -1,6 +1,5 @@
 import { FactoryHelper, ModelFactory } from '@tss/test-starter';
 import { PasswordResetRequest } from '../entity/password-reset-request.entity';
-import { PortalUser } from '../entity/portal-user.entity';
 import { PortalUserIdentifier } from '../entity/portal-user-identifier.entity';
 
 
@@ -8,7 +7,6 @@ export class PasswordRequestFactory implements FactoryHelper<PasswordResetReques
   async apply(faker: Faker.FakerStatic, modelFactory: ModelFactory): Promise<PasswordResetRequest> {
     let passwordResetRequest = new PasswordResetRequest();
     passwordResetRequest.expiresOn = faker.date.future();
-    passwordResetRequest.portalUser = await modelFactory.create(PortalUser);
     passwordResetRequest.portalUserIdentifier = await modelFactory.create(PortalUserIdentifier);
     passwordResetRequest.resetCode = faker.random.alphaNumeric(5);
     passwordResetRequest.resetCodeHash = faker.random.uuid();

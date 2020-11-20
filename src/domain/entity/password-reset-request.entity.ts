@@ -14,10 +14,14 @@ export class PasswordResetRequest extends BaseEntity {
   @Column()
   userAgent: string;
 
-  @ManyToOne(() => PortalUserIdentifier)
+  @ManyToOne(() => PortalUserIdentifier, {
+    eager: true,
+  })
   portalUserIdentifier: PortalUserIdentifier;
 
-  @ManyToOne(() => PortalUser)
+  @ManyToOne(() => PortalUser, {
+    eager: true,
+  })
   portalUser: PortalUser;
 
   @Column()

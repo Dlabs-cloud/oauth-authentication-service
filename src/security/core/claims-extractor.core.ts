@@ -27,9 +27,11 @@ export class ClaimsExtractorCore implements AccessClaimsExtractor {
       if (!header.kid) {
         return null;
       }
+
       let signatureKey = await this.connection
         .getCustomRepository(SignatureKeyRepository)
         .findByKidAndType(header.kid, this.type);
+
       if (!signatureKey) {
         return null;
       }

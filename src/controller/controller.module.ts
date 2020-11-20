@@ -14,6 +14,7 @@ import { errorResponseFilter } from '@tss/common/exception-filters/error-respons
 import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/illegal-argument.exception.filter';
 import { AccessTokenController } from './access-token.controller';
 import { PasswordResetRequestController } from './password-reset-request.controller';
+import { PasswordResetController } from './password-reset.controller';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { PasswordResetRequestController } from './password-reset-request.control
     LoginAuthenticationController,
     PasswordResetRequestController,
     AccessTokenController,
+    PasswordResetController,
   ],
   providers: [
     ResponseTransformInterceptor,
