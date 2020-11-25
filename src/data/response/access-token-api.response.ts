@@ -1,5 +1,6 @@
 import { Gender } from '../../domain/constants/gender.constant';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
+import { DataResponse } from './data.response';
 
 
 export class AccessTokenApiResponse {
@@ -10,7 +11,7 @@ export class AccessTokenApiResponse {
   gender: Gender;
   emailAddresses: string[];
   phoneNumbers: string[];
-  data: { name, value };
+  data: DataResponse[];
   passwordUpdateRequired: boolean;
   refresh_token: string;
   token_type: string = 'Bearer';

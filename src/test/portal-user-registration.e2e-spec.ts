@@ -57,6 +57,12 @@ describe('Portal -user registration controller', () => {
       otherNames: faker.name.firstName(),
       password: faker.random.uuid(),
       phoneNumber: `${faker.phone.phoneNumber('+2347########')}`,
+      data: [
+        {
+          name: 'name',
+          value: 'value',
+        },
+      ],
     };
     const url = `/users`;
     return request(applicationContext.getHttpServer())
@@ -77,6 +83,14 @@ describe('Portal -user registration controller', () => {
         expect(payload.access_token).toBeDefined();
         expect(payload.secondsTillExpiry).toBeDefined();
         expect(payload.expires_at).toBeDefined();
+        expect(payload.data).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: 'name',
+              value: 'value',
+            }),
+          ]),
+        );
       });
   });
 
