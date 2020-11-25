@@ -8,6 +8,8 @@ import { ErrorResponseException } from '@tss/common/exceptions/error-response.ex
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
 import { Public } from '../security/decorators/public.decorator';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { AccessTokenApiResponse } from '../data/response/access-token-api.response';
 
 @Controller()
 @Public()
@@ -17,6 +19,7 @@ export class LoginAuthenticationController {
   }
 
   @Post('/login')
+  @ApiOkResponse({ type: AccessTokenApiResponse })
   async login(@Body() loginRequest: LoginRequest, @RequestMetaDataContext() requestMetaData: RequestMetaData) {
     let portalUserAuthentication = await this.loginAuthenticationService.getAuthenticationResponse(loginRequest, requestMetaData);
     if (portalUserAuthentication.responseType !== AuthenticationResponseType.SUCCESSFUL) {

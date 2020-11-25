@@ -12,6 +12,8 @@ import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { PortalUserAuthenticationFactory } from '../domain/factory/portal-user-authentication.factory';
 import { PortalUserAuthenticationRepository } from '../dao/portal-user-authentication.repository';
 import { Public } from '../security/decorators/public.decorator';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { AccessTokenApiResponse } from '../data/response/access-token-api.response';
 
 @Controller()
 @Public()
@@ -23,6 +25,7 @@ export class AccessTokenController {
   }
 
   @Post('/oauth2/token')
+  @ApiOkResponse({ type: AccessTokenApiResponse })
   async getAccessToken(@Body() accessTokenRequest: AccessTokenRequest, @RequestMetaDataContext() requestMetaData: RequestMetaData) {
     let accessClaims = await this.accessClaimsExtractor.getClaims(accessTokenRequest.refresh_token);
     if (!accessClaims) {

@@ -1,9 +1,9 @@
 export class ApiResponseDto<T> {
-  private readonly data?: T;
+  public readonly data?: T;
 
-  private readonly message: string;
+  public readonly message: string;
 
-  private readonly code: number;
+  public readonly code: number;
 
   constructor(code = 200, data?: T, message = 'Successfully') {
     this.data = data;

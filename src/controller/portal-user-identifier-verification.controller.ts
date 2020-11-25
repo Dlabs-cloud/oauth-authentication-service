@@ -7,6 +7,7 @@ import { Connection } from 'typeorm';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
 import { Public } from '../security/decorators/public.decorator';
+import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
 
 @Controller()
 @Public()
@@ -19,6 +20,7 @@ export class PortalUserIdentifierVerificationController {
   }
 
   @Post('/user-emails/:email/verification-code')
+  @ApiNoContentResponse()
   async requestEmailVerificationCode(@Param() verificationCodeParam: EmailVerificationCodeParam) {
     let portalUserIdentifier = await this.connection
       .getCustomRepository(PortalUserIdentifierRepository)
@@ -33,7 +35,7 @@ export class PortalUserIdentifierVerificationController {
       .then(verification => {
         return this.verificationEmailSenderService.sendVerificationCode(verification.userVerification)
           .then(() => {
-            return Promise.resolve(new ApiResponseDto(201));
+            return Promise.resolve(new ApiResponseDto(HttpStatus.NO_CONTENT));
           });
       });
 

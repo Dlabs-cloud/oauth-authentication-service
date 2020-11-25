@@ -1,6 +1,7 @@
 import { Gender } from '../../domain/constants/gender.constant';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
 
+
 export class AccessTokenApiResponse {
   id: number;
   displayName: string;
@@ -22,6 +23,7 @@ export class AccessTokenApiResponse {
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.gender = user.gender;
+    this.id = user.id;
     this.passwordUpdateRequired = user.passwordUpdateRequired;
   }
 }

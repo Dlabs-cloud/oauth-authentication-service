@@ -30,7 +30,6 @@ describe('password reset controller e2e', () => {
   });
 
 
-
   it('Test that a user with valid token and identifier can reset password', () => {
     return factory().upset(PortalUserIdentifier).use(portalUserIdentifier => {
       portalUserIdentifier.identifier = faker.internet.email();
@@ -60,10 +59,10 @@ describe('password reset controller e2e', () => {
             invalidateOtherSession: true,
             password: '234012345',
           })
-          .expect(204);
+          .expect(201);
       });
     });
-  })
+  });
   it('Test that an invalid token with valid identifier cannot perform password reset', () => {
 
     const url = `/password/${faker.internet.email}/${faker.random.uuid()}`;
@@ -118,7 +117,6 @@ describe('password reset controller e2e', () => {
       });
     });
   });
-
 
 
   it('Test that a used token cannot be reused', () => {

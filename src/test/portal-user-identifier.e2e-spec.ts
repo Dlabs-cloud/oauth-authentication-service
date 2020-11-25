@@ -26,7 +26,7 @@ describe('Portal-user-identifier-controller', () => {
     const url = `/user-emails/${faker.internet.email()}/verification-code`;
     return request(applicationContext.getHttpServer())
       .post(url)
-      .expect(201);
+      .expect(204);
   });
 
   it('Test that a verified portal user cannot be used', async () => {
@@ -56,7 +56,7 @@ describe('Portal-user-identifier-controller', () => {
     const url = `/user-emails/${identifierEmail}/verification-code`;
     await request(applicationContext.getHttpServer())
       .post(url)
-      .expect(201);
+      .expect(204);
 
     await connection.getCustomRepository(PortalUserIdentifierVerificationRepository)
       .count({

@@ -9,6 +9,7 @@ import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.re
 import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
 import { PasswordResetEmailSenderService } from '../service/password-reset-email-sender.service';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
+import { ApiNoContentResponse, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 
 
 @Controller()
@@ -21,6 +22,7 @@ export class PasswordResetRequestController {
   }
 
   @Post('/password-resets/:email')
+  @ApiNoContentResponse()
   public requestPasswordResetWithEmail(@Param('email') email: string, @RequestMetaDataContext() requestMetaData: RequestMetaData) {
     return this.connection.getCustomRepository(PortalUserIdentifierRepository).findByIdentifier(email)
       .then(identifier => {
@@ -34,7 +36,7 @@ export class PasswordResetRequestController {
       }).then(passwordResetRequest => {
         return this.passwordResetEmailSenderService.sendResendLink(passwordResetRequest, requestMetaData.host);
       }).then(() => {
-        return Promise.resolve(new ApiResponseDto(204));
+        return Promise.resolve(new ApiResponseDto(HttpStatus.NO_CONTENT));
       });
 
   }

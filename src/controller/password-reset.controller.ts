@@ -14,6 +14,8 @@ import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { GenericStatus } from '@tss/common';
+import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import { AccessTokenApiResponse } from '../data/response/access-token-api.response';
 
 @Controller()
 @Public()
@@ -26,7 +28,8 @@ export class PasswordResetController {
   }
 
   @Post('/password/:identifier/:resetToken')
-  resetPasswordWithResetToken(@Param('identifier') identifier,
+  @ApiCreatedResponse({ type: AccessTokenApiResponse })
+  resetPasswordWithResetToken(@Param('identifier') identifier: string,
                               @Param('resetToken') resetToken: string,
                               @RequestMetaDataContext() requestMetaData: RequestMetaData,
                               @Body() request: PasswordResetApiRequest) {
@@ -54,7 +57,7 @@ export class PasswordResetController {
         }).then(portalUserAuthentication => {
           return this.accessTokenApiResponseHandler.getAccessToken(portalUserAuthentication);
         }).then(accessTokenApiResponse => {
-          return new ApiResponseDto(HttpStatus.NO_CONTENT, accessTokenApiResponse);
+          return new ApiResponseDto(HttpStatus.CREATED, accessTokenApiResponse);
         });
     } catch (e) {
       if (e instanceof TokenExpiredError) {
