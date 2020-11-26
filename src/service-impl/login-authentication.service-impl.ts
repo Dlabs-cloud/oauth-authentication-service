@@ -3,12 +3,12 @@ import { PortalUserAuthentication } from '../domain/entity/portal-user-authentic
 import { LoginRequest } from '../data/request/login.request';
 import { Connection } from 'typeorm';
 import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.repository';
-import { HashService } from '@tss/security/service';
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { AuthenticationResponseType } from '../domain/constants/authentication-response-type,constant';
 import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
 import { AuthenticationType } from '../domain/constants/authentication-type.constant';
 import { Injectable } from '@nestjs/common';
+import { HashService } from '@tss/common';
 
 @Injectable()
 export class LoginAuthenticationServiceImpl implements LoginAuthenticationService {

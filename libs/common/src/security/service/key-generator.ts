@@ -1,6 +1,5 @@
-import { v4 as uuid } from 'uuid';
-import { createDiffieHellman, generateKeyPair, generateKeyPairSync } from 'crypto';
-import { Key } from '@tss/security/data/key.dto';
+import { generateKeyPairSync } from 'crypto';
+import { Key } from '@tss/common/security/data/key.dto';
 
 export class AsymmetricCrypto {
   public generateKeyPair(): Promise<Key> {

@@ -5,7 +5,7 @@ import { Reflector } from '@nestjs/core';
 import { RequestMetaData } from '../data/request-meta-data.dto';
 
 @Injectable()
-export class AccessConstrainInterceptor implements NestInterceptor {
+export class AccessConstraintInterceptor implements NestInterceptor {
   constructor(private readonly reflector: Reflector) {
   }
 
@@ -27,7 +27,7 @@ export class AccessConstrainInterceptor implements NestInterceptor {
       throw new UnauthorizedException('Token is not provided');
     }
     if (!requestMetaData.accessClaims) {
-      AccessConstrainInterceptor.inValidTokenResponse(requestMetaData);
+      AccessConstraintInterceptor.inValidTokenResponse(requestMetaData);
     }
 
     if (accessTokenTypes.includes(AccessTypes.NOTCLIENTTOKEN)) {

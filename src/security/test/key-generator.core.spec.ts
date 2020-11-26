@@ -4,12 +4,11 @@ import { KeyGenerator } from '../contracts/key-generator.contracts';
 import { Test } from '@nestjs/testing';
 import { SecurityModule } from '../security.module';
 import { ConfModule } from '../../conf/conf.module';
-import { SecurityModule as TssSecurityModule } from '@tss/security';
 import { entityManager, transaction } from '@tss/test-starter/mocks/type-orm.mock';
 import { JwtType } from '../../domain/constants/jwt-type.constant';
-import { AsymmetricCrypto } from '@tss/security/service/key-generator';
-import { Key } from '@tss/security/data/key.dto';
+import { AsymmetricCrypto } from '@tss/security/../../../libs/common/src/security/service/key-generator';
 import * as faker from 'faker';
+import { CommonModule, Key } from '@tss/common';
 
 describe('Security: Key generator - core', () => {
   let applicationContext: INestApplication;
@@ -18,7 +17,7 @@ describe('Security: Key generator - core', () => {
   let asymmetricCrypto: AsymmetricCrypto;
   beforeAll(async () => {
     let moduleRef = await Test.createTestingModule({
-      imports: [SecurityModule, ConfModule, TssSecurityModule],
+      imports: [SecurityModule, ConfModule, CommonModule],
       providers: [],
     })
       .overrideProvider(Connection)

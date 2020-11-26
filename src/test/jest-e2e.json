@@ -13,8 +13,6 @@
   "moduleNameMapper": {
     "@tss/common/(.*)": "<rootDir>/../libs/common/src/$1",
     "@tss/common": "<rootDir>/../libs/common/src",
-    "@tss/security/(.*)": "<rootDir>/../libs/security/src/$1",
-    "@tss/security": "<rootDir>/../libs/security/src",
     "@tss/test-starter/(.*)": "<rootDir>/../libs/test-starter/src/$1",
     "@tss/test-starter": "<rootDir>/../libs/test-starter/src"
   }

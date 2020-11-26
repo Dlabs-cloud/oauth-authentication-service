@@ -4,7 +4,7 @@ import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { EntityManager } from 'typeorm';
-import { AsymmetricCrypto } from '@tss/security/service/key-generator';
+import { AsymmetricCrypto } from '@tss/common';
 
 @Injectable()
 export class KeyGeneratorCore implements KeyGenerator {
@@ -16,7 +16,7 @@ export class KeyGeneratorCore implements KeyGenerator {
     return this.asymmetricCrypto.generateKeyPair().then(key => {
       let signatureKey = new SignatureKey();
       signatureKey.algorithm = key.algorithm;
-      signatureKey.encodedKey = key.publicKey;
+      signatureKey.publicKey = key.publicKey;
       signatureKey.format = key.format;
       signatureKey.type = jwtTokenType;
       signatureKey.keyId = uuid();

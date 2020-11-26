@@ -16,7 +16,6 @@ export class AuthJwsGenerator {
 
 
   public hasKey(): boolean {
-
     return !!this.keyId;
 
   }

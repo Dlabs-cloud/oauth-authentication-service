@@ -17,12 +17,6 @@
       "@tss/common/*": [
         "libs/common/src/*"
       ],
-      "@tss/security": [
-        "libs/security/src"
-      ],
-      "@tss/security/*": [
-        "libs/security/src/*"
-      ],
       "@tss/test-starter": [
         "libs/test-starter/src"
       ],

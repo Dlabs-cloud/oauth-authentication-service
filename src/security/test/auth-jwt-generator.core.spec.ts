@@ -1,15 +1,14 @@
 import { AuthJwsGenerator } from '../core/auth-jws-generator.core';
 import { RefreshToken } from '../../domain/entity/refresh-token.entity';
 import { Test } from '@nestjs/testing';
-import { SecurityModule } from '@tss/security';
-import { AsymmetricCrypto } from '@tss/security/service/key-generator';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import * as faker from 'faker';
 import { decode, verify } from 'jsonwebtoken';
-import { Key } from '@tss/security/data/key.dto';
+import { Key } from '@tss/security/../../../libs/common/src/security/data/key.dto';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { v4 as uuid } from 'uuid';
 import { JwtType } from '../../domain/constants/jwt-type.constant';
+import { AsymmetricCrypto, CommonModule } from '@tss/common';
 
 describe('Security: Auth-jwt-generator-core', () => {
 
@@ -19,7 +18,7 @@ describe('Security: Auth-jwt-generator-core', () => {
   let signatureKey: SignatureKey;
   beforeAll(async () => {
     let moduleRef = await Test.createTestingModule({
-      imports: [SecurityModule],
+      imports: [CommonModule],
       providers: [],
     }).compile();
     asymmetricCrypto = moduleRef.get<AsymmetricCrypto>(AsymmetricCrypto);
@@ -32,9 +31,10 @@ describe('Security: Auth-jwt-generator-core', () => {
       expiresAt: faker.date.future(),
       portalUser: portalUser,
     } as RefreshToken;
+
     signatureKey = {
       algorithm: 'RS256',
-      encodedKey: key.publicKey,
+      encodedKey: Buffer.from(key.publicKey).toString('base64'),
       format: 'pem',
       keyId: uuid(),
       type: JwtType.ACCESS,
@@ -45,7 +45,7 @@ describe('Security: Auth-jwt-generator-core', () => {
   it('Test that the token generated was signed', async () => {
 
     let keyVal = await asymmetricCrypto.generateKeyPair();
-    signatureKey.encodedKey = keyVal.publicKey;
+    signatureKey.encodedKey = Buffer.from(keyVal.publicKey).toString('base64');
     let authJwsGenerator = new AuthJwsGenerator();
     authJwsGenerator.updateKey({
       key: keyVal.privateKey,
@@ -53,7 +53,8 @@ describe('Security: Auth-jwt-generator-core', () => {
     });
 
     let token = await authJwsGenerator.createJwt(refreshToken, refreshToken.expiresAt);
-    let jwtPayload = verify(token, signatureKey.encodedKey, {
+    signatureKey.publicKey = Buffer.from(signatureKey.encodedKey, 'base64').toString();
+    let jwtPayload = verify(token, signatureKey.publicKey, {
       algorithms: ['RS256'],
     });
 

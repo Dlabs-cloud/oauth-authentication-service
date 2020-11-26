@@ -11,7 +11,7 @@ import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.en
 import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
 import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
 import { PortalUserIdentificationVerification } from '../domain/entity/portal-user-identification-verification.entity';
-import { HashService } from '@tss/security/service';
+import { HashService } from '@tss/common';
 
 describe('Portal -user registration controller', () => {
   let applicationContext: INestApplication;

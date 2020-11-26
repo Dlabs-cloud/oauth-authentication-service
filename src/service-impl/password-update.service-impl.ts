@@ -1,15 +1,15 @@
 import { PasswordUpdateService } from '../service/password-update.service';
 import { PasswordResetRequest } from '../domain/entity/password-reset-request.entity';
 import { PasswordResetApiRequest } from '../data/request/password-reset-api.request';
-import { HashService } from '@tss/security/service';
 import { Connection, EntityManager } from 'typeorm';
 import { PortalUser } from '../domain/entity/portal-user.entity';
-import { PasswordResetRequestRepository } from '../dao/password-reset-request.repository';
+
 import { PortalUserAuthenticationRepository } from '../dao/portal-user-authentication.repository';
 import { Inject, Injectable } from '@nestjs/common';
 import { ImplicitAuthenticationService } from '../service/implicit-authentication.service';
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { PortalUserAuthentication } from '../domain/entity/portal-user-authentication.entity';
+import { HashService } from '@tss/common';
 
 @Injectable()
 export class PasswordUpdateServiceImpl implements PasswordUpdateService {
