@@ -1,2 +1,2 @@
-export * from './data/index';
-export * from './service/index';
+export * from './data';
+export * from './service';

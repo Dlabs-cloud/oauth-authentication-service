@@ -1,6 +1,7 @@
-import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
+
 import { Column, Entity } from 'typeorm';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
+import { BaseEntity } from '@tss/common';
 
 @Entity()
 export class PortalUserIdentificationVerification extends BaseEntity {

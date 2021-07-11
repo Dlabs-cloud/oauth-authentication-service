@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
-import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
 import { Response } from 'express';
 import { APP_FILTER } from '@nestjs/core';
+import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
 
 @Catch(ErrorResponseException)
 export class ErrorResponseExceptionFilter implements ExceptionFilter {

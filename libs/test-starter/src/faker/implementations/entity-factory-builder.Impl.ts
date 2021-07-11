@@ -1,8 +1,11 @@
 import FakerStatic = Faker.FakerStatic;
-import { FactoryHelper } from '../contracts/factory-helper';
-import { ModelFactory } from '../contracts/model-factory';
-import { EntityFactoryBuilder, OrmAdapter } from '@tss/test-starter/faker/contracts';
-import { FactoryInstantiationException } from '@tss/test-starter/faker/exceptions';
+import {
+  EntityFactoryBuilder,
+  FactoryHelper,
+  FactoryInstantiationException,
+  OrmAdapter,
+} from '@tss/test-starter/faker';
+import { ModelFactory } from '@tss/test-starter/faker';
 
 export class EntityFactoryBuilderImpl<T> implements EntityFactoryBuilder<T> {
 
