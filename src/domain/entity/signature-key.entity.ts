@@ -1,6 +1,6 @@
-import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
 import { BeforeInsert, Column, Entity } from 'typeorm';
 import { JwtType } from '../constants/jwt-type.constant';
+import { BaseEntity } from '@tss/common';
 
 
 @Entity()

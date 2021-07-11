@@ -1,5 +1,5 @@
-import { BaseEntity } from '@tss/common';
 import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '@tss/common';
 
 @Entity()
 export class Setting extends BaseEntity {
