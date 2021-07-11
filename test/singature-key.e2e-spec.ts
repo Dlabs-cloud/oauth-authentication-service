@@ -4,9 +4,9 @@ import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
 import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
 import * as request from 'supertest';
-import { factory } from '../domain/factory/factory';
-import { SignatureKey } from '../domain/entity/signature-key.entity';
-import { JwtType } from '../domain/constants/jwt-type.constant';
+import { factory } from '../src/domain/factory/factory';
+import { SignatureKey } from '../src/domain/entity/signature-key.entity';
+import { JwtType } from '../src/domain/constants/jwt-type.constant';
 import { AsymmetricCrypto } from '@tss/common';
 
 describe('signature-key e2e', () => {

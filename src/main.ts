@@ -6,7 +6,7 @@ import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transforme
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix(`api/v${process.env.VERSION}`);
+  app.setGlobalPrefix(`api/v1`);
   globalPipes(app);
 
   const options = new DocumentBuilder()

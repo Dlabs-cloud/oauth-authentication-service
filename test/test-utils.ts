@@ -1,14 +1,14 @@
 import { Test } from '@nestjs/testing';
-import { AppModule } from '../app.module';
-import { ServiceImplModule } from '../service-impl/service-impl.module';
+import { AppModule } from '../src/app.module';
+import { ServiceImplModule } from '../src/service-impl/service-impl.module';
 import { ISendMailOptions, MailerService } from '@nestjs-modules/mailer';
-import { UserRegistrationApiRequest } from '../data/request/user-registration-api.request';
+import { UserRegistrationApiRequest } from '../src/data/request/user-registration-api.request';
 import * as faker from 'faker';
-import { Gender } from '../domain/constants/gender.constant';
-import { PortalUserRegistrationServiceImpl } from '../service-impl/portal-user-registration.service-impl';
-import { RequestMetaData } from '../security/data/request-meta-data.dto';
-import { PortalUserRegistrationService } from '../service/portal-user-registration.service';
-import { PortalUser } from '../domain/entity/portal-user.entity';
+import { Gender } from '../src/domain/constants/gender.constant';
+import { PortalUserRegistrationServiceImpl } from '../src/service-impl/portal-user-registration.service-impl';
+import { RequestMetaData } from '../src/security/data/request-meta-data.dto';
+import { PortalUserRegistrationService } from '../src/service/portal-user-registration.service';
+import { PortalUser } from '../src/domain/entity/portal-user.entity';
 
 export const mockSendEmail = () => jest.fn().mockImplementation((sendEmailOptions: ISendMailOptions) => {
   return Promise.resolve('Email has been sent successfully');

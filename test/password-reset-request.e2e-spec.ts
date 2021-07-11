@@ -5,10 +5,10 @@ import { baseTestingModule } from './test-utils';
 import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
 import * as faker from 'faker';
 import * as request from 'supertest';
-import { factory } from '../domain/factory/factory';
-import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
-import { PasswordResetEmailSenderService } from '../service/password-reset-email-sender.service';
-import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
+import { factory } from '../src/domain/factory/factory';
+import { PortalUserIdentifier } from '../src/domain/entity/portal-user-identifier.entity';
+import { PasswordResetEmailSenderService } from '../src/service/password-reset-email-sender.service';
+import { UserIdentifierType } from '../src/domain/constants/user-identifier-type.constant';
 
 describe('Password reset request', () => {
   let applicationContext: INestApplication;
