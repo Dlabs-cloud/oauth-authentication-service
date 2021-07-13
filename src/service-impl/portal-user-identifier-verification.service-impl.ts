@@ -3,11 +3,12 @@ import { UserIdentifierType } from '../domain/constants/user-identifier-type.con
 import { PhoneNumberService } from '@tss/common/utils/phone-number/phone-number.service';
 import { PortalUserIdentificationVerification } from '../domain/entity/portal-user-identification-verification.entity';
 import { PortalUserIdentifierVerificationRepository } from '../dao/portal-user-identifier-verification.repository';
-import { HashService } from '@tss/security/service';
+
 import { DateTime } from 'luxon';
 import { Connection, EntityManager } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { IllegalArgumentException } from '@tss/common';
+import { HashService } from '@tss/common';
+
 
 @Injectable()
 export class PortalUserIdentifierVerificationServiceImpl implements PortalUserIdentifierVerificationService {

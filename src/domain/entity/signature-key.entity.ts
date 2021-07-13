@@ -1,6 +1,6 @@
-import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
-import { Column, Entity } from 'typeorm';
+import { BeforeInsert, Column, Entity } from 'typeorm';
 import { JwtType } from '../constants/jwt-type.constant';
+import { BaseEntity } from '@tss/common';
 
 
 @Entity()
@@ -12,6 +12,7 @@ export class SignatureKey extends BaseEntity {
   })
   keyId: string;
 
+  publicKey: string;
 
   @Column({
     type: 'text',
@@ -29,4 +30,11 @@ export class SignatureKey extends BaseEntity {
     enum: JwtType,
   })
   type: JwtType;
+
+
+  @BeforeInsert()
+  beforeInsert() {
+    this.encodedKey = Buffer.from(this.publicKey).toString('base64');
+  }
+
 }

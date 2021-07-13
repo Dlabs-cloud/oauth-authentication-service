@@ -3,9 +3,9 @@ import { baseTestingModule, signUpUser } from './test-utils';
 import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
 import { Connection, getConnection } from 'typeorm';
 import { INestApplication } from '@nestjs/common';
-import { PortalUserRegistrationService } from '../service/portal-user-registration.service';
+import { PortalUserRegistrationService } from '../src/service/portal-user-registration.service';
 import * as request from 'supertest';
-import { LoginRequest } from '../data/request/login.request';
+import { LoginRequest } from '../src/data/request/login.request';
 import * as faker from 'faker';
 
 describe('Login e2e', () => {
@@ -44,7 +44,7 @@ describe('Login e2e', () => {
       .post(url)
       .send(loginRequest)
       .expect(200).then(response => {
-        let payload = response.body.data;
+        let payload = response.body;
         expect(payload).toBeDefined();
         expect(payload.token_type).toEqual('Bearer');
         expect(payload.displayName).toBeDefined();

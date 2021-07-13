@@ -10,7 +10,7 @@ export class UserIdentifierVerificationHandler implements IEventHandler<UserIden
   }
 
   handle(event: UserIdentifierVerificationEvent): any {
-    let sendMailOptions: ISendMailOptions = {
+    const sendMailOptions: ISendMailOptions = {
       to: event.portalUserIdentificationVerification.identifier,
       subject: 'EMAIL VERIFICATION',
       template: 'email_verification',

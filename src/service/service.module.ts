@@ -18,7 +18,6 @@ import { PasswordResetRequestService } from './password-reset-request.service';
 import { PasswordResetRequestServiceImpl } from '../service-impl/password-reset-request.service-impl';
 import { SecurityModule } from '../security/security.module';
 import { ConfModule } from '../conf/conf.module';
-import { SecurityModule as TssSecurityModule } from '@tss/security';
 import { CommonModule } from '@tss/common';
 import { PasswordUpdateService } from './password-update.service';
 import { PasswordUpdateServiceImpl } from '../service-impl/password-update.service-impl';
@@ -71,7 +70,6 @@ let passwordUpdateService = {
   imports: [
     SecurityModule,
     forwardRef(() => ServiceImplModule),
-    TssSecurityModule,
     ConfModule,
     CommonModule,
   ],
@@ -97,7 +95,6 @@ let passwordUpdateService = {
     passwordResetRequestService,
     passwordUpdateService,
     SecurityModule,
-    TssSecurityModule,
     ConfModule,
     CommonModule,
   ],

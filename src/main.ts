@@ -6,7 +6,7 @@ import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transforme
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix(`api/v${process.env.VERSION}`);
+  app.setGlobalPrefix(`api/v1`);
   globalPipes(app);
 
   const options = new DocumentBuilder()
@@ -17,6 +17,10 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
+  app.getHttpAdapter().get(`/api/v${process.env.VERSION}/docs/json`, (req, res) => {
+    return res.json(JSON.parse(JSON.stringify(document)));
+  });
+
   SwaggerModule.setup(`api/v${process.env.VERSION}/docs`, app, document);
 
   let port = process.env.HOST_PORT || process.env.PORT || 3000;

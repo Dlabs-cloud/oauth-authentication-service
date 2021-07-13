@@ -3,17 +3,17 @@ import { Connection, getConnection } from 'typeorm';
 import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
 import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
-import { PasswordResetGenerator } from '../security/contracts/password-reset-generator.contracts';
+import { PasswordResetGenerator } from '../src/security/contracts/password-reset-generator.contracts';
 import * as faker from 'faker';
 import * as request from 'supertest';
-import { PasswordResetApiRequest } from '../data/request/password-reset-api.request';
-import { factory } from '../domain/factory/factory';
-import { PasswordResetRequest } from '../domain/entity/password-reset-request.entity';
+import { PasswordResetApiRequest } from '../src/data/request/password-reset-api.request';
+import { factory } from '../src/domain/factory/factory';
+import { PasswordResetRequest } from '../src/domain/entity/password-reset-request.entity';
 import { TokenExpiredError } from 'jsonwebtoken';
-import { PASSWORDCLAIMEXTRACTOR } from '../security/constants';
-import { AccessClaimsExtractor } from '../security/contracts/access-claims-extractor.contracts';
-import { AccessClaims } from '../security/contracts/access-claims.contracts';
-import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
+import { PASSWORDCLAIMEXTRACTOR } from '../src/security/constants';
+import { AccessClaimsExtractor } from '../src/security/contracts/access-claims-extractor.contracts';
+import { AccessClaims } from '../src/security/contracts/access-claims.contracts';
+import { PortalUserIdentifier } from '../src/domain/entity/portal-user-identifier.entity';
 
 describe('password reset controller e2e', () => {
 
@@ -28,7 +28,6 @@ describe('password reset controller e2e', () => {
     connection = getConnection();
     accessClaimsExtractor = moduleRef.get<AccessClaimsExtractor>(PASSWORDCLAIMEXTRACTOR);
   });
-
 
 
   it('Test that a user with valid token and identifier can reset password', () => {
@@ -60,10 +59,10 @@ describe('password reset controller e2e', () => {
             invalidateOtherSession: true,
             password: '234012345',
           })
-          .expect(204);
+          .expect(201);
       });
     });
-  })
+  });
   it('Test that an invalid token with valid identifier cannot perform password reset', () => {
 
     const url = `/password/${faker.internet.email}/${faker.random.uuid()}`;
@@ -118,7 +117,6 @@ describe('password reset controller e2e', () => {
       });
     });
   });
-
 
 
   it('Test that a used token cannot be reused', () => {

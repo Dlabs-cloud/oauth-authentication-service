@@ -9,12 +9,13 @@ import {
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
 import { SecurityModule } from '../security/security.module';
 import { PortalUserRegistrationController } from './portal-user-registration.controller';
-import { LoginAuthenticationController } from './login-authentication.controller';
 import { errorResponseFilter } from '@tss/common/exception-filters/error-response.exception.filter';
 import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/illegal-argument.exception.filter';
 import { AccessTokenController } from './access-token.controller';
 import { PasswordResetRequestController } from './password-reset-request.controller';
 import { PasswordResetController } from './password-reset.controller';
+import { SignatureKeyController } from './signature-key.controller';
+import { LoginController } from './login.controller';
 
 @Module({
   imports: [
@@ -25,10 +26,11 @@ import { PasswordResetController } from './password-reset.controller';
   controllers: [
     PortalUserIdentifierVerificationController,
     PortalUserRegistrationController,
-    LoginAuthenticationController,
+    LoginController,
     PasswordResetRequestController,
     AccessTokenController,
     PasswordResetController,
+    SignatureKeyController,
   ],
   providers: [
     ResponseTransformInterceptor,

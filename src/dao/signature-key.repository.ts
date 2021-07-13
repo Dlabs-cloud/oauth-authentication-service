@@ -8,7 +8,6 @@ export class SignatureKeyRepository extends BaseRepository<SignatureKey> {
 
 
   findByKidAndType(kid: string, type: JwtType) {
-    console.log(kid);
     return this.findOne({
       keyId: kid,
       type: type,

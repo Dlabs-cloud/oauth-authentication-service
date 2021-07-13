@@ -1,4 +1,4 @@
-import { ApiResponseDto } from '@tss/common/data/api.response.dto';
+
 
 export class ErrorResponseException extends Error {
   status: number;

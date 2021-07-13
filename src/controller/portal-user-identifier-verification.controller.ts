@@ -7,6 +7,7 @@ import { Connection } from 'typeorm';
 import { ApiResponseDto } from '@tss/common/data/api.response.dto';
 import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
 import { Public } from '../security/decorators/public.decorator';
+import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
 
 @Controller()
 @Public()
@@ -18,22 +19,23 @@ export class PortalUserIdentifierVerificationController {
               private readonly connection: Connection) {
   }
 
-  @Post('/user-emails/:email/verification-code')
-  async requestEmailVerificationCode(@Param() verificationCodeParam: EmailVerificationCodeParam) {
+  @Post('user-emails/:email/verification-code')
+ // @ApiNoContentResponse()
+  async requestEmailVerificationCode(@Param('email')email: string) {
     let portalUserIdentifier = await this.connection
       .getCustomRepository(PortalUserIdentifierRepository)
-      .findByIdentifier(verificationCodeParam.email);
+      .findByIdentifier(email);
 
     if (portalUserIdentifier) {
       throw new HttpException('Email has already been verified', HttpStatus.CONFLICT);
     }
 
     return this.portalUserIdentifierVerificationService
-      .createVerification(verificationCodeParam.email, UserIdentifierType.EMAIL)
+      .createVerification(email, UserIdentifierType.EMAIL)
       .then(verification => {
         return this.verificationEmailSenderService.sendVerificationCode(verification.userVerification)
           .then(() => {
-            return Promise.resolve(new ApiResponseDto(201));
+            return Promise.resolve(new ApiResponseDto(HttpStatus.NO_CONTENT));
           });
       });
 

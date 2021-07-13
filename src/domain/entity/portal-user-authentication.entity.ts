@@ -1,11 +1,10 @@
-import { BaseEntity } from '@tss/common/utils/typeorm/base.entity';
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 import { AuthenticationResponseType } from '../constants/authentication-response-type,constant';
 import { AuthenticationType } from '../constants/authentication-type.constant';
 import { PortalUser } from './portal-user.entity';
 import { PortalUserIdentifier } from './portal-user-identifier.entity';
 import { PasswordResetRequest } from './password-reset-request.entity';
-import { IllegalArgumentException } from '@tss/common/exceptions/illegal-argument.exception';
+import { BaseEntity, IllegalArgumentException } from '@tss/common';
 
 @Entity()
 export class PortalUserAuthentication extends BaseEntity {

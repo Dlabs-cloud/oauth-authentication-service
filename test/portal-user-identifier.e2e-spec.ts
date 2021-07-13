@@ -4,11 +4,11 @@ import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
 import * as request from 'supertest';
 import * as faker from 'faker';
-import { factory } from '../domain/factory/factory';
-import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
-import { PortalUserIdentificationVerification } from '../domain/entity/portal-user-identification-verification.entity';
+import { factory } from '../src/domain/factory/factory';
+import { PortalUserIdentifier } from '../src/domain/entity/portal-user-identifier.entity';
+import { PortalUserIdentificationVerification } from '../src/domain/entity/portal-user-identification-verification.entity';
 import { DateTime } from 'luxon';
-import { PortalUserIdentifierVerificationRepository } from '../dao/portal-user-identifier-verification.repository';
+import { PortalUserIdentifierVerificationRepository } from '../src/dao/portal-user-identifier-verification.repository';
 
 describe('Portal-user-identifier-controller', () => {
   let applicationContext: INestApplication;
@@ -26,7 +26,7 @@ describe('Portal-user-identifier-controller', () => {
     const url = `/user-emails/${faker.internet.email()}/verification-code`;
     return request(applicationContext.getHttpServer())
       .post(url)
-      .expect(201);
+      .expect(204);
   });
 
   it('Test that a verified portal user cannot be used', async () => {
@@ -56,7 +56,7 @@ describe('Portal-user-identifier-controller', () => {
     const url = `/user-emails/${identifierEmail}/verification-code`;
     await request(applicationContext.getHttpServer())
       .post(url)
-      .expect(201);
+      .expect(204);
 
     await connection.getCustomRepository(PortalUserIdentifierVerificationRepository)
       .count({

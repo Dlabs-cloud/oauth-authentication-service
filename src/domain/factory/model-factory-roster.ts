@@ -11,6 +11,8 @@ import { PortalUserAuthentication } from '../entity/portal-user-authentication.e
 import { PortalUserAuthenticationFactory } from './portal-user-authentication.factory';
 import { PasswordRequestFactory } from './password-request.factory';
 import { PasswordResetRequest } from '../entity/password-reset-request.entity';
+import { SignatureKey } from '../entity/signature-key.entity';
+import { SignatureKeyFactory } from './signature-key.factory';
 
 export class ModelFactoryRoster {
   static register(modelFactory: ModelFactory) {
@@ -20,5 +22,6 @@ export class ModelFactoryRoster {
     modelFactory.register(RefreshToken, RefreshTokenFactory);
     modelFactory.register(PortalUserAuthentication, PortalUserAuthenticationFactory);
     modelFactory.register(PasswordResetRequest, PasswordRequestFactory);
+    modelFactory.register(SignatureKey, SignatureKeyFactory);
   }
 }

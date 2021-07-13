@@ -3,15 +3,15 @@ import { Connection, getConnection } from 'typeorm';
 import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
 import * as faker from 'faker';
-import { UserRegistrationApiRequest } from '../data/request/user-registration-api.request';
-import { Gender } from '../domain/constants/gender.constant';
+import { UserRegistrationApiRequest } from '../src/data/request/user-registration-api.request';
+import { Gender } from '../src/domain/constants/gender.constant';
 import * as request from 'supertest';
-import { factory } from '../domain/factory/factory';
-import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
-import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
+import { factory } from '../src/domain/factory/factory';
+import { PortalUserIdentifier } from '../src/domain/entity/portal-user-identifier.entity';
+import { UserIdentifierType } from '../src/domain/constants/user-identifier-type.constant';
 import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
-import { PortalUserIdentificationVerification } from '../domain/entity/portal-user-identification-verification.entity';
-import { HashService } from '@tss/security/service';
+import { PortalUserIdentificationVerification } from '../src/domain/entity/portal-user-identification-verification.entity';
+import { HashService } from '@tss/common';
 
 describe('Portal -user registration controller', () => {
   let applicationContext: INestApplication;
@@ -57,6 +57,12 @@ describe('Portal -user registration controller', () => {
       otherNames: faker.name.firstName(),
       password: faker.random.uuid(),
       phoneNumber: `${faker.phone.phoneNumber('+2347########')}`,
+      data: [
+        {
+          name: 'name',
+          value: 'value',
+        },
+      ],
     };
     const url = `/users`;
     return request(applicationContext.getHttpServer())
@@ -64,7 +70,7 @@ describe('Portal -user registration controller', () => {
       .send(requestPayload)
       .expect(201)
       .then(response => {
-        let payload = response.body.data;
+        let payload = response.body;
         expect(payload).toBeDefined();
         expect(payload.token_type).toEqual('Bearer');
         expect(payload.displayName).toEqual(requestPayload.displayName);
@@ -77,6 +83,14 @@ describe('Portal -user registration controller', () => {
         expect(payload.access_token).toBeDefined();
         expect(payload.secondsTillExpiry).toBeDefined();
         expect(payload.expires_at).toBeDefined();
+        expect(payload.data).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              name: 'name',
+              value: 'value',
+            }),
+          ]),
+        );
       });
   });
 

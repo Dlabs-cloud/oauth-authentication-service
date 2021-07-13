@@ -11,15 +11,6 @@
         "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
     },
-    "security": {
-      "type": "library",
-      "root": "libs/security",
-      "entryFile": "index",
-      "sourceRoot": "libs/security/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/security/tsconfig.lib.json"
-      }
-    },
     "test-starter": {
       "type": "library",
       "root": "libs/test-starter",

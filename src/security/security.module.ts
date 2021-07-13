@@ -13,13 +13,13 @@ import {
 import { Connection } from 'typeorm';
 import { KeyGenerator } from './contracts/key-generator.contracts';
 import { KeyGeneratorCore } from './core/key-generator.core';
-import { SecurityModule as TssSecurityModule } from '@tss/security';
 import { ClaimsExtractorCore } from './core/claims-extractor.core';
 import { JwtType } from '../domain/constants/jwt-type.constant';
-import { AccessConstrainInterceptor } from './interceptors/access-constrain.interceptor';
+import { AccessConstraintInterceptor } from './interceptors/access-constraint.interceptor';
 import { PasswordResetGeneratorCore } from './core/password-reset-generator.core';
 import { PasswordResetJwsGenerator } from './core/password-reset-jws-generator.core';
 import { PasswordResetGenerator } from './contracts/password-reset-generator.contracts';
+import { CommonModule } from '@tss/common';
 
 
 const keyGenerator = {
@@ -85,10 +85,10 @@ const refreshClaimsExtractor = {
 
 
 @Module({
-  imports: [TssSecurityModule],
+  imports: [CommonModule],
   providers: [
     RequestMetaDataInterceptor,
-    AccessConstrainInterceptor,
+    AccessConstraintInterceptor,
 
     {
       provide: APP_INTERCEPTOR,
@@ -96,7 +96,7 @@ const refreshClaimsExtractor = {
     },
     {
       provide: APP_INTERCEPTOR,
-      useExisting: AccessConstrainInterceptor,
+      useExisting: AccessConstraintInterceptor,
     },
     KeyGeneratorCore,
     keyGenerator,
