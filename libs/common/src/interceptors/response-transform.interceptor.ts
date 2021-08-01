@@ -8,8 +8,8 @@ export class ResponseTransformInterceptor<T> implements NestInterceptor<ApiRespo
   intercept(context: ExecutionContext, next: CallHandler<ApiResponseDto<T>>): Observable<any> | Promise<Observable<any>> {
     const response = context.switchToHttp().getResponse();
     return next.handle().pipe(tap(responseVal => {
-      response.status(responseVal.code ?? 200);
-    }), map(responseVal => responseVal.data));
+      response.status(responseVal?.code ?? 200);
+    }), map(responseVal => responseVal));
   }
 }
 

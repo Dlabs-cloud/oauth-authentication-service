@@ -16,6 +16,7 @@ import { PasswordResetRequestController } from './password-reset-request.control
 import { PasswordResetController } from './password-reset.controller';
 import { SignatureKeyController } from './signature-key.controller';
 import { LoginController } from './login.controller';
+import { IndexController } from './index.controller';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { LoginController } from './login.controller';
     PasswordResetRequestController,
     AccessTokenController,
     PasswordResetController,
+    IndexController,
     SignatureKeyController,
   ],
   providers: [
