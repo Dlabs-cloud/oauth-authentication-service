@@ -4,9 +4,8 @@ import { Connection } from 'typeorm';
 import { SignatureKeyRepository } from '../dao/signature-key.repository';
 import { JwtType } from '../domain/constants/jwt-type.constant';
 import { JwtWebTokenResponse } from '../data/response/jwt-web-token.response';
-import { ApiOkResponse } from '@nestjs/swagger';
 import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
-import { ApiResponseDto } from '@tss/common/data/api.response.dto';
+import { ApiResponseDto } from '../data/response/api.response.dto';
 
 @Controller()
 export class SignatureKeyController {
@@ -17,8 +16,7 @@ export class SignatureKeyController {
 
   @Public()
   @Get('/key/:kid')
-  @ApiOkResponse({ type: JwtWebTokenResponse })
-  public getJsonWebKey(@Param('kid') kid: string) {
+  public getJsonWebKey(@Param('kid') kid: string): Promise<ApiResponseDto<JwtWebTokenResponse>> {
     return this.connection.getCustomRepository(SignatureKeyRepository)
       .findByKidAndType(kid, JwtType.ACCESS)
       .then(signatureKey => {

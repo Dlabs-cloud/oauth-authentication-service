@@ -25,7 +25,7 @@ export class AccessTokenApiResponseHandler {
   public getAccessToken(portalUserAuthentication: PortalUserAuthentication): Promise<AccessTokenApiResponse> {
     return this.connection.transaction(async entityManager => {
 
-      let refreshToken = await this.refreshTokenService.createRefreshToken(entityManager, portalUserAuthentication);
+      const refreshToken = await this.refreshTokenService.createRefreshToken(entityManager, portalUserAuthentication);
       return await this.makeAccessToken(refreshToken);
     });
 
@@ -38,11 +38,11 @@ export class AccessTokenApiResponseHandler {
         id: refreshToken.portalUserId,
       });
     }
-    let accessTokenApiResponse = new AccessTokenApiResponse(refreshToken.portalUser);
+    const accessTokenApiResponse = new AccessTokenApiResponse(refreshToken.portalUser);
 
-    let refreshTokenJwt = await this.refreshKeyGenerator.generateJwt(refreshToken);
-    let accessTokenDtoJwt = await this.accessKeyGenerator.generateJwt(refreshToken);
-    let portalUserIdentifiers = await this.connection.getCustomRepository(PortalUserIdentifierRepository).findByPortalUser(refreshToken.portalUser);
+    const refreshTokenJwt = await this.refreshKeyGenerator.generateJwt(refreshToken);
+    const accessTokenDtoJwt = await this.accessKeyGenerator.generateJwt(refreshToken);
+    const portalUserIdentifiers = await this.connection.getCustomRepository(PortalUserIdentifierRepository).findByPortalUser(refreshToken.portalUser);
     accessTokenApiResponse.emailAddresses = this.getEmailIdentifiers(portalUserIdentifiers);
     accessTokenApiResponse.phoneNumbers = this.getPhoneNumberIdentifier(portalUserIdentifiers);
     accessTokenApiResponse.refresh_token = refreshTokenJwt.token;

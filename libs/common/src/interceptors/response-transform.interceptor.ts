@@ -1,5 +1,5 @@
 import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
-import { ApiResponseDto } from '../data/api.response.dto';
+import { ApiResponseDto } from '../../../../src/data/response/api.response.dto';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { APP_INTERCEPTOR } from '@nestjs/core';

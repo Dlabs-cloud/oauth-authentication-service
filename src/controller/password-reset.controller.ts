@@ -6,15 +6,12 @@ import { PASSWORDCLAIMEXTRACTOR } from '../security/constants';
 import { TokenExpiredError } from 'jsonwebtoken';
 import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
 import { PasswordResetRequestRepository } from '../dao/password-reset-request.repository';
-import { DateTime } from 'luxon';
 import { PasswordResetApiRequest } from '../data/request/password-reset-api.request';
 import { PasswordUpdateService } from '../service/password-update.service';
 import { RequestMetaDataContext } from '../security/decorators/request-meta-data.decorator';
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
-import { ApiResponseDto } from '@tss/common/data/api.response.dto';
-import { GenericStatus } from '@tss/common';
-import { ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import { ApiResponseDto } from '../data/response/api.response.dto';
 import { AccessTokenApiResponse } from '../data/response/access-token-api.response';
 
 @Controller()
@@ -28,11 +25,10 @@ export class PasswordResetController {
   }
 
   @Post('/password/:identifier/:resetToken')
-  @ApiCreatedResponse({ type: AccessTokenApiResponse })
   resetPasswordWithResetToken(@Param('identifier') identifier: string,
                               @Param('resetToken') resetToken: string,
                               @RequestMetaDataContext() requestMetaData: RequestMetaData,
-                              @Body() request: PasswordResetApiRequest) {
+                              @Body() request: PasswordResetApiRequest): Promise<ApiResponseDto<AccessTokenApiResponse>> {
 
     try {
       return this.accessClaimsExtractor.getClaims(resetToken)
@@ -40,7 +36,7 @@ export class PasswordResetController {
           if (!claims) {
             throw new ErrorResponseException(HttpStatus.FORBIDDEN, 'Token is not valid');
           }
-          let passwordRequestId = Number(claims.getId());
+          const passwordRequestId = Number(claims.getId());
           return this.connection
             .getCustomRepository(PasswordResetRequestRepository)
             .findOne({

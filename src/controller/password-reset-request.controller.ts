@@ -4,12 +4,10 @@ import { RequestMetaDataContext } from '../security/decorators/request-meta-data
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { PasswordResetRequestService } from '../service/password-reset-request.service';
 import { Connection } from 'typeorm';
-import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
 import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.repository';
 import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
 import { PasswordResetEmailSenderService } from '../service/password-reset-email-sender.service';
-import { ApiResponseDto } from '@tss/common/data/api.response.dto';
-import { ApiNoContentResponse, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiResponseDto } from '../data/response/api.response.dto';
 
 
 @Controller()
@@ -22,8 +20,7 @@ export class PasswordResetRequestController {
   }
 
   @Post('/password-resets/:email')
-  @ApiNoContentResponse()
-  public requestPasswordResetWithEmail(@Param('email') email: string, @RequestMetaDataContext() requestMetaData: RequestMetaData) {
+  public requestPasswordResetWithEmail(@Param('email') email: string, @RequestMetaDataContext() requestMetaData: RequestMetaData): Promise<ApiResponseDto<void>> {
     return this.connection.getCustomRepository(PortalUserIdentifierRepository).findByIdentifier(email)
       .then(identifier => {
         if (!identifier) {

@@ -1,13 +1,11 @@
 import { Controller, HttpException, HttpStatus, Inject, Param, Post } from '@nestjs/common';
-import { EmailVerificationCodeParam } from '../data/params/email-verification-code.param';
 import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.repository';
 import { PortalUserIdentifierVerificationService } from '../service/portal-user-identifier-verification.service';
 import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
 import { Connection } from 'typeorm';
-import { ApiResponseDto } from '@tss/common/data/api.response.dto';
+import { ApiResponseDto } from '../data/response/api.response.dto';
 import { VerificationEmailSenderService } from '../service/verification-email-sender.service';
 import { Public } from '../security/decorators/public.decorator';
-import { ApiCreatedResponse, ApiNoContentResponse, ApiOkResponse } from '@nestjs/swagger';
 
 @Controller()
 @Public()
@@ -20,9 +18,8 @@ export class PortalUserIdentifierVerificationController {
   }
 
   @Post('user-emails/:email/verification-code')
- // @ApiNoContentResponse()
-  async requestEmailVerificationCode(@Param('email')email: string) {
-    let portalUserIdentifier = await this.connection
+  async requestEmailVerificationCode(@Param('email')email: string): Promise<ApiResponseDto<void>> {
+    const portalUserIdentifier = await this.connection
       .getCustomRepository(PortalUserIdentifierRepository)
       .findByIdentifier(email);
 
