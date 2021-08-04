@@ -18,19 +18,19 @@ export class PortalUserIdentifierVerificationServiceImpl implements PortalUserId
   }
 
   async createVerification(identifier: string, identifierType: UserIdentifierType) {
-    let currentTime = new Date();
+    const currentTime = new Date();
     if (UserIdentifierType.PHONE_NUMBER === identifierType) {
       identifier = this.phoneNumberService.formatPhoneNumber(identifier);
     }
 
     return this.connection.transaction(async entityManager => {
-      let verification = new PortalUserIdentificationVerification();
+      const verification = new PortalUserIdentificationVerification();
       verification.identifierType = identifierType;
       verification.identifier = identifier.toLowerCase();
       await this.deactivateAllActiveVerification(entityManager, identifier);
       verification.createdAt = currentTime;
       verification.expiresOn = DateTime.local().plus({ minutes: 15 }).toJSDate();
-      let verificationCode = this.generateVerificationCode(5);
+      const verificationCode = this.generateVerificationCode(5);
 
       verification.verificationCode = verificationCode;
       return this.hashService.hash(verificationCode).then(code => {

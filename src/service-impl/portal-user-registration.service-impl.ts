@@ -25,7 +25,7 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
   }
 
   async register(userData: UserRegistrationApiRequest, requestMetaData: RequestMetaData): Promise<PortalUserAuthentication> {
-    let portalUser = new PortalUser();
+    const portalUser = new PortalUser();
     portalUser.firstName = userData.firstName.normalize();
     portalUser.lastName = userData.lastName.normalize();
     portalUser.otherName = userData.otherNames;
@@ -60,8 +60,8 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
       }
 
       if (userData.data) {
-        let userDataPromise = userData.data.map(data => {
-          let portalUserData = new PortalUserData();
+        const userDataPromise = userData.data.map(data => {
+          const portalUserData = new PortalUserData();
           portalUserData.name = data.name;
           portalUserData.value = data.value;
           portalUserData.portalUser = portalUser;
@@ -87,7 +87,7 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
   }
 
   private async createUserEmailIdentifier(entityManager: EntityManager, portalUser: PortalUser, userData: UserRegistrationApiRequest) {
-    let portalUserIdentifier = new PortalUserIdentifier();
+    const portalUserIdentifier = new PortalUserIdentifier();
     portalUserIdentifier.identifierType = UserIdentifierType.EMAIL;
     portalUserIdentifier.portalUser = portalUser;
     portalUserIdentifier.identifier = userData.email.toLowerCase();
@@ -101,15 +101,15 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
   }
 
   private async resolveVerification(entityManager: EntityManager, userIdentifier: PortalUserIdentifier, verificationCode: string) {
-    let now = new Date();
-    let existingVerifications = await this.connection
+    const now = new Date();
+    const existingVerifications = await this.connection
       .getCustomRepository(PortalUserIdentifierVerificationRepository)
       .findAllActive(userIdentifier.identifier.toLowerCase());
     if (!existingVerifications.length) {
       throw new IllegalArgumentException('Verification with identifier does not exist');
     }
 
-    let verification = existingVerifications[0];
+    const verification = existingVerifications[0];
 
     await this.hashService.compare(verificationCode, verification.verificationCodeHash)
       .then(isSame => {
@@ -124,7 +124,7 @@ export class PortalUserRegistrationServiceImpl implements PortalUserRegistration
     userIdentifier.verified = true;
     verification.usedOn = now;
     await entityManager.save(verification);
-    let existingVerificationsPromise = existingVerifications.map(existingVerification => {
+    const existingVerificationsPromise = existingVerifications.map(existingVerification => {
       existingVerification.deactivatedOn = now;
       return entityManager.save(existingVerification);
     });
