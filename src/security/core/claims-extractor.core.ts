@@ -15,25 +15,25 @@ export class ClaimsExtractorCore implements AccessClaimsExtractor {
 
   async getClaims(jws: string): Promise<AccessClaims> {
     try {
-      let decodedToken = decode(jws, { complete: true });
+      const decodedToken = decode(jws, { complete: true });
       if (!decodedToken) {
         return null;
       }
 
       // @ts-ignore
-      let header = decodedToken.header;
+      const header = decodedToken.header;
       if (!header.kid) {
         return null;
       }
 
-      let signatureKey = await this.connection
+      const signatureKey = await this.connection
         .getCustomRepository(SignatureKeyRepository)
         .findByKidAndType(header.kid, this.type);
 
       if (!signatureKey) {
         return null;
       }
-      let claims = await this.verifyToken(jws, signatureKey);
+      const claims = await this.verifyToken(jws, signatureKey);
       return new SimpleAccessClaimsCore(claims as JwtTokenPayloadDto);
 
     } catch (e) {

@@ -13,12 +13,12 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
   constructor(@Inject(ACCESSCLAIMEXTRACTOR) private readonly accessClaimsExtractor: AccessClaimsExtractor) {
   }
 
-  private proxyIpHeader: string = 'X-REAL-IP';
-  private tokenPrefix: string = 'Bearer ';
+  private proxyIpHeader = 'X-REAL-IP';
+  private tokenPrefix = 'Bearer ';
 
   async intercept(context: ExecutionContext, next: CallHandler<any>) {
     const request = context.switchToHttp().getRequest();
-    let requestMetaData = new RequestMetaData();
+    const requestMetaData = new RequestMetaData();
     requestMetaData.accessClaims = await this.accessClaims(request, requestMetaData);
     requestMetaData.accessToken = this.getAccessToken(request);
     requestMetaData.ipAddress = this.getIpAddress(request);
@@ -31,12 +31,12 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
 
 
   private async accessClaims(request, requestMetaData: RequestMetaData) {
-    let accessToken = this.getAccessToken(request);
+    const accessToken = this.getAccessToken(request);
     if (!accessToken) {
       return null;
     }
     try {
-      let claims = await this.accessClaimsExtractor.getClaims(accessToken);
+      const claims = await this.accessClaimsExtractor.getClaims(accessToken);
       if (!claims) {
         return null;
       }
@@ -56,7 +56,7 @@ export class RequestMetaDataInterceptor implements NestInterceptor {
 
 
   private static isIpLocalHost(ipAddress: string) {
-    let possibleIpAddress = ['127.0.0.1', '0:0:0:0:0:0:0:1', '::1', '::ffff:127.0.0.1'];
+    const possibleIpAddress = ['127.0.0.1', '0:0:0:0:0:0:0:1', '::1', '::ffff:127.0.0.1'];
     return possibleIpAddress.includes(ipAddress);
   }
 

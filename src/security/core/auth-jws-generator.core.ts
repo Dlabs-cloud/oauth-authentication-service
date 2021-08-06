@@ -22,14 +22,14 @@ export class AuthJwsGenerator {
 
   public createJwt(refreshToken: RefreshToken, expiration: Date): Promise<string> {
 
-    let currentTime = new Date();
-    let interval = Interval.fromDateTimes(currentTime, expiration);
+    const currentTime = new Date();
+    const interval = Interval.fromDateTimes(currentTime, expiration);
     const signOptions: SignOptions = {
       algorithm: 'RS256',
       keyid: this.keyId,
       expiresIn: interval.count('second'),
       subject: refreshToken.portalUser.id.toString(),
-      issuer: 'Tss_authentication_service',
+      issuer: 'Dlabs_authentication_service',
       jwtid: refreshToken.id.toString(),
       header: {
         'kid': this.keyId,

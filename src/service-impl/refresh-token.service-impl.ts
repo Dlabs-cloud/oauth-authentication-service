@@ -17,7 +17,7 @@ export class RefreshTokenServiceImpl implements RefreshTokenService {
   }
 
   async createRefreshToken(entityManager: EntityManager, portalUserAuthentication: PortalUserAuthentication): Promise<RefreshToken> {
-    let refreshToken = new RefreshToken();
+    const refreshToken = new RefreshToken();
     refreshToken.portalUser = portalUserAuthentication.portalUser;
     refreshToken.expiresAt = await this.getExpiryDate();
     refreshToken.accessExpiresAt = await this.getAccessExpiresAt();
@@ -52,7 +52,7 @@ export class RefreshTokenServiceImpl implements RefreshTokenService {
       .getCustomRepository(SettingsRepository)
       .findByLabel(RefreshTokenServiceImpl.ACCESS_TOKEN_EXPIRY_DURATION_IN_SECONDS, RefreshTokenServiceImpl.ACCESS_TOKEN_EXPIRY_DURATION_IN_SECONDS_VALUE)
       .then(setting => {
-        let dateTime = DateTime.local().plus({
+        const dateTime = DateTime.local().plus({
           second: Number(setting.value),
         });
         return Promise.resolve(dateTime.toJSDate());

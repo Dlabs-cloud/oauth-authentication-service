@@ -17,6 +17,8 @@ import { PasswordResetController } from './password-reset.controller';
 import { SignatureKeyController } from './signature-key.controller';
 import { LoginController } from './login.controller';
 import { IndexController } from './index.controller';
+import { ClientHandler } from './handler/client.handler';
+import { ClientController } from './client.controller';
 
 @Module({
   imports: [
@@ -33,10 +35,12 @@ import { IndexController } from './index.controller';
     PasswordResetController,
     IndexController,
     SignatureKeyController,
+    ClientController,
   ],
   providers: [
     ResponseTransformInterceptor,
     AccessTokenApiResponseHandler,
+    ClientHandler,
     responseTransformInterceptor,
     errorResponseFilter,
     illegalArgumentExceptionFilter,

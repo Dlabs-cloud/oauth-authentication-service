@@ -21,49 +21,56 @@ import { ConfModule } from '../conf/conf.module';
 import { CommonModule } from '@tss/common';
 import { PasswordUpdateService } from './password-update.service';
 import { PasswordUpdateServiceImpl } from '../service-impl/password-update.service-impl';
+import { ClientService } from './client.service';
+import { ClientServiceImpl } from '../service-impl/client-service-impl';
 
-let portalUserIdentifierService = {
+const portalUserIdentifierService = {
   provide: PortalUserIdentifierVerificationService,
   useExisting: PortalUserIdentifierVerificationServiceImpl,
 };
 
-let loginAuthenticationService = {
+const loginAuthenticationService = {
   provide: LoginAuthenticationService,
   useExisting: LoginAuthenticationServiceImpl,
 };
-let verificationEmailSenderService = {
+const verificationEmailSenderService = {
   provide: VerificationEmailSenderService,
   useExisting: VerificationEmailSenderServiceImpl,
 };
 
-let passwordResetEmailSenderService = {
+const passwordResetEmailSenderService = {
   provide: PasswordResetEmailSenderService,
   useExisting: PasswordResetEmailSenderServiceImpl,
 };
 
-let portalUserRegistrationService = {
+const portalUserRegistrationService = {
   provide: PortalUserRegistrationService,
   useExisting: PortalUserRegistrationServiceImpl,
 };
 
-let implicitAuthenticationService = {
+const implicitAuthenticationService = {
   provide: ImplicitAuthenticationService,
   useExisting: ImplicitAuthenticationServiceImpl,
 };
 
-let refreshTokenService = {
+const refreshTokenService = {
   provide: RefreshTokenService,
   useExisting: RefreshTokenServiceImpl,
 };
 
-let passwordResetRequestService = {
+const passwordResetRequestService = {
   provide: PasswordResetRequestService,
   useExisting: PasswordResetRequestServiceImpl,
 };
 
-let passwordUpdateService = {
+const passwordUpdateService = {
   provide: PasswordUpdateService,
   useExisting: PasswordUpdateServiceImpl,
+};
+
+const clientService = {
+  provide: ClientService,
+  useExisting: ClientServiceImpl,
 };
 
 @Module({
@@ -79,6 +86,7 @@ let passwordUpdateService = {
     portalUserRegistrationService,
     implicitAuthenticationService,
     refreshTokenService,
+    clientService,
     loginAuthenticationService,
     passwordResetEmailSenderService,
     passwordResetRequestService,
@@ -90,6 +98,7 @@ let passwordUpdateService = {
     portalUserRegistrationService,
     implicitAuthenticationService,
     refreshTokenService,
+    clientService,
     loginAuthenticationService,
     passwordResetEmailSenderService,
     passwordResetRequestService,

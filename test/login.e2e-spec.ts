@@ -44,7 +44,7 @@ describe('Login e2e', () => {
       .post(url)
       .send(loginRequest)
       .expect(200).then(response => {
-        let payload = response.body;
+        const payload = response.body.data;
         expect(payload).toBeDefined();
         expect(payload.token_type).toEqual('Bearer');
         expect(payload.displayName).toBeDefined();

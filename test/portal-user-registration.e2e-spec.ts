@@ -70,7 +70,7 @@ describe('Portal -user registration controller', () => {
       .send(requestPayload)
       .expect(201)
       .then(response => {
-        let payload = response.body;
+        let payload = response.body.data;
         expect(payload).toBeDefined();
         expect(payload.token_type).toEqual('Bearer');
         expect(payload.displayName).toEqual(requestPayload.displayName);

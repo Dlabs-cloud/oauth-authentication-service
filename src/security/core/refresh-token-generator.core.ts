@@ -29,8 +29,8 @@ export class RefreshTokenGeneratorCore implements AuthKeyGenerator {
   }
 
   generateJwt(refreshToken: RefreshToken): Promise<JwtDto> {
-    let interval = Interval.fromDateTimes(DateTime.local(), refreshToken.expiresAt);
-    let jwtDto = new JwtDto();
+    const interval = Interval.fromDateTimes(DateTime.local(), refreshToken.expiresAt);
+    const jwtDto = new JwtDto();
     jwtDto.secondsTillExpiry = interval.count('second');
     return this.authKeyGenerator.createJwt(refreshToken, refreshToken.expiresAt)
       .then(token => {

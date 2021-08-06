@@ -9,6 +9,7 @@ import { LoginAuthenticationServiceImpl } from './login-authentication.service-i
 import { PasswordResetEmailSenderServiceImpl } from './password-reset-email-sender.service-impl';
 import { PasswordResetRequestServiceImpl } from './password-reset-request.service-impl';
 import { PasswordUpdateServiceImpl } from './password-update.service-impl';
+import { ClientServiceImpl } from './client-service-impl';
 
 
 @Module({
@@ -25,6 +26,7 @@ import { PasswordUpdateServiceImpl } from './password-update.service-impl';
     PasswordResetEmailSenderServiceImpl,
     PasswordResetRequestServiceImpl,
     PasswordUpdateServiceImpl,
+    ClientServiceImpl,
   ],
   exports: [
     PortalUserIdentifierVerificationServiceImpl,
@@ -36,6 +38,7 @@ import { PasswordUpdateServiceImpl } from './password-update.service-impl';
     PasswordResetEmailSenderServiceImpl,
     PasswordResetRequestServiceImpl,
     PasswordUpdateServiceImpl,
+    ClientServiceImpl,
   ],
 })
 export class ServiceImplModule {

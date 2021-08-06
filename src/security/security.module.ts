@@ -20,6 +20,11 @@ import { PasswordResetGeneratorCore } from './core/password-reset-generator.core
 import { PasswordResetJwsGenerator } from './core/password-reset-jws-generator.core';
 import { PasswordResetGenerator } from './contracts/password-reset-generator.contracts';
 import { CommonModule } from '@tss/common';
+import { ClientIdSecretGeneratorCore } from './core/client-id-secret-generator.core';
+import { ClientIdSecretGenerator } from './contracts/clientIdSecret-generator.contracts';
+import { Encryption } from './contracts/encrption.contracts';
+import { EncryptionCore } from './core/encryption.core';
+import { ConfigService } from '@nestjs/config';
 
 
 const keyGenerator = {
@@ -41,7 +46,7 @@ const refreshTokenGenerator = {
 const accessKeyGenerator = {
   provide: ACCESSKEYGENERATOR,
   useFactory: async (connection: Connection, keyGenerator: KeyGenerator) => {
-    let accessTokenGeneratorCore = new AccessTokenGeneratorCore(new AuthJwsGenerator(), connection, keyGenerator);
+    const accessTokenGeneratorCore = new AccessTokenGeneratorCore(new AuthJwsGenerator(), connection, keyGenerator);
     await accessTokenGeneratorCore.onApplicationBootstrap();
     return accessTokenGeneratorCore;
   },
@@ -75,6 +80,11 @@ const passwordResetClaimExtractor = {
   inject: [Connection],
 };
 
+const clientIdSecretGeneratorProvider = {
+  provide: ClientIdSecretGenerator,
+  useExisting: ClientIdSecretGeneratorCore,
+};
+
 const refreshClaimsExtractor = {
   provide: REFRESHCLAIMEXTRACTOR,
   useFactory: (connection: Connection) => {
@@ -83,13 +93,24 @@ const refreshClaimsExtractor = {
   inject: [Connection],
 };
 
+const encryptionCore = {
+  provide: Encryption,
+  useFactory: (configService: ConfigService) => {
+    return new EncryptionCore(configService.get('APP_SECRET'));
+  },
+  inject: [
+    ConfigService,
+  ],
+};
+
 
 @Module({
   imports: [CommonModule],
   providers: [
     RequestMetaDataInterceptor,
     AccessConstraintInterceptor,
-
+    ClientIdSecretGeneratorCore,
+    clientIdSecretGeneratorProvider,
     {
       provide: APP_INTERCEPTOR,
       useExisting: RequestMetaDataInterceptor,
@@ -106,6 +127,7 @@ const refreshClaimsExtractor = {
     refreshTokenGenerator,
     accessKeyGenerator,
     passwordResetGenerator,
+    encryptionCore,
   ],
   exports: [
     refreshTokenGenerator,
@@ -113,6 +135,8 @@ const refreshClaimsExtractor = {
     refreshClaimsExtractor,
     passwordResetClaimExtractor,
     passwordResetGenerator,
+    clientIdSecretGeneratorProvider,
+    encryptionCore,
   ],
 
 })

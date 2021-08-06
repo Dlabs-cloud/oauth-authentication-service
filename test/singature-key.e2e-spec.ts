@@ -45,7 +45,7 @@ describe('signature-key e2e', () => {
     return request(applicationContext.getHttpServer())
       .get(url)
       .expect(200).then(response => {
-        let body = response.body;
+        let body = response.body.data;
         expect(body.use).toEqual('sig');
         expect(body.kid).toBeDefined();
         expect(body.kty).toBeDefined();
