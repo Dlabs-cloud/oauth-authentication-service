@@ -1,6 +1,4 @@
 {
-  "domain": "http://localhost",
-  "version": "1",
   "secret": "app_secret",
   "db": {
     "host": "localhost",

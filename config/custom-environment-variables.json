@@ -1,0 +1,20 @@
+{
+  "secret": "app_secret",
+  "db": {
+    "host": "DB_HOST",
+    "port": "DB_PORT",
+    "name": "DB_NAME",
+    "username": "DB_USERNAME",
+    "password": "DB_PASSWORD",
+    "show_log": false,
+    "ssl": false
+  },
+  "email": {
+    "host": "MAILER_HOST",
+    "port": "MAILER_POST",
+    "user": "MAILER_USER",
+    "password": "MAILER_PASSWORD",
+    "sender": "\"dlabs DEVS\" <no-reply@dlabsdevs.com>",
+    "reply": "mail_reply"
+  }
+}
