@@ -4,7 +4,7 @@ import { Connection } from 'typeorm';
 import { AccessClaimsExtractor } from '../security/contracts/access-claims-extractor.contracts';
 import { PASSWORDCLAIMEXTRACTOR } from '../security/constants';
 import { TokenExpiredError } from 'jsonwebtoken';
-import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
+import { ErrorResponseException } from '@dlabs/common/exceptions/error-response.exception';
 import { PasswordResetRequestRepository } from '../dao/password-reset-request.repository';
 import { PasswordResetApiRequest } from '../data/request/password-reset-api.request';
 import { PasswordUpdateService } from '../service/password-update.service';

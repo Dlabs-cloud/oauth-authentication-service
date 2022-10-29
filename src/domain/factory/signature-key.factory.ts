@@ -1,4 +1,4 @@
-import { FactoryHelper, ModelFactory } from '@tss/test-starter';
+import { FactoryHelper, ModelFactory } from '@dlabs/test-starter';
 import { SignatureKey } from '../entity/signature-key.entity';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
 import { JwtType } from '../constants/jwt-type.constant';

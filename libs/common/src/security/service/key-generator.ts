@@ -1,5 +1,5 @@
 import { generateKeyPairSync } from 'crypto';
-import { Key } from '@tss/common/security';
+import { Key } from '@dlabs/common/security';
 
 export class AsymmetricCrypto {
   public generateKeyPair(): Promise<Key> {

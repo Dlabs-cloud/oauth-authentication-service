@@ -1,7 +1,7 @@
 import { CallHandler, ExecutionContext, Inject, Injectable, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { RequestMetaData } from '../data/request-meta-data.dto';
-import { isBlank } from '@tss/common/utils/string.utlls';
+import { isBlank } from '@dlabs/common/utils/string.utlls';
 import { AccessClaimsExtractor } from '../contracts/access-claims-extractor.contracts';
 import { ACCESSCLAIMEXTRACTOR } from '../constants';
 import { TokenExpiredError } from 'jsonwebtoken';

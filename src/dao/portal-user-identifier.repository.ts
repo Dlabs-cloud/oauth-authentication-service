@@ -1,4 +1,4 @@
-import { BaseRepository } from '@tss/common';
+import { BaseRepository } from '@dlabs/common';
 import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
 import { EntityRepository } from 'typeorm';
 import { PortalUser } from '../domain/entity/portal-user.entity';

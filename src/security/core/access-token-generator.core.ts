@@ -6,7 +6,7 @@ import { AuthJwsGenerator } from './auth-jws-generator.core';
 import { Connection } from 'typeorm';
 import { AuthKeyGenerator } from '../contracts/auth-key-generator.contracts';
 import { DateTime, Interval } from 'luxon';
-import { IllegalArgumentException } from '@tss/common';
+import { IllegalArgumentException } from '@dlabs/common';
 import { tsconfigPathsBeforeHookFactory } from '@nestjs/cli/lib/compiler/hooks/tsconfig-paths.hook';
 
 

@@ -1,4 +1,4 @@
-import { FactoryHelper, ModelFactory } from '@tss/test-starter';
+import { FactoryHelper, ModelFactory } from '@dlabs/test-starter';
 import { PortalUserAuthentication } from '../entity/portal-user-authentication.entity';
 import { PortalUser } from '../entity/portal-user.entity';
 import { AuthenticationResponseType } from '../constants/authentication-response-type,constant';

@@ -4,7 +4,7 @@ import { PortalUserIdentifier } from '../entity/portal-user-identifier.entity';
 import { PortalUserIdentifierFactory } from './portal-user-identifier.factory';
 import { PortalUser } from '../entity/portal-user.entity';
 import { PortalUserFactory } from './portal-user.factory';
-import { ModelFactory } from '@tss/test-starter';
+import { ModelFactory } from '@dlabs/test-starter';
 import { RefreshToken } from '../entity/refresh-token.entity';
 import { RefreshTokenFactory } from './refresh-token.factory';
 import { PortalUserAuthentication } from '../entity/portal-user-authentication.entity';

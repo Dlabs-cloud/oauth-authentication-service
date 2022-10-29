@@ -6,7 +6,7 @@ import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { Connection, EntityManager } from 'typeorm';
 import { PasswordResetRequestRepository } from '../dao/password-reset-request.repository';
 import { DateTime } from 'luxon';
-import { HashService } from '@tss/common';
+import { HashService } from '@dlabs/common';
 
 @Injectable()
 export class PasswordResetRequestServiceImpl implements PasswordResetRequestService {

@@ -4,7 +4,7 @@ import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { EntityManager } from 'typeorm';
-import { AsymmetricCrypto } from '@tss/common';
+import { AsymmetricCrypto } from '@dlabs/common';
 
 @Injectable()
 export class KeyGeneratorCore implements KeyGenerator {

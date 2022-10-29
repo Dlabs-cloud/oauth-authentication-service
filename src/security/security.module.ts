@@ -19,12 +19,12 @@ import { AccessConstraintInterceptor } from './interceptors/access-constraint.in
 import { PasswordResetGeneratorCore } from './core/password-reset-generator.core';
 import { PasswordResetJwsGenerator } from './core/password-reset-jws-generator.core';
 import { PasswordResetGenerator } from './contracts/password-reset-generator.contracts';
-import { CommonModule } from '@tss/common';
+import { CommonModule } from '@dlabs/common';
 import { ClientIdSecretGeneratorCore } from './core/client-id-secret-generator.core';
 import { ClientIdSecretGenerator } from './contracts/clientIdSecret-generator.contracts';
 import { Encryption } from './contracts/encrption.contracts';
 import { EncryptionCore } from './core/encryption.core';
-import { ConfigService } from '@nestjs/config';
+import * as config from 'config'
 
 
 const keyGenerator = {
@@ -36,7 +36,7 @@ const keyGenerator = {
 const refreshTokenGenerator = {
   provide: REFRESHKEYGENERATOR,
   useFactory: async (connection: Connection, keyGenerator: KeyGenerator) => {
-    let refreshTokenGeneratorCore = new RefreshTokenGeneratorCore(new AuthJwsGenerator(), connection, keyGenerator);
+    const refreshTokenGeneratorCore = new RefreshTokenGeneratorCore(new AuthJwsGenerator(), connection, keyGenerator);
     await refreshTokenGeneratorCore.onApplicationBootstrap();
     return refreshTokenGeneratorCore;
   },
@@ -56,7 +56,7 @@ const accessKeyGenerator = {
 const passwordResetGenerator = {
   provide: PasswordResetGenerator,
   useFactory: async (connection: Connection, keyGenerator: KeyGenerator) => {
-    let passwordResetJwsGenerator = new PasswordResetGeneratorCore(new PasswordResetJwsGenerator(), connection, keyGenerator);
+    const passwordResetJwsGenerator = new PasswordResetGeneratorCore(new PasswordResetJwsGenerator(), connection, keyGenerator);
     await passwordResetJwsGenerator.onApplicationBootstrap();
     return passwordResetJwsGenerator;
   },
@@ -95,11 +95,11 @@ const refreshClaimsExtractor = {
 
 const encryptionCore = {
   provide: Encryption,
-  useFactory: (configService: ConfigService) => {
-    return new EncryptionCore(configService.get('APP_SECRET'));
+  useFactory: () => {
+    return new EncryptionCore(config.get('secret'));
   },
   inject: [
-    ConfigService,
+
   ],
 };
 

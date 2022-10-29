@@ -2,7 +2,7 @@ import { INestApplication } from '@nestjs/common';
 import { Connection, getConnection } from 'typeorm';
 import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
-import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
+import { ValidatorTransformerPipe } from '@dlabs/common/pipes/validator-transformer.pipe';
 import { PasswordResetGenerator } from '../src/security/contracts/password-reset-generator.contracts';
 import * as faker from 'faker';
 import * as request from 'supertest';

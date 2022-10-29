@@ -1,7 +1,7 @@
 import { BeforeInsert, BeforeUpdate, Column, Entity, ManyToOne } from 'typeorm';
 import { PortalUserIdentifier } from './portal-user-identifier.entity';
 import { PortalUser } from './portal-user.entity';
-import { BaseEntity, IllegalArgumentException } from '@tss/common';
+import { BaseEntity, IllegalArgumentException } from '@dlabs/common';
 
 ;
 

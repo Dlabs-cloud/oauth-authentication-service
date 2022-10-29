@@ -9,9 +9,9 @@ import * as request from 'supertest';
 import { factory } from '../src/domain/factory/factory';
 import { PortalUserIdentifier } from '../src/domain/entity/portal-user-identifier.entity';
 import { UserIdentifierType } from '../src/domain/constants/user-identifier-type.constant';
-import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
+import { ValidatorTransformerPipe } from '@dlabs/common/pipes/validator-transformer.pipe';
 import { PortalUserIdentificationVerification } from '../src/domain/entity/portal-user-identification-verification.entity';
-import { HashService } from '@tss/common';
+import { HashService } from '@dlabs/common';
 
 describe('Portal -user registration controller', () => {
   let applicationContext: INestApplication;

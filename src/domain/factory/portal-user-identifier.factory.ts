@@ -2,7 +2,7 @@ import { PortalUserIdentifier } from '../entity/portal-user-identifier.entity';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
 import { PortalUserIdentificationVerification } from '../entity/portal-user-identification-verification.entity';
 import { PortalUser } from '../entity/portal-user.entity';
-import { FactoryHelper, ModelFactory } from '@tss/test-starter';
+import { FactoryHelper, ModelFactory } from '@dlabs/test-starter';
 
 export class PortalUserIdentifierFactory implements FactoryHelper<PortalUserIdentifier> {
   async apply(faker: Faker.FakerStatic, modelFactory: ModelFactory): Promise<PortalUserIdentifier> {

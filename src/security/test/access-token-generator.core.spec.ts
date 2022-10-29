@@ -9,9 +9,9 @@ import * as faker from 'faker';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { ConfModule } from '../../conf/conf.module';
 import { KeyGenerator } from '../contracts/key-generator.contracts';
-import { transaction } from '@tss/test-starter/mocks/type-orm.mock';
+import { transaction } from '@dlabs/test-starter/mocks/type-orm.mock';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
-import { ACCESSKEYGENERATOR } from '../constants';
+import { AppModule } from '../../app.module';
 
 describe('Security: Access-token generator-core', () => {
   let applicationContext: INestApplication;

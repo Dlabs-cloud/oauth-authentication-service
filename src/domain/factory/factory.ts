@@ -1,6 +1,6 @@
 import { getConnection } from 'typeorm';
 import { ModelFactoryRoster } from './model-factory-roster';
-import { ModelFactoryImpl, OrmAdapter } from '@tss/test-starter';
+import { ModelFactoryImpl, OrmAdapter } from '@dlabs/test-starter';
 
 
 export function factory() {

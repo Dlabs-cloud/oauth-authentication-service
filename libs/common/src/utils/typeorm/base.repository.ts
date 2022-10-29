@@ -1,6 +1,8 @@
 import { BaseEntity } from './base.entity';
 import { FindConditions, Repository } from 'typeorm'
-import { GenericStatus } from '@tss/common/constants';
+import { GenericStatus } from '.';
+
+
 
 export abstract class BaseRepository<T extends BaseEntity> extends Repository<T> {
 

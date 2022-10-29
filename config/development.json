@@ -1,0 +1,22 @@
+{
+  "domain": "http://localhost",
+  "version": "1",
+  "secret": "app_secret",
+  "db": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "auth_service",
+    "username": "docker",
+    "password": "docker",
+    "show_log": false,
+    "ssl": false
+  },
+  "email": {
+    "host": "mailer_host",
+    "port": "mailer_port",
+    "user": "mailer_user",
+    "password": "mailer_password",
+    "sender": "\"dlabs DEVS\" <no-reply@dlabsdevs.com>",
+    "reply": "mail_reply"
+  }
+}

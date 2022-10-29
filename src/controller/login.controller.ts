@@ -6,7 +6,7 @@ import { LoginRequest } from '../data/request/login.request';
 import { RequestMetaDataContext } from '../security/decorators/request-meta-data.decorator';
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { AuthenticationResponseType } from '../domain/constants/authentication-response-type,constant';
-import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
+import { ErrorResponseException } from '@dlabs/common/exceptions/error-response.exception';
 import { ApiResponseDto } from '../data/response/api.response.dto';
 import { Public } from '../security/decorators/public.decorator';
 

@@ -8,7 +8,7 @@ import { AuthenticationResponseType } from '../domain/constants/authentication-r
 import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
 import { AuthenticationType } from '../domain/constants/authentication-type.constant';
 import { Injectable } from '@nestjs/common';
-import { HashService } from '@tss/common';
+import { HashService } from '@dlabs/common';
 
 @Injectable()
 export class LoginAuthenticationServiceImpl implements LoginAuthenticationService {

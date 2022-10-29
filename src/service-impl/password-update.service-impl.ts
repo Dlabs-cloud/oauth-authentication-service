@@ -9,7 +9,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ImplicitAuthenticationService } from '../service/implicit-authentication.service';
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { PortalUserAuthentication } from '../domain/entity/portal-user-authentication.entity';
-import { HashService } from '@tss/common';
+import { HashService } from '@dlabs/common';
 
 @Injectable()
 export class PasswordUpdateServiceImpl implements PasswordUpdateService {

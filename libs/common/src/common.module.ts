@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { PhoneNumberService } from '@tss/common/utils/phone-number/phone-number.service';
-import { AsymmetricCrypto, HashService } from '@tss/common/security';
+import { PhoneNumberService } from '@dlabs/common/utils/phone-number/phone-number.service';
+import { AsymmetricCrypto, HashService } from '@dlabs/common/security';
 
 
 @Module({

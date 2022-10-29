@@ -1,12 +1,12 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { UserIdentifierVerificationEvent } from '../events/user-identifier-verification.event';
 import { ISendMailOptions, MailerService } from '@nestjs-modules/mailer';
-import { ConfigService } from '@nestjs/config';
+import * as config from 'config'
 
 @EventsHandler(UserIdentifierVerificationEvent)
 export class UserIdentifierVerificationHandler implements IEventHandler<UserIdentifierVerificationEvent> {
 
-  constructor(private readonly mailerService: MailerService, private readonly configService: ConfigService) {
+  constructor(private readonly mailerService: MailerService) {
   }
 
   handle(event: UserIdentifierVerificationEvent): any {
@@ -17,8 +17,8 @@ export class UserIdentifierVerificationHandler implements IEventHandler<UserIden
       context: {
         verification_code: event.portalUserIdentificationVerification.verificationCode,
       },
-      from: this.configService.get<string>('EMAIL_SENDER', 'auth_Service@tssdevs.com'),
-      replyTo: this.configService.get<string>('EMAIL_REPLY', 'noreply@tssdevs.com'),
+      from: config.get<string>('email.sender'),
+      replyTo: config.get<string>('email.reply'),
     };
 
     return this.mailerService.sendMail(sendMailOptions).catch(error => {

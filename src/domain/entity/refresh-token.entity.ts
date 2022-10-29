@@ -1,7 +1,7 @@
 import { BeforeInsert, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { PortalUserAuthentication } from './portal-user-authentication.entity';
 import { PortalUser } from './portal-user.entity';
-import { BaseEntity, IllegalArgumentException } from '@tss/common';
+import { BaseEntity, IllegalArgumentException } from '@dlabs/common';
 
 @Entity()
 export class RefreshToken extends BaseEntity {

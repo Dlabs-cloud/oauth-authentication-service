@@ -19,12 +19,12 @@
     "test:watch": "ENV=test jest --watch",
     "test:cov": "ENV=test jest --coverage --runInBand",
     "test:debug": "ENV=test node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "ENV=test jest --runInBand  --config  test/jest-e2e.json"
+    "test:e2e": "ENV=test jest --runInBand  --config  test/jest-e2e.json",
+    "generate:open-api": "api-doc --input ./src/main.ts --out ./openapi.json "
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^1.5.1",
     "@nestjs/common": "^7.0.0",
-    "@nestjs/config": "^0.5.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/cqrs": "^7.0.1",
     "@nestjs/platform-express": "^7.0.0",
@@ -32,6 +32,7 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
+    "config": "^3.3.8",
     "google-libphonenumber": "^3.2.14",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^1.25.0",
@@ -96,10 +97,10 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "@tss/common/(.*)": "<rootDir>/libs/common/src/$1",
-      "@tss/common": "<rootDir>/libs/common/src",
-      "@tss/test-starter/(.*)": "<rootDir>/libs/test-starter/src/$1",
-      "@tss/test-starter": "<rootDir>/libs/test-starter/src"
+      "@dlabs/common/(.*)": "<rootDir>/libs/common/src/$1",
+      "@dlabs/common": "<rootDir>/libs/common/src",
+      "@dlabs/test-starter/(.*)": "<rootDir>/libs/test-starter/src/$1",
+      "@dlabs/test-starter": "<rootDir>/libs/test-starter/src"
     }
   }
 }

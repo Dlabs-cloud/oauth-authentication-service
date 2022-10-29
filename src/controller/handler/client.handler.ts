@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientIdSecretGenerator } from '../../security/contracts/clientIdSecret-generator.contracts';
 import { Client } from '../../domain/entity/client.entity';
 import { ClientCredential } from '../../domain/entity/client-credential.entity';
-import { GenericStatus } from '@tss/common';
+import { GenericStatus } from '@dlabs/common';
 import { Encryption } from '../../security/contracts/encrption.contracts';
 
 @Injectable()

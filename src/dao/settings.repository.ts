@@ -1,4 +1,4 @@
-import { BaseRepository, GenericStatus } from '@tss/common';
+import { BaseRepository, GenericStatus } from '@dlabs/common';
 import { Setting } from '../domain/entity/settings.entity';
 import { EntityRepository } from 'typeorm';
 

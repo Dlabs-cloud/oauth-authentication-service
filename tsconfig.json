@@ -11,16 +11,16 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
-      "@tss/common": [
+      "@dlabs/common": [
         "libs/common/src"
       ],
-      "@tss/common/*": [
+      "@dlabs/common/*": [
         "libs/common/src/*"
       ],
-      "@tss/test-starter": [
+      "@dlabs/test-starter": [
         "libs/test-starter/src"
       ],
-      "@tss/test-starter/*": [
+      "@dlabs/test-starter/*": [
         "libs/test-starter/src/*"
       ]
     }

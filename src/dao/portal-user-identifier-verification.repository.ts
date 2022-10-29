@@ -1,5 +1,5 @@
 import { EntityRepository } from 'typeorm';
-import { BaseRepository } from '@tss/common/utils/typeorm/base.repository';
+import { BaseRepository } from '@dlabs/common/utils/typeorm/base.repository';
 import { PortalUserIdentificationVerification } from '../domain/entity/portal-user-identification-verification.entity';
 
 

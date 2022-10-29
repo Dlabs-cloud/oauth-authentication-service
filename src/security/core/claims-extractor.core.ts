@@ -5,7 +5,7 @@ import { decode, TokenExpiredError, verify, VerifyErrors } from 'jsonwebtoken';
 import { SignatureKeyRepository } from '../../dao/signature-key.repository';
 import { JwtType } from '../../domain/constants/jwt-type.constant';
 import { SimpleAccessClaimsCore } from './simple-access-claims.core';
-import { JwtTokenPayloadDto } from '@tss/security/../../../libs/common/src/security/data/jwt-token-payload.dto';
+import { JwtTokenPayloadDto } from '@dlabs/security/../../../libs/common/src/security/data/jwt-token-payload.dto';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
 
 

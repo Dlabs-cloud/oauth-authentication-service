@@ -2,6 +2,7 @@ import { Controller, Get, Req, Res } from '@nestjs/common';
 import { Public } from '../security/decorators/public.decorator';
 import * as fs from 'fs';
 import { Request, Response } from 'express';
+import { Exclude } from 'class-transformer';
 
 
 @Public()
@@ -15,12 +16,13 @@ export class IndexController {
   }
 
   @Get('/api-docs')
+  @Exclude()
   async apiDocs(@Req() request: Request, @Res() response: Response): Promise<string> {
     response.set({
       'content-type': 'application/json',
     });
-
-    fs.createReadStream(process.env.API_DOC_PATH || `${__dirname}/../.././openapi.json`).pipe(response);
+    console.log(`${__dirname}/../openapi.json`)
+    fs.createReadStream(process.env.API_DOC_PATH || `${__dirname}/../../openapi.json`).pipe(response);
     return;
   }
 

@@ -1,0 +1,23 @@
+{
+  "domain": "project_domain",
+  "version": "1",
+  "secret": "app_secret",
+  "db": {
+    "connection": "database_connection",
+    "host": "localhost",
+    "port": "db_port",
+    "name": "database_name",
+    "username": "database_username",
+    "password": "database_password",
+    "show_log": false,
+    "ssl": false
+  },
+  "email": {
+    "host": "mailer_host",
+    "port": "mailer_port",
+    "user": "mailer_user",
+    "password": "mailer_password",
+    "sender": "\"dlabs DEVS\" <no-reply@dlabsdevs.com>",
+    "reply": "mail_reply"
+  }
+}

@@ -1,27 +1,28 @@
 import { MailerOptions, MailerOptionsFactory } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import * as config from 'config'
 
 @Injectable()
 export class EmailConf implements MailerOptionsFactory {
 
-  constructor(private readonly configService: ConfigService) {
+  constructor() {
   }
 
   createMailerOptions(): Promise<MailerOptions> | MailerOptions {
+    config.get<string>('email.host')
     return {
       transport: {
-        host: this.configService.get<string>('MAILER_HOST', 'smtp.example.com'),
-        port: this.configService.get<number>('EMAIL_PORT', 587),
+        host: config.get<string>('email.host'),
+        port: config.get<string>('email.port'),
         secure: false,
         auth: {
-          user: this.configService.get<string>('EMAIL_USER', 'tss_mailer'),
-          pass: this.configService.get<string>('EMAIL_PASS', 'tss_password'),
+          user: config.get<string>('email.user'),
+          pass: config.get<string>('email.password'),
         },
       },
       defaults: {
-        from: this.configService.get<string>('EMAIL_SENDER', '"TSS DEVS" <no-reply@tssdevs.com>'),
+        from: config.get<string>('email.sender'),
       },
       template: {
         dir: process.cwd() + '/views/email/',

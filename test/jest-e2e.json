@@ -11,9 +11,9 @@
     "^.+\\.(t|j)s$": "ts-jest"
   },
   "moduleNameMapper": {
-    "@tss/common/(.*)": "<rootDir>/libs/common/src/$1",
-    "@tss/common": "<rootDir>/libs/common/src",
-    "@tss/test-starter/(.*)": "<rootDir>/libs/test-starter/src/$1",
-    "@tss/test-starter": "<rootDir>/libs/test-starter/src"
+    "@dlabs/common/(.*)": "<rootDir>/libs/common/src/$1",
+    "@dlabs/common": "<rootDir>/libs/common/src",
+    "@dlabs/test-starter/(.*)": "<rootDir>/libs/test-starter/src/$1",
+    "@dlabs/test-starter": "<rootDir>/libs/test-starter/src"
   }
 }

@@ -6,13 +6,13 @@ import { Connection, EntityManager } from 'typeorm';
 import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';
 import { UserIdentifierType } from '../domain/constants/user-identifier-type.constant';
 import { PortalUserIdentifierVerificationRepository } from '../dao/portal-user-identifier-verification.repository';
-import { HashService, IllegalArgumentException } from '@tss/common';
-import { PhoneNumberService } from '@tss/common/utils/phone-number/phone-number.service';
+import { HashService, IllegalArgumentException } from '@dlabs/common';
+import { PhoneNumberService } from '@dlabs/common/utils/phone-number/phone-number.service';
 import { PortalUserData } from '../domain/entity/portal-user-data.entity';
 import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { PortalUserAuthentication } from '../domain/entity/portal-user-authentication.entity';
 import { ImplicitAuthenticationService } from '../service/implicit-authentication.service';
-import { isBlank } from '@tss/common/utils/string.utlls';
+import { isBlank } from '@dlabs/common/utils/string.utlls';
 
 @Injectable()
 export class PortalUserRegistrationServiceImpl implements PortalUserRegistrationService {

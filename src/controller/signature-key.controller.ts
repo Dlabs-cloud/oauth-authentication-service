@@ -4,7 +4,7 @@ import { Connection } from 'typeorm';
 import { SignatureKeyRepository } from '../dao/signature-key.repository';
 import { JwtType } from '../domain/constants/jwt-type.constant';
 import { JwtWebTokenResponse } from '../data/response/jwt-web-token.response';
-import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
+import { ErrorResponseException } from '@dlabs/common/exceptions/error-response.exception';
 import { ApiResponseDto } from '../data/response/api.response.dto';
 
 @Controller()

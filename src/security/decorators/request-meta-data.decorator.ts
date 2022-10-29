@@ -1,5 +1,5 @@
 import { createParamDecorator } from '@nestjs/common';
-import { IllegalArgumentException } from '@tss/common';
+import { IllegalArgumentException } from '@dlabs/common';
 
 
 export const RequestMetaDataContext = createParamDecorator((data, context) => {

@@ -32,7 +32,7 @@ export class PasswordResetJwsGenerator {
       keyid: this.keyId,
       expiresIn: interval.count('second'),
       subject: passwordReset.portalUser.id.toString(),
-      issuer: 'Tss_authentication_service',
+      issuer: 'dlabs_authentication_service',
       jwtid: passwordReset.id.toString(),
       header: {
         'kid': this.keyId,

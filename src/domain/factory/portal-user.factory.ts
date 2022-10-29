@@ -1,7 +1,7 @@
 
 import { PortalUser } from '../entity/portal-user.entity';
 import { Gender } from '../constants/gender.constant';
-import { FactoryHelper, ModelFactory } from '@tss/test-starter';
+import { FactoryHelper, ModelFactory } from '@dlabs/test-starter';
 
 export class PortalUserFactory implements FactoryHelper<PortalUser> {
   apply(faker: Faker.FakerStatic, modelFactory: ModelFactory): Promise<PortalUser> {

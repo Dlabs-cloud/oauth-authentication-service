@@ -6,7 +6,12 @@ export class EncryptionCore implements Encryption {
   private key;
 
   constructor(private readonly secret: string) {
-    this.key = crypto.scryptSync(secret, 'salt', 24);
+    try {
+      this.key = crypto.scryptSync(secret, 'salt', 24);
+    }catch (e) {
+
+    }
+
   }
 
   encrypt(clearText: string): Promise<string> {

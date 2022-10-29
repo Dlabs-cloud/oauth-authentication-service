@@ -1,10 +1,10 @@
 import * as faker from 'faker';
-import { FactoryHelper } from '@tss/test-starter/faker';
-import { EntityFactoryBuilderImpl } from '@tss/test-starter/faker';
-import { ModelFactory } from '@tss/test-starter/faker';
-import { OrmAdapter } from '@tss/test-starter/faker';
+import { FactoryHelper } from '@dlabs/test-starter/faker';
+import { EntityFactoryBuilderImpl } from '@dlabs/test-starter/faker';
+import { ModelFactory } from '@dlabs/test-starter/faker';
+import { OrmAdapter } from '@dlabs/test-starter/faker';
 import { ObjectType } from 'typeorm';
-import { EntityFactoryBuilder } from '@tss/test-starter/faker';
+import { EntityFactoryBuilder } from '@dlabs/test-starter/faker';
 
 export class ModelFactoryImpl implements ModelFactory {
   private definitions: Map<string, any> = new Map<string, FactoryHelper<any>>();

@@ -5,12 +5,12 @@ import { PortalUserIdentifierVerificationController } from './portal-user-identi
 import {
   ResponseTransformInterceptor,
   responseTransformInterceptor,
-} from '@tss/common/interceptors/response-transform.interceptor';
+} from '@dlabs/common/interceptors/response-transform.interceptor';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';
 import { SecurityModule } from '../security/security.module';
 import { PortalUserRegistrationController } from './portal-user-registration.controller';
-import { errorResponseFilter } from '@tss/common/exception-filters/error-response.exception.filter';
-import { illegalArgumentExceptionFilter } from '@tss/common/exception-filters/illegal-argument.exception.filter';
+import { errorResponseFilter } from '@dlabs/common/exception-filters/error-response.exception.filter';
+import { illegalArgumentExceptionFilter } from '@dlabs/common/exception-filters/illegal-argument.exception.filter';
 import { AccessTokenController } from './access-token.controller';
 import { PasswordResetRequestController } from './password-reset-request.controller';
 import { PasswordResetController } from './password-reset.controller';

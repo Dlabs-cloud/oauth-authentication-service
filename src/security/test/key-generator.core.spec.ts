@@ -4,11 +4,11 @@ import { KeyGenerator } from '../contracts/key-generator.contracts';
 import { Test } from '@nestjs/testing';
 import { SecurityModule } from '../security.module';
 import { ConfModule } from '../../conf/conf.module';
-import { entityManager, transaction } from '@tss/test-starter/mocks/type-orm.mock';
+import { entityManager, transaction } from '@dlabs/test-starter/mocks/type-orm.mock';
 import { JwtType } from '../../domain/constants/jwt-type.constant';
-import { AsymmetricCrypto } from '@tss/security/../../../libs/common/src/security/service/key-generator';
+import { AsymmetricCrypto } from '@dlabs/security/../../../libs/common/src/security/service/key-generator';
 import * as faker from 'faker';
-import { CommonModule, Key } from '@tss/common';
+import { CommonModule, Key } from '@dlabs/common';
 
 describe('Security: Key generator - core', () => {
   let applicationContext: INestApplication;

@@ -1,6 +1,6 @@
 import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule, signUpUser } from './test-utils';
-import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
+import { ValidatorTransformerPipe } from '@dlabs/common/pipes/validator-transformer.pipe';
 import { Connection, getConnection } from 'typeorm';
 import { INestApplication } from '@nestjs/common';
 import { PortalUserRegistrationService } from '../src/service/portal-user-registration.service';

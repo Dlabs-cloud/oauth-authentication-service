@@ -4,7 +4,7 @@ import { KeyGenerator } from '../contracts/key-generator.contracts';
 import { Test } from '@nestjs/testing';
 import { SecurityModule } from '../security.module';
 import { ConfModule } from '../../conf/conf.module';
-import { transaction } from '@tss/test-starter/mocks/type-orm.mock';
+import { transaction } from '@dlabs/test-starter/mocks/type-orm.mock';
 import { AuthJwsGenerator } from '../core/auth-jws-generator.core';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import { RefreshToken } from '../../domain/entity/refresh-token.entity';

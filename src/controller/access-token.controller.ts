@@ -2,7 +2,7 @@ import { Body, Controller, HttpStatus, Inject, Post } from '@nestjs/common';
 import { AccessTokenRequest } from '../data/request/access-token.request';
 import { AccessClaimsExtractor } from '../security/contracts/access-claims-extractor.contracts';
 import { REFRESHCLAIMEXTRACTOR } from '../security/constants';
-import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
+import { ErrorResponseException } from '@dlabs/common/exceptions/error-response.exception';
 import { Connection } from 'typeorm';
 import { RefreshTokenRepository } from '../dao/refresh-token.repository';
 import { AccessTokenApiResponseHandler } from './handler/access-token-api-response.handler';

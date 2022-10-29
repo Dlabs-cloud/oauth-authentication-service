@@ -1,6 +1,6 @@
 import { ClientRegistrationRequest } from '../data/request/client-registration.request';
 import { Client } from '../domain/entity/client.entity';
-import { GenericStatus } from '@tss/common';
+import { GenericStatus } from '@dlabs/common';
 
 export interface ClientService {
   createClient(clientDto: ClientRegistrationRequest): Promise<Client>;

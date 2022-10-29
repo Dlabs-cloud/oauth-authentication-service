@@ -1,4 +1,4 @@
-import { IllegalArgumentException } from '@tss/common';
+import { IllegalArgumentException } from '@dlabs/common';
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { APP_FILTER } from '@nestjs/core';

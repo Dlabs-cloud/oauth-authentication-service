@@ -1,6 +1,6 @@
 import { PortalUserIdentificationVerification } from '../entity/portal-user-identification-verification.entity';
 import { UserIdentifierType } from '../constants/user-identifier-type.constant';
-import { FactoryHelper, ModelFactory } from '@tss/test-starter';
+import { FactoryHelper, ModelFactory } from '@dlabs/test-starter';
 
 export class PortalUserIdentifierVerificationFactory implements FactoryHelper<PortalUserIdentificationVerification> {
 

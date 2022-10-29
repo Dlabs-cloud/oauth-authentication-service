@@ -1,4 +1,4 @@
-import { FactoryHelper, ModelFactory } from '@tss/test-starter';
+import { FactoryHelper, ModelFactory } from '@dlabs/test-starter';
 import { PasswordResetRequest } from '../entity/password-reset-request.entity';
 import { PortalUserIdentifier } from '../entity/portal-user-identifier.entity';
 

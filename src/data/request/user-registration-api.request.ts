@@ -10,10 +10,10 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Gender } from '../../domain/constants/gender.constant';
-import { EntityValidator } from '@tss/common/validators/entity-constraint.validator';
+import { EntityValidator } from '@dlabs/common/validators/entity-constraint.validator';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { Type } from 'class-transformer';
-import { IsValidPhoneNumber } from '@tss/common/validators/phone-number-constraint.validator';
+import { IsValidPhoneNumber } from '@dlabs/common/validators/phone-number-constraint.validator';
 import { PortalUserIdentifier } from '../../domain/entity/portal-user-identifier.entity';
 
 export class UserRegistrationApiRequest {

@@ -1,4 +1,4 @@
-import { BaseRepository } from '@tss/common';
+import { BaseRepository } from '@dlabs/common';
 import { PasswordResetRequest } from '../domain/entity/password-reset-request.entity';
 import { EntityRepository } from 'typeorm';
 import { PortalUserIdentifier } from '../domain/entity/portal-user-identifier.entity';

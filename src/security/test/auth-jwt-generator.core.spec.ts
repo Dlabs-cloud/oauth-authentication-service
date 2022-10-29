@@ -4,11 +4,11 @@ import { Test } from '@nestjs/testing';
 import { SignatureKey } from '../../domain/entity/signature-key.entity';
 import * as faker from 'faker';
 import { decode, verify } from 'jsonwebtoken';
-import { Key } from '@tss/security/../../../libs/common/src/security/data/key.dto';
+import { Key } from '@dlabs/security/../../../libs/common/src/security/data/key.dto';
 import { PortalUser } from '../../domain/entity/portal-user.entity';
 import { v4 as uuid } from 'uuid';
 import { JwtType } from '../../domain/constants/jwt-type.constant';
-import { AsymmetricCrypto, CommonModule } from '@tss/common';
+import { AsymmetricCrypto, CommonModule } from '@dlabs/common';
 
 describe('Security: Auth-jwt-generator-core', () => {
 
@@ -77,7 +77,7 @@ describe('Security: Auth-jwt-generator-core', () => {
     expect(header.alg).toEqual(signatureKey.algorithm);
     expect(header.kid).toEqual(signatureKey.keyId);
     expect(payload.userId).toStrictEqual(refreshToken.portalUser.id.toString());
-    expect(payload.iss).toEqual('Tss_authentication_service');
+    expect(payload.iss).toEqual('Dlabs_authentication_service');
     expect(payload.jti).toEqual(refreshToken.id.toString());
     expect(payload.exp).toBeDefined();
   });

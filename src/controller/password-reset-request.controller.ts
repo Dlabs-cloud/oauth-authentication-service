@@ -5,7 +5,7 @@ import { RequestMetaData } from '../security/data/request-meta-data.dto';
 import { PasswordResetRequestService } from '../service/password-reset-request.service';
 import { Connection } from 'typeorm';
 import { PortalUserIdentifierRepository } from '../dao/portal-user-identifier.repository';
-import { ErrorResponseException } from '@tss/common/exceptions/error-response.exception';
+import { ErrorResponseException } from '@dlabs/common/exceptions/error-response.exception';
 import { PasswordResetEmailSenderService } from '../service/password-reset-email-sender.service';
 import { ApiResponseDto } from '../data/response/api.response.dto';
 

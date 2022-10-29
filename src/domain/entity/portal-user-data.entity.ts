@@ -1,7 +1,7 @@
 
 import { Column, Entity, ManyToOne } from 'typeorm';
 import { PortalUser } from './portal-user.entity';
-import { BaseEntity } from '@tss/common';
+import { BaseEntity } from '@dlabs/common';
 
 @Entity()
 export class PortalUserData extends BaseEntity {

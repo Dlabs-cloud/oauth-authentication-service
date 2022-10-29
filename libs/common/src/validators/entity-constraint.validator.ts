@@ -3,7 +3,7 @@ import {
   ValidationArguments, ValidationOptions,
 } from 'class-validator';
 import { getConnection } from 'typeorm';
-import { GenericStatus } from '@tss/common';
+import { GenericStatus } from '@dlabs/common';
 import { EntityTarget } from 'typeorm/common/EntityTarget';
 
 export function EntityValidator(param: EntityConstraintParam, options?: ValidationOptions) {

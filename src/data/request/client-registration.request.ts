@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { EntityValidator } from '@tss/common/validators/entity-constraint.validator';
+import { EntityValidator } from '@dlabs/common/validators/entity-constraint.validator';
 import { Client } from '../../domain/entity/client.entity';
 
 export class ClientRegistrationRequest {

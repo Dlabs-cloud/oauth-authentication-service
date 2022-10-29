@@ -2,7 +2,7 @@ import { ClientRegistrationRequest } from '../data/request/client-registration.r
 import { Client } from '../domain/entity/client.entity';
 import { Injectable } from '@nestjs/common';
 import { ClientResponse } from '../data/response/client.response';
-import { GenericStatus } from '@tss/common';
+import { GenericStatus } from '@dlabs/common';
 import { ClientService } from '../service/client.service';
 
 

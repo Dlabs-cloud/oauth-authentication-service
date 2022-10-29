@@ -1,4 +1,4 @@
-import { BaseRepository } from '@tss/common';
+import { BaseRepository } from '@dlabs/common';
 import { RefreshToken } from '../domain/entity/refresh-token.entity';
 import { EntityRepository } from 'typeorm';
 import { PortalUserAuthentication } from '../domain/entity/portal-user-authentication.entity';

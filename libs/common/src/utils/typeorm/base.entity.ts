@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { GenericStatus } from '@tss/common/constants';
+import { GenericStatus } from '@dlabs/common/constants';
 
 export abstract class BaseEntity extends TypeOrmBaseEntity {
   @PrimaryGeneratedColumn()

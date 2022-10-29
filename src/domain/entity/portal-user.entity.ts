@@ -1,6 +1,6 @@
 import { Column, Entity } from 'typeorm';
 import { Gender } from '../constants/gender.constant';
-import { BaseEntity } from '@tss/common';
+import { BaseEntity } from '@dlabs/common';
 
 @Entity()
 export class PortalUser extends BaseEntity {
@@ -32,7 +32,7 @@ export class PortalUser extends BaseEntity {
     enum: Gender,
     nullable: true
   })
-  gender: Gender;
+  gender?: Gender;
   @Column({
     nullable: true,
     type: 'timestamp',

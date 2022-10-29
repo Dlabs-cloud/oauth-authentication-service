@@ -1,6 +1,6 @@
 ;
 import { AccessClaims } from '../contracts/access-claims.contracts';
-import { JwtTokenPayloadDto } from '@tss/security/../../../libs/common/src/security/data/jwt-token-payload.dto';
+import { JwtTokenPayloadDto } from '@dlabs/security/../../../libs/common/src/security/data/jwt-token-payload.dto';
 
 
 export class SimpleAccessClaimsCore implements AccessClaims {

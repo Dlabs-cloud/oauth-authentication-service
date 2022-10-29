@@ -2,12 +2,12 @@ import { INestApplication } from '@nestjs/common';
 import { Connection, getConnection } from 'typeorm';
 import { TestingModule } from '@nestjs/testing';
 import { baseTestingModule } from './test-utils';
-import { ValidatorTransformerPipe } from '@tss/common/pipes/validator-transformer.pipe';
+import { ValidatorTransformerPipe } from '@dlabs/common/pipes/validator-transformer.pipe';
 import * as request from 'supertest';
 import { factory } from '../src/domain/factory/factory';
 import { SignatureKey } from '../src/domain/entity/signature-key.entity';
 import { JwtType } from '../src/domain/constants/jwt-type.constant';
-import { AsymmetricCrypto } from '@tss/common';
+import { AsymmetricCrypto } from '@dlabs/common';
 
 describe('signature-key e2e', () => {
   let applicationContext: INestApplication;

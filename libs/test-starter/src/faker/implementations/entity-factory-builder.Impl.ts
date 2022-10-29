@@ -4,8 +4,8 @@ import {
   FactoryHelper,
   FactoryInstantiationException,
   OrmAdapter,
-} from '@tss/test-starter/faker';
-import { ModelFactory } from '@tss/test-starter/faker';
+} from '@dlabs/test-starter/faker';
+import { ModelFactory } from '@dlabs/test-starter/faker';
 
 export class EntityFactoryBuilderImpl<T> implements EntityFactoryBuilder<T> {
 
